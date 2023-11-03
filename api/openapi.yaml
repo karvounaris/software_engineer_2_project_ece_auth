@@ -1,0 +1,1410 @@
+openapi: 3.0.0
+info:
+  title: 'Software Egineering project '
+  description: ""
+  version: "1.0"
+servers:
+- url: https://virtserver.swaggerhub.com/TSITSANOU_1/Ergasia/1.0
+  description: SwaggerHub API Auto Mocking
+tags:
+- name: user
+  description: All users of the software
+- name: engineer
+  description: Enineers that view data charts and make proposals
+- name: handsOnEngineer
+  description: Engineers that view proposals and change their status
+- name: chiefEngineer
+  description: "Engineers that accept proposals, adds elements to   vehicle setup\
+    \ and assign roles"
+paths:
+  /user/{userID}/Weather:
+    get:
+      tags:
+      - user
+      summary: Gets the weather forecast
+      description: All assigned users must be able to view the weather report
+      operationId: getWeather
+      parameters:
+      - name: userID
+        in: path
+        description: This is the unique identifier of the user
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: Succesful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+        "500":
+          description: Server error
+      x-swagger-router-controller: User
+  /user/engineer/{userID}/proposals:
+    post:
+      tags:
+      - engineer
+      summary: the engineer makes a new proposal
+      description: Engineers must be able to make proposals
+      operationId: postProposal
+      parameters:
+      - name: userID
+        in: path
+        description: This is the unique identifier of the user
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      requestBody:
+        description: Proposal model
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/userID_proposals_body'
+        required: true
+      responses:
+        "201":
+          description: New Proposal added
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/userID_proposals_body'
+        "400":
+          description: Invalid value or missing required parameter
+      x-swagger-router-controller: Engineer
+  /user/handsOnEngineer/{userID}/proposals/{proposalID}:
+    put:
+      tags:
+      - handsOnEngineer
+      summary: the hands-on engineer changes the proposal status
+      description: Hands-on engineers must be able to change the proposal status to
+        DONE
+      operationId: :"changeStatus"
+      parameters:
+      - name: userID
+        in: path
+        description: This is the unique identifier of the user
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      - name: proposalID
+        in: path
+        description: this is the unique identifier of the proposal
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      requestBody:
+        description: Proposal model
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/proposals_proposalID_body'
+        required: true
+      responses:
+        "200":
+          description: Successful Proposal Status Update
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/proposals_proposalID_body'
+        "400":
+          description: Bad Request
+        "404":
+          description: Not found
+      x-swagger-router-controller: HandsOnEngineer
+  /user/{userID}/vehicleSetUp:
+    get:
+      tags:
+      - user
+      summary: View vehicle setup
+      description: This endpoint displays vehicle setup details
+      operationId: viewVehicleSetup
+      parameters:
+      - name: userID
+        in: path
+        description: This is the unique identifier of the user
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_1'
+        "400":
+          description: Invalid input parameter
+        "404":
+          description: Vehicle setup not found
+      x-swagger-router-controller: User
+  /user/chiefEngineer/{userID}/vehicleSetUp/{elementID}:
+    put:
+      tags:
+      - chiefEngineer
+      summary: Update vehicle setup
+      description: This endpoint allows the chief engineer to update the vehicle setup
+      operationId: updateVehicleSetup
+      parameters:
+      - name: userID
+        in: path
+        description: This is the unique identifier of the user
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      - name: elementID
+        in: path
+        description: This is the unique identifier of the element
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      requestBody:
+        description: Vehicle Setup model
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/vehicleSetUp_elementID_body'
+        required: true
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_1'
+        "400":
+          description: Invalid input parameter
+        "404":
+          description: Vehicle setup not found
+      x-swagger-router-controller: ChiefEngineer
+  /user/chiefEngineer/{userID}/vehicleSetUp:
+    post:
+      tags:
+      - chiefEngineer
+      summary: Create vehicle setup
+      description: This endpoint allows the chief engineer to create a new vehicle
+        setup
+      operationId: createVehicleSetup
+      parameters:
+      - name: userID
+        in: path
+        description: This is the unique identifier of the user
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      requestBody:
+        description: Vehicle Setup model
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/userID_vehicleSetUp_body'
+        required: true
+      responses:
+        "201":
+          description: Vehicle setup created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_1'
+        "400":
+          description: Invalid action
+        "500":
+          description: Server error
+      x-swagger-router-controller: ChiefEngineer
+  /user/{userID}/chart/{chartID}:
+    get:
+      tags:
+      - user
+      summary: View the data in data charts
+      description: Returns a data chart based on a single ID
+      operationId: viewChart
+      parameters:
+      - name: userID
+        in: path
+        description: This is the unique identifier of the user
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      - name: chartID
+        in: path
+        description: this is the unique identifier of the chart
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: Chart successfully fetched.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_2'
+        "400":
+          description: Invalid data details. Data don't exist.
+      x-swagger-router-controller: User
+  /user/{userID}/chart/{chartID}/chat/{chatRoomID}:
+    post:
+      tags:
+      - user
+      summary: Send data chart to chat
+      description: Send a data chart based on a user ID
+      operationId: sendChartToChat
+      parameters:
+      - name: userID
+        in: path
+        description: This is the unique identifier of the user
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      - name: chartID
+        in: path
+        description: This is the unique identifier of the chart
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      - name: chatRoomID
+        in: path
+        description: This is the unique identifier of the chatroom
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      requestBody:
+        description: User model
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/chat_chatRoomID_body'
+        required: true
+      responses:
+        "200":
+          description: Chart successfully fetched.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_3'
+        "400":
+          description: Invalid data details. Data don't exist.
+      x-swagger-router-controller: User
+  /user/{userID}/chat/{chatRoomID}:
+    post:
+      tags:
+      - user
+      summary: send message to chat
+      description: Send message based on a chatroom ID
+      operationId: sendMessageToChat
+      parameters:
+      - name: userID
+        in: path
+        description: This is the unique identifier of the user
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      - name: chatRoomID
+        in: path
+        description: This is the unique identifier of the chatroom
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      requestBody:
+        description: User model
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/chat_chatRoomID_body_1'
+        required: true
+      responses:
+        "200":
+          description: Message send successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_3'
+        "400":
+          description: Invalid action
+        "500":
+          description: Server error
+      x-swagger-router-controller: User
+  /user/{userID}/chat:
+    post:
+      tags:
+      - user
+      summary: Create a chatRoom
+      description: Creates a chatRoom for the users to communicate
+      operationId: createChatRoom
+      parameters:
+      - name: userID
+        in: path
+        description: This is the unique identifier of the user
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      requestBody:
+        description: User model
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/userID_chat_body'
+        required: true
+      responses:
+        "200":
+          description: Chat successfully created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_3'
+        "400":
+          description: "Invalid chatRoom name or Error: Empty user list."
+      x-swagger-router-controller: User
+  /user/chiefEngineer/{userID}/adminPanel/{userID}:
+    put:
+      tags:
+      - chiefEngineer
+      summary: Assign roles
+      description: The chief engineer must be able to edit the roles
+      operationId: userChiefEngineerUserIDAdminPanelUserIDPUT
+      parameters:
+      - name: userID
+        in: path
+        description: This is the unique identifier of the user
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      requestBody:
+        description: User model
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/adminPanel_userID_body'
+        required: true
+      responses:
+        "200":
+          description: Successful Changed Users Role
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/adminPanel_userID_body'
+        "404":
+          description: User not found
+        "500":
+          description: Server Error
+      x-swagger-router-controller: ChiefEngineer
+  /user/chiefEngineer/{userID}/proposals/{proposalID}:
+    put:
+      tags:
+      - chiefEngineer
+      summary: Accepts or Declines a proposal
+      description: Chief engineer must be able to accept or decline proposals
+      operationId: acceptOrDeclineProposal
+      parameters:
+      - name: userID
+        in: path
+        description: This is the unique identifier of the user
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      - name: proposalID
+        in: path
+        description: This is a unique identifier of the proposal
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      requestBody:
+        description: Proposal model
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/proposals_proposalID_body_1'
+        required: true
+      responses:
+        "200":
+          description: Successfully Accepted or Declined a Proposal
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/proposals_proposalID_body_1'
+        "400":
+          description: Bad Request
+        "404":
+          description: Not found
+      x-swagger-router-controller: ChiefEngineer
+  /user/engineer/{userID}/file:
+    post:
+      tags:
+      - engineer
+      summary: Uploads a file containing data from the sensors
+      description: Engineers must be able to upload a file containing data from the
+        sensors
+      operationId: postFile
+      parameters:
+      - name: userID
+        in: path
+        description: This is the unique identifier of the user
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              type: string
+              format: binary
+        required: true
+      responses:
+        "201":
+          description: New file added
+        "400":
+          description: Invalid action
+        "500":
+          description: Server error
+      x-swagger-router-controller: Engineer
+  /user/{userID}/profilePage:
+    put:
+      tags:
+      - user
+      summary: Edit Profile Page
+      description: All assigned users must be able to edit their Personal Profile
+        page
+      operationId: userUserIDProfilePagePUT
+      parameters:
+      - name: userID
+        in: path
+        description: This is the unique identifier of the user
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      requestBody:
+        description: User Profile
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/userID_profilePage_body'
+        required: true
+      responses:
+        "200":
+          description: Successful Changed User's Profile
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/userID_profilePage_body'
+        "400":
+          description: Invalid image size
+        "404":
+          description: User not found
+        "500":
+          description: Server Error
+      x-swagger-router-controller: User
+    delete:
+      tags:
+      - user
+      summary: Delete profile description
+      description: All users must be able to delete their profile description
+      operationId: userUserIDProfilePageDELETE
+      parameters:
+      - name: userID
+        in: path
+        description: This is the unique identifier of the user
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: Successfully Deleted User's Profile Description
+        "404":
+          description: User not found
+        "500":
+          description: Server Error
+      x-swagger-router-controller: User
+components:
+  schemas:
+    vehicleSetup:
+      type: object
+      properties:
+        name:
+          type: string
+        year:
+          type: integer
+        description:
+          type: string
+        systems:
+          type: array
+          items:
+            $ref: '#/components/schemas/userchiefEngineeruserIDvehicleSetUpelementID_systems'
+    system:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        subSystems:
+          type: array
+          items:
+            $ref: '#/components/schemas/userchiefEngineeruserIDvehicleSetUpelementID_subSystems'
+    subSystem:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        parts:
+          type: array
+          items:
+            $ref: '#/components/schemas/userchiefEngineeruserIDvehicleSetUpelementID_parts'
+    part:
+      type: object
+      properties:
+        name:
+          type: string
+        measurementUnit:
+          type: string
+        initialValue:
+          type: integer
+    Weather:
+      type: object
+      properties:
+        temperature:
+          type: integer
+        humidity:
+          type: number
+        windSpeed:
+          type: number
+        windDirection:
+          type: integer
+        chanceOfRain:
+          type: integer
+    proposal:
+      type: object
+      properties:
+        id:
+          type: integer
+        prposalID:
+          type: integer
+        partID:
+          type: integer
+        userID:
+          type: integer
+        status:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+        currentValue:
+          type: number
+        newValue:
+          type: number
+    chart:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        dataCategory:
+          type: string
+        date:
+          type: integer
+        track:
+          type: string
+        lap:
+          type: integer
+        data:
+          type: number
+    chatRoom:
+      type: object
+      properties:
+        chatRoomName:
+          type: string
+        userList:
+          type: array
+          items:
+            $ref: '#/components/schemas/adminPanel_userID_body'
+        messageList:
+          type: array
+          items:
+            $ref: '#/components/schemas/useruserIDchartchartIDchatchatRoomID_messageList'
+        chatRoomID:
+          type: integer
+        chatRoomIcon:
+          type: string
+          format: uri
+    message:
+      type: object
+      properties:
+        text:
+          type: string
+        messageID:
+          type: integer
+        userID:
+          type: integer
+        timeSent:
+          type: string
+          format: date-time
+        image:
+          type: string
+          format: uri
+        chart:
+          type: array
+          items:
+            $ref: '#/components/schemas/inline_response_200_2'
+    profile:
+      type: object
+      properties:
+        username:
+          type: string
+        role:
+          type: string
+        department:
+          type: string
+        description:
+          type: string
+        googleLink:
+          type: string
+          format: uri
+        githubLink:
+          type: string
+          format: uri
+        linkedinLink:
+          type: string
+          format: uri
+        profileImage:
+          type: string
+          format: uri
+    user:
+      type: object
+      properties:
+        userID:
+          type: integer
+        name:
+          type: string
+        department:
+          type: string
+        role:
+          type: string
+        joined:
+          type: string
+          format: date-time
+        last-modified:
+          type: string
+          format: date-time
+    inline_response_200:
+      type: object
+      properties:
+        temperature:
+          type: integer
+        humidity:
+          type: number
+        windSpeed:
+          type: number
+        windDirection:
+          type: integer
+        chanceOfRain:
+          type: integer
+      example:
+        temperature: 0
+        humidity: 6.02745618307040320615897144307382404804229736328125
+        windDirection: 5
+        windSpeed: 1.46581298050294517310021547018550336360931396484375
+        chanceOfRain: 5
+    userID_proposals_body:
+      type: object
+      properties:
+        id:
+          type: integer
+        prposalID:
+          type: integer
+        partID:
+          type: integer
+        userID:
+          type: integer
+        status:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+        currentValue:
+          type: number
+        newValue:
+          type: number
+      example:
+        newValue: 2.3021358869347654518833223846741020679473876953125
+        prposalID: 6
+        partID: 1
+        description: description
+        id: 0
+        title: title
+        userID: 5
+        currentValue: 5.63737665663332876420099637471139430999755859375
+        status: status
+    proposals_proposalID_body:
+      type: object
+      properties:
+        id:
+          type: integer
+        prposalID:
+          type: integer
+        partID:
+          type: integer
+        userID:
+          type: integer
+        status:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+        currentValue:
+          type: number
+        newValue:
+          type: number
+      example:
+        newValue: 2.3021358869347654518833223846741020679473876953125
+        prposalID: 6
+        partID: 1
+        description: description
+        id: 0
+        title: title
+        userID: 5
+        currentValue: 5.63737665663332876420099637471139430999755859375
+        status: status
+    inline_response_200_1:
+      type: object
+      properties:
+        name:
+          type: string
+        year:
+          type: integer
+        description:
+          type: string
+        systems:
+          type: array
+          items:
+            $ref: '#/components/schemas/userchiefEngineeruserIDvehicleSetUpelementID_systems'
+      example:
+        year: 0
+        systems:
+        - subSystems:
+          - name: name
+            parts:
+            - name: name
+              initialValue: 6
+              measurementUnit: measurementUnit
+            - name: name
+              initialValue: 6
+              measurementUnit: measurementUnit
+            description: description
+          - name: name
+            parts:
+            - name: name
+              initialValue: 6
+              measurementUnit: measurementUnit
+            - name: name
+              initialValue: 6
+              measurementUnit: measurementUnit
+            description: description
+          name: name
+          description: description
+        - subSystems:
+          - name: name
+            parts:
+            - name: name
+              initialValue: 6
+              measurementUnit: measurementUnit
+            - name: name
+              initialValue: 6
+              measurementUnit: measurementUnit
+            description: description
+          - name: name
+            parts:
+            - name: name
+              initialValue: 6
+              measurementUnit: measurementUnit
+            - name: name
+              initialValue: 6
+              measurementUnit: measurementUnit
+            description: description
+          name: name
+          description: description
+        name: name
+        description: description
+    userchiefEngineeruserIDvehicleSetUpelementID_parts:
+      type: object
+      properties:
+        name:
+          type: string
+        measurementUnit:
+          type: string
+        initialValue:
+          type: integer
+      example:
+        name: name
+        initialValue: 6
+        measurementUnit: measurementUnit
+    userchiefEngineeruserIDvehicleSetUpelementID_subSystems:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        parts:
+          type: array
+          items:
+            $ref: '#/components/schemas/userchiefEngineeruserIDvehicleSetUpelementID_parts'
+      example:
+        name: name
+        parts:
+        - name: name
+          initialValue: 6
+          measurementUnit: measurementUnit
+        - name: name
+          initialValue: 6
+          measurementUnit: measurementUnit
+        description: description
+    userchiefEngineeruserIDvehicleSetUpelementID_systems:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        subSystems:
+          type: array
+          items:
+            $ref: '#/components/schemas/userchiefEngineeruserIDvehicleSetUpelementID_subSystems'
+      example:
+        subSystems:
+        - name: name
+          parts:
+          - name: name
+            initialValue: 6
+            measurementUnit: measurementUnit
+          - name: name
+            initialValue: 6
+            measurementUnit: measurementUnit
+          description: description
+        - name: name
+          parts:
+          - name: name
+            initialValue: 6
+            measurementUnit: measurementUnit
+          - name: name
+            initialValue: 6
+            measurementUnit: measurementUnit
+          description: description
+        name: name
+        description: description
+    vehicleSetUp_elementID_body:
+      type: object
+      properties:
+        name:
+          type: string
+        year:
+          type: integer
+        description:
+          type: string
+        systems:
+          type: array
+          items:
+            $ref: '#/components/schemas/userchiefEngineeruserIDvehicleSetUpelementID_systems'
+    userID_vehicleSetUp_body:
+      type: object
+      properties:
+        name:
+          type: string
+        year:
+          type: integer
+        description:
+          type: string
+        systems:
+          type: array
+          items:
+            $ref: '#/components/schemas/userchiefEngineeruserIDvehicleSetUpelementID_systems'
+    inline_response_200_2:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        dataCategory:
+          type: string
+        date:
+          type: integer
+        track:
+          type: string
+        lap:
+          type: integer
+        data:
+          type: number
+      example:
+        date: 6
+        data: 5.962133916683182377482808078639209270477294921875
+        dataCategory: dataCategory
+        name: name
+        lap: 1
+        id: 0
+        track: track
+    useruserIDchartchartIDchatchatRoomID_userList:
+      type: object
+      properties:
+        userID:
+          type: integer
+        name:
+          type: string
+        department:
+          type: string
+        role:
+          type: string
+        joined:
+          type: string
+          format: date-time
+        last-modified:
+          type: string
+          format: date-time
+    useruserIDchartchartIDchatchatRoomID_messageList:
+      type: object
+      properties:
+        text:
+          type: string
+        messageID:
+          type: integer
+        userID:
+          type: integer
+        timeSent:
+          type: string
+          format: date-time
+        image:
+          type: string
+          format: uri
+      example:
+        image: http://example.com/aeiou
+        timeSent: 2000-01-23T04:56:07.000+00:00
+        messageID: 6
+        text: text
+        userID: 1
+    chat_chatRoomID_body:
+      type: object
+      properties:
+        chatRoomName:
+          type: string
+        userList:
+          type: array
+          items:
+            $ref: '#/components/schemas/useruserIDchartchartIDchatchatRoomID_userList'
+        messageList:
+          type: array
+          items:
+            $ref: '#/components/schemas/useruserIDchartchartIDchatchatRoomID_messageList'
+        chatRoomID:
+          type: integer
+        chatRoomIcon:
+          type: string
+          format: uri
+    inline_response_200_3:
+      type: object
+      properties:
+        chatRoomName:
+          type: string
+        userList:
+          type: array
+          items:
+            $ref: '#/components/schemas/adminPanel_userID_body'
+        messageList:
+          type: array
+          items:
+            $ref: '#/components/schemas/useruserIDchartchartIDchatchatRoomID_messageList'
+        chatRoomID:
+          type: integer
+        chatRoomIcon:
+          type: string
+          format: uri
+      example:
+        userList:
+        - last-modified: 2000-01-23T04:56:07.000+00:00
+          role: role
+          joined: 2000-01-23T04:56:07.000+00:00
+          name: name
+          department: department
+          userID: 0
+        - last-modified: 2000-01-23T04:56:07.000+00:00
+          role: role
+          joined: 2000-01-23T04:56:07.000+00:00
+          name: name
+          department: department
+          userID: 0
+        messageList:
+        - image: http://example.com/aeiou
+          timeSent: 2000-01-23T04:56:07.000+00:00
+          messageID: 6
+          text: text
+          userID: 1
+        - image: http://example.com/aeiou
+          timeSent: 2000-01-23T04:56:07.000+00:00
+          messageID: 6
+          text: text
+          userID: 1
+        chatRoomID: 5
+        chatRoomName: chatRoomName
+        chatRoomIcon: http://example.com/aeiou
+    chat_chatRoomID_body_1:
+      type: object
+      properties:
+        chatRoomName:
+          type: string
+        userList:
+          type: array
+          items:
+            $ref: '#/components/schemas/useruserIDchartchartIDchatchatRoomID_userList'
+        messageList:
+          type: array
+          items:
+            $ref: '#/components/schemas/useruserIDchartchartIDchatchatRoomID_messageList'
+        chatRoomID:
+          type: integer
+        chatRoomIcon:
+          type: string
+          format: uri
+    userID_chat_body:
+      type: object
+      properties:
+        chatRoomName:
+          type: string
+        userList:
+          type: array
+          items:
+            $ref: '#/components/schemas/useruserIDchartchartIDchatchatRoomID_userList'
+        messageList:
+          type: array
+          items:
+            $ref: '#/components/schemas/useruserIDchartchartIDchatchatRoomID_messageList'
+        chatRoomID:
+          type: integer
+        chatRoomIcon:
+          type: string
+          format: uri
+    adminPanel_userID_body:
+      type: object
+      properties:
+        userID:
+          type: integer
+        name:
+          type: string
+        department:
+          type: string
+        role:
+          type: string
+        joined:
+          type: string
+          format: date-time
+        last-modified:
+          type: string
+          format: date-time
+      example:
+        last-modified: 2000-01-23T04:56:07.000+00:00
+        role: role
+        joined: 2000-01-23T04:56:07.000+00:00
+        name: name
+        department: department
+        userID: 0
+    proposals_proposalID_body_1:
+      type: object
+      properties:
+        id:
+          type: integer
+        prposalID:
+          type: integer
+        partID:
+          type: integer
+        userID:
+          type: integer
+        status:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+        currentValue:
+          type: number
+        newValue:
+          type: number
+      example:
+        newValue: 2.3021358869347654518833223846741020679473876953125
+        prposalID: 6
+        partID: 1
+        description: description
+        id: 0
+        title: title
+        userID: 5
+        currentValue: 5.63737665663332876420099637471139430999755859375
+        status: status
+    userID_profilePage_body:
+      type: object
+      properties:
+        username:
+          type: string
+        role:
+          type: string
+        department:
+          type: string
+        description:
+          type: string
+        googleLink:
+          type: string
+          format: uri
+        githubLink:
+          type: string
+          format: uri
+        linkedinLink:
+          type: string
+          format: uri
+        profileImage:
+          type: string
+          format: uri
+      example:
+        role: role
+        githubLink: http://example.com/aeiou
+        linkedinLink: http://example.com/aeiou
+        googleLink: http://example.com/aeiou
+        description: description
+        profileImage: http://example.com/aeiou
+        department: department
+        username: username
+  requestBodies:
+    vehicleSetup:
+      description: Vehicle Setup model
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              name:
+                type: string
+              year:
+                type: integer
+              description:
+                type: string
+              systems:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    description:
+                      type: string
+                    subSystems:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                          description:
+                            type: string
+                          parts:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                name:
+                                  type: string
+                                measurementUnit:
+                                  type: string
+                                initialValue:
+                                  type: integer
+      required: true
+    proposal:
+      description: Proposal model
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              id:
+                type: integer
+              prposalID:
+                type: integer
+              partID:
+                type: integer
+              userID:
+                type: integer
+              status:
+                type: string
+              title:
+                type: string
+              description:
+                type: string
+              currentValue:
+                type: number
+              newValue:
+                type: number
+      required: true
+    chart:
+      description: Chart model
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              id:
+                type: integer
+              name:
+                type: string
+              dataCategory:
+                type: string
+              date:
+                type: integer
+              track:
+                type: string
+              lap:
+                type: integer
+              data:
+                type: number
+      required: true
+    user:
+      description: User model
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              userID:
+                type: integer
+              name:
+                type: string
+              department:
+                type: string
+              role:
+                type: string
+              joined:
+                type: string
+                format: date-time
+              last-modified:
+                type: string
+                format: date-time
+      required: true
+    chatRoom:
+      description: User model
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              chatRoomName:
+                type: string
+              userList:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    userID:
+                      type: integer
+                    name:
+                      type: string
+                    department:
+                      type: string
+                    role:
+                      type: string
+                    joined:
+                      type: string
+                      format: date-time
+                    last-modified:
+                      type: string
+                      format: date-time
+              messageList:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    text:
+                      type: string
+                    messageID:
+                      type: integer
+                    userID:
+                      type: integer
+                    timeSent:
+                      type: string
+                      format: date-time
+                    image:
+                      type: string
+                      format: uri
+              chatRoomID:
+                type: integer
+              chatRoomIcon:
+                type: string
+                format: uri
+      required: true
+    profile:
+      description: User Profile
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              username:
+                type: string
+              role:
+                type: string
+              department:
+                type: string
+              description:
+                type: string
+              googleLink:
+                type: string
+                format: uri
+              githubLink:
+                type: string
+                format: uri
+              linkedinLink:
+                type: string
+                format: uri
+              profileImage:
+                type: string
+                format: uri
+      required: true
