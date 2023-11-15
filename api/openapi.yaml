@@ -4,7 +4,7 @@ info:
   description: ""
   version: "1.0"
 servers:
-- url: https://virtserver.swaggerhub.com/TSITSANOU_1/Ergasia/1.0
+- url: https://se2-backend-group-10-production.up.railway.app/
   description: SwaggerHub API Auto Mocking
 tags:
 - name: user
