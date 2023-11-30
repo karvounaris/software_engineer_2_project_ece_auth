@@ -16,12 +16,14 @@ jobs:
 
       - name: Download deps
         run: npm i
-        
-      - name: Give execution rights to Ava
-        run: chmod +x ./node_modules/.bin/ava
 
       - name: Run tests
-        run: ./node_modules/.bin/ava
+        run: npm run test
+      # - name: Give execution rights to Ava
+      #   run: chmod +x ./node_modules/.bin/ava
+
+      # - name: Run tests
+      #   run: ./node_modules/.bin/ava
 
   cd:
     runs-on: ubuntu-latest
