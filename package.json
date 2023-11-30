@@ -11,5 +11,8 @@
   "license": "ISC",
   "dependencies": {
     "oas3-tools": "^2.2.3"
+  },
+  "devDependencies": {
+    "ava": "^5.3.1"
   }
 }
