@@ -38,7 +38,3 @@ jobs:
         run: railway up --service 69d4c10e-5eb9-4891-a5a4-3021d5b7f5e3
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }} 
-
-  
-
-  
