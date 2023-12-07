@@ -90,7 +90,10 @@ exports.getWeather = function(userID) {
  * chatRoomID Integer This is the unique identifier of the chatroom
  * returns inline_response_200_3
  **/
-exports.sendChartToChat = function(body,userID,chartID,chatRoomID) {
+
+const readline = require('readline');
+
+exports.sendChartToChat = function(body,userID,chartID,chatRoomID, confirmation) {
   return new Promise(function(resolve, reject) {
     var examples = {};
     examples['application/json'] = {
@@ -126,14 +129,22 @@ exports.sendChartToChat = function(body,userID,chartID,chatRoomID) {
   "chatRoomName" : "chatRoomName",
   "chatRoomIcon" : "http://example.com/aeiou"
 };
-    if (Object.keys(examples).length > 0) {
+    const rl = readline.createInterface({
+      input: process.stdin,
+      output: process.stdout
+    });
+
+    rl.question('Are you sure you want to send this Chart?: ', (confirmation) => {
+      rl.close();
+    });
+
+    if (Object.keys(examples).length > 0 && confirmation === "yes") {
       resolve(examples[Object.keys(examples)[0]]);
     } else {
       resolve();
     }
   });
 }
-
 
 /**
  * send message to chat
