@@ -33,6 +33,16 @@ module.exports.updateVehicleSetup = function updateVehicleSetup (req, res, next,
     });
 };
 
+module.exports.getVehicleSetup = function getVehicleSetup (req, res, next, userID, elementID) {
+  ChiefEngineer.getVehicleSetup(userID, elementID)
+    .then(function (response) {
+      utils.writeJson(res, response);
+    })
+    .catch(function (response) {
+      utils.writeJson(res, response);
+    });
+};
+
 module.exports.userChiefEngineerUserIDAdminPanelUserIDPUT = function userChiefEngineerUserIDAdminPanelUserIDPUT (req, res, next, body, userID) {
   ChiefEngineer.userChiefEngineerUserIDAdminPanelUserIDPUT(body, userID)
     .then(function (response) {

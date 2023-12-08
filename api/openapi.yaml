@@ -191,6 +191,41 @@ paths:
         "404":
           description: Vehicle setup not found
       x-swagger-router-controller: ChiefEngineer
+    get:
+      tags:
+      - chiefEngineer
+      summary: Get vehicle setup
+      description: This endpoint displays vehicle setup details
+      operationId: getVehicleSetup
+      parameters:
+      - name: userID
+        in: path
+        description: This is the unique identifier of the user
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      - name: elementID
+        in: path
+        description: This is the unique identifier of the element
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_1'
+        "400":
+          description: Invalid input parameter
+        "404":
+          description: Vehicle setup not found
+      x-swagger-router-controller: ChiefEngineer
   /user/chiefEngineer/{userID}/vehicleSetUp:
     post:
       tags:

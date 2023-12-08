@@ -199,6 +199,87 @@ exports.updateVehicleSetup = function(body,userID,elementID) {
 
 
 /**
+ * Get vehicle setup
+ * This endpoint displays vehicle setup details
+ *
+ * userID Integer This is the unique identifier of the user
+ * elementID Integer This is the unique identifier of the element
+ * returns inline_response_200_1
+ **/
+exports.getVehicleSetup = function(userID,elementID) {
+  return new Promise(function(resolve, reject) {
+    var examples = {};
+    examples['application/json'] = {
+  "year" : 0,
+  "systems" : [ {
+    "subSystems" : [ {
+      "name" : "name",
+      "parts" : [ {
+        "name" : "name",
+        "initialValue" : 6,
+        "measurementUnit" : "measurementUnit"
+      }, {
+        "name" : "name",
+        "initialValue" : 6,
+        "measurementUnit" : "measurementUnit"
+      } ],
+      "description" : "description"
+    }, {
+      "name" : "name",
+      "parts" : [ {
+        "name" : "name",
+        "initialValue" : 6,
+        "measurementUnit" : "measurementUnit"
+      }, {
+        "name" : "name",
+        "initialValue" : 6,
+        "measurementUnit" : "measurementUnit"
+      } ],
+      "description" : "description"
+    } ],
+    "name" : "name",
+    "description" : "description"
+  }, {
+    "subSystems" : [ {
+      "name" : "name",
+      "parts" : [ {
+        "name" : "name",
+        "initialValue" : 6,
+        "measurementUnit" : "measurementUnit"
+      }, {
+        "name" : "name",
+        "initialValue" : 6,
+        "measurementUnit" : "measurementUnit"
+      } ],
+      "description" : "description"
+    }, {
+      "name" : "name",
+      "parts" : [ {
+        "name" : "name",
+        "initialValue" : 6,
+        "measurementUnit" : "measurementUnit"
+      }, {
+        "name" : "name",
+        "initialValue" : 6,
+        "measurementUnit" : "measurementUnit"
+      } ],
+      "description" : "description"
+    } ],
+    "name" : "name",
+    "description" : "description"
+  } ],
+  "name" : "name",
+  "description" : "description"
+};
+    if (Object.keys(examples).length > 0) {
+      resolve(examples[Object.keys(examples)[0]]);
+    } else {
+      resolve();
+    }
+  });
+}
+
+/**
  * Assign roles
  * The chief engineer must be able to edit the roles
  *
