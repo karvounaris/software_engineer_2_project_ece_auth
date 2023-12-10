@@ -115,6 +115,8 @@ exports.createVehicleSetup = function(body,userID) {
 }
 
 
+var updatedVehicleData = null;
+
 /**
  * Update vehicle setup
  * This endpoint allows the chief engineer to update the vehicle setup
@@ -124,160 +126,45 @@ exports.createVehicleSetup = function(body,userID) {
  * elementID Integer This is the unique identifier of the element
  * returns inline_response_200_1
  **/
-exports.updateVehicleSetup = function(body,userID,elementID) {
+exports.updateVehicleSetup = function(body, userID, elementID) {
   return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = {
-  "year" : 0,
-  "systems" : [ {
-    "subSystems" : [ {
-      "name" : "name",
-      "parts" : [ {
-        "name" : "name",
-        "initialValue" : 6,
-        "measurementUnit" : "measurementUnit"
-      }, {
-        "name" : "name",
-        "initialValue" : 6,
-        "measurementUnit" : "measurementUnit"
-      } ],
-      "description" : "description"
-    }, {
-      "name" : "name",
-      "parts" : [ {
-        "name" : "name",
-        "initialValue" : 6,
-        "measurementUnit" : "measurementUnit"
-      }, {
-        "name" : "name",
-        "initialValue" : 6,
-        "measurementUnit" : "measurementUnit"
-      } ],
-      "description" : "description"
-    } ],
-    "name" : "name",
-    "description" : "description"
-  }, {
-    "subSystems" : [ {
-      "name" : "name",
-      "parts" : [ {
-        "name" : "name",
-        "initialValue" : 6,
-        "measurementUnit" : "measurementUnit"
-      }, {
-        "name" : "name",
-        "initialValue" : 6,
-        "measurementUnit" : "measurementUnit"
-      } ],
-      "description" : "description"
-    }, {
-      "name" : "name",
-      "parts" : [ {
-        "name" : "name",
-        "initialValue" : 6,
-        "measurementUnit" : "measurementUnit"
-      }, {
-        "name" : "name",
-        "initialValue" : 6,
-        "measurementUnit" : "measurementUnit"
-      } ],
-      "description" : "description"
-    } ],
-    "name" : "name",
-    "description" : "description"
-  } ],
-  "name" : "name",
-  "description" : "description"
-};
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
-    }
+    // Sample logic to construct a response based on the input parameters
+    updatedVehicleData = {
+      year: body.year || 0,
+      systems: (body.systems || []).map(system => ({
+        name: system.name || 'Default System Name',
+        description: system.description || 'Default System Description',
+        subSystems: (system.subSystems || []).map(subSystem => ({
+          name: subSystem.name || 'Default Subsystem Name',
+          description: subSystem.description || 'Default Subsystem Description',
+          parts: (subSystem.parts || []).map(part => ({
+            name: part.name || 'Default Part Name',
+            initialValue: part.initialValue || 6,
+            measurementUnit: part.measurementUnit || 'Default Measurement Unit'
+          }))
+        }))
+      })),
+      name: body.vehicleName || 'Default Vehicle Name',
+      description: body.vehicleDescription || 'Default Vehicle Description'
+    };
+
+    resolve(updatedVehicleData); // Resolve with the constructed dynamic response
   });
-}
+};
 
 
-/**
- * Get vehicle setup
- * This endpoint displays vehicle setup details
- *
- * userID Integer This is the unique identifier of the user
- * elementID Integer This is the unique identifier of the element
- * returns inline_response_200_1
- **/
-exports.getVehicleSetup = function(userID,elementID) {
+// Function to retrieve the updated data
+exports.getVehicleSetup = function(userID, elementID) {
   return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = {
-  "year" : 0,
-  "systems" : [ {
-    "subSystems" : [ {
-      "name" : "name",
-      "parts" : [ {
-        "name" : "name",
-        "initialValue" : 6,
-        "measurementUnit" : "measurementUnit"
-      }, {
-        "name" : "name",
-        "initialValue" : 6,
-        "measurementUnit" : "measurementUnit"
-      } ],
-      "description" : "description"
-    }, {
-      "name" : "name",
-      "parts" : [ {
-        "name" : "name",
-        "initialValue" : 6,
-        "measurementUnit" : "measurementUnit"
-      }, {
-        "name" : "name",
-        "initialValue" : 6,
-        "measurementUnit" : "measurementUnit"
-      } ],
-      "description" : "description"
-    } ],
-    "name" : "name",
-    "description" : "description"
-  }, {
-    "subSystems" : [ {
-      "name" : "name",
-      "parts" : [ {
-        "name" : "name",
-        "initialValue" : 6,
-        "measurementUnit" : "measurementUnit"
-      }, {
-        "name" : "name",
-        "initialValue" : 6,
-        "measurementUnit" : "measurementUnit"
-      } ],
-      "description" : "description"
-    }, {
-      "name" : "name",
-      "parts" : [ {
-        "name" : "name",
-        "initialValue" : 6,
-        "measurementUnit" : "measurementUnit"
-      }, {
-        "name" : "name",
-        "initialValue" : 6,
-        "measurementUnit" : "measurementUnit"
-      } ],
-      "description" : "description"
-    } ],
-    "name" : "name",
-    "description" : "description"
-  } ],
-  "name" : "name",
-  "description" : "description"
-};
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
+    if (updatedVehicleData) {
+      // If updatedData is available, resolve with it
+      resolve(updatedVehicleData);
     } else {
-      resolve();
+      // If updatedData is not available, handle it accordingly (resolve with default or an error)
+      resolve(null);
     }
   });
-}
+};
 
 /**
  * Assign roles
