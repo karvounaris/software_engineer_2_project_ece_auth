@@ -190,5 +190,14 @@ test('GET user/${userID}/profilePage View the profile page of a user', async (t)
     const response = await t.context.got.get(`user/${userID}/profilePage`);
     //console.log(response.body);
     t.is(response.statusCode, 200);
+
+});
+
+test('GET user/engineer/${userID}/file View the file', async (t) => {
+    const userID = 2;
+
+    const response = await t.context.got.get(`user/engineer/${userID}/file`);
+    //console.log(response.body);
+    t.is(response.statusCode, 200);
     
 });

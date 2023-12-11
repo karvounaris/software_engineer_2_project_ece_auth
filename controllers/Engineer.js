@@ -22,3 +22,13 @@ module.exports.postProposal = function postProposal (req, res, next, body, userI
       utils.writeJson(res, response);
     });
 };
+
+module.exports.viewFile = function viewFile (req, res, next, userID) {
+  Engineer.viewFile(userID)
+    .then(function (response) {
+      utils.writeJson(res, response);
+    })
+    .catch(function (response) {
+      utils.writeJson(res, response);
+    });
+};
