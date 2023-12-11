@@ -528,6 +528,8 @@ paths:
                     type: integer
                   status:
                     type: string
+                  confirmation:
+                    type: string
                   title:
                     type: string
                   description:
@@ -540,6 +542,7 @@ paths:
           description: Invalid input parameter
         '404':
           description: Proposal not found
+      x-swagger-router-controller: ChiefEngineer
   /user/engineer/{userID}/file:
     post:
       tags:
@@ -861,6 +864,7 @@ components:
         userID: 5
         currentValue: 5.63737665663332876420099637471139430999755859375
         status: status
+        confirmation: confirmation 
     proposals_proposalID_body:
       type: object
       properties:
@@ -894,6 +898,7 @@ components:
         userID: 5
         currentValue: 5.63737665663332876420099637471139430999755859375
         status: status
+        confirmation: confirmation
     inline_response_200_1:
       type: object
       properties:
@@ -1267,6 +1272,7 @@ components:
         userID: 5
         currentValue: 5.63737665663332876420099637471139430999755859375
         status: status
+        confirmation: confirmation
     userID_profilePage_body:
       type: object
       properties:

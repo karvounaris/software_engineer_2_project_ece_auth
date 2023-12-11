@@ -39,8 +39,8 @@ exports.getProposal = function(userID, proposalID) {
       // If updatedData is not available, handle it accordingly (resolve with default or an error)
       resolve(/* Default or appropriate response */);
     }
-     });
-      };
+  });
+};
 
 
 /**
