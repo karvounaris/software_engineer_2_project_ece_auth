@@ -133,6 +133,9 @@ test('GET /user/${userID}/chart/${chartID} endpoint returns correct data', async
     t.deepEqual(response.body.systems[0].subSystems[0].name , updatedResource.body.systems[0].subSystems[0].name);
 });
 
+
+//I should test the POST create vehicle setup as well
+
 test('GET user/${userID}/Weather weather report', async (t) => {
     const userID = 2;
 
@@ -178,4 +181,14 @@ test('PUT /user/chiefEngineer/{userID}/proposals/{proposalID} change the proposa
      t.deepEqual(response.body.status, updatedResource.body.status);
      t.deepEqual(response.body.confirmation, updatedResource.body.confirmation);
      t.deepEqual(response.body.description, updatedResource.body.description);
+});
+
+
+test('GET user/${userID}/profilePage View the profile page of a user', async (t) => {
+    const userID = 2;
+
+    const response = await t.context.got.get(`user/${userID}/profilePage`);
+    //console.log(response.body);
+    t.is(response.statusCode, 200);
+    
 });

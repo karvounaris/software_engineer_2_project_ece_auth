@@ -2,6 +2,8 @@
 
 const ChiefEngineerService = require('./ChiefEngineerService.js');
 
+var updatedProfileData = null;
+
 /**
  * Create a chatRoom
  * Creates a chatRoom for the users to communicate
@@ -347,3 +349,37 @@ exports.viewVehicleSetup = function(userID) {
   });
 }
 
+
+/**
+ * View the profile page of a user
+ * Returns a profile page based on a single ID
+ *
+ * userID Integer This is the unique identifier of the user
+ * chartID Integer this is the unique identifier of the chart
+ * returns inline_response_200_2
+ **/
+exports.viewProfile = function(userID) {
+  return new Promise(function(resolve, reject) { 
+    if (updatedProfileData) {
+      // If updatedData is available, resolve with it
+      resolve(updatedProfileData);
+    } else {
+    var examples = {};
+    examples['application/json'] = {
+  "role" : "role",
+  "githubLink" : "http://example.com/aeiou",
+  "linkedinLink" : "http://example.com/aeiou",
+  "googleLink" : "http://example.com/aeiou",
+  "description" : "description",
+  "profileImage" : "http://example.com/aeiou",
+  "department" : "department",
+  "username" : "username"
+};
+    if (Object.keys(examples).length > 0) {
+      resolve(examples[Object.keys(examples)[0]]);
+    } else {
+      resolve();
+    }
+  }
+  });
+}

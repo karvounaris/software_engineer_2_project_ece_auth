@@ -636,6 +636,50 @@ paths:
         "500":
           description: Server Error
       x-swagger-router-controller: User
+    get:
+      tags:
+      - user
+      summary: View the profile page of a user
+      description: Returns a profile page based on a single ID
+      operationId: viewProfile
+      parameters:
+      - name: userID
+        in: path
+        description: This is the unique identifier of the user
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Profile successfully fetched.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  username:
+                    type: string
+                  role:
+                    type: string
+                  department:
+                    type: string
+                  description:
+                    type: string
+                  googleLink:
+                    type: string
+                    format: uri
+                  githubLink:
+                    type: string
+                    format: uri
+                  linkedinLink:
+                    type: string
+                    format: uri
+                  profileImage:
+                    type: string
+                    format: uri
+        '404':
+          description: Profile page not found.
+      x-swagger-router-controller: User
 components:
   schemas:
     vehicleSetup:
