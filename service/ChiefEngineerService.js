@@ -1,5 +1,7 @@
 'use strict';
 
+var updatedVehicleData = null;
+var updatedProposalData = null;
 
 /**
  * Accepts or Declines a proposal
@@ -12,25 +14,33 @@
  **/
 exports.acceptOrDeclineProposal = function(body,userID,proposalID) {
   return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = {
-  "newValue" : 2.3021358869347655,
-  "prposalID" : 6,
-  "partID" : 1,
-  "description" : "description",
-  "id" : 0,
-  "title" : "title",
-  "userID" : 5,
-  "currentValue" : 5.637376656633329,
-  "status" : "status"
-};
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
-    }
+    updatedProposalData = {
+      id : body.id || 0,
+      prposalID : body.proposalID || 0,
+      partID : body.partID || 0,
+      userID : body.userID || 0,
+      status : body.status || "Default",
+      confirmation : body.confirmation || "Default",
+      title : body.title || "Default",
+      description : body.description || "Default",
+      currentValue : body.currentValue || 0,
+      newValue : body.newValue || 0
+    };
+    resolve(updatedProposalData); // Resolve with the constructed dynamic response
   });
 }
+
+exports.getProposal = function(userID, proposalID) {
+  return new Promise(function(resolve, reject) {
+    if (updatedProposalData) {
+      // If updatedData is available, resolve with it
+      resolve(updatedProposalData);
+    } else {
+      // If updatedData is not available, handle it accordingly (resolve with default or an error)
+      resolve(/* Default or appropriate response */);
+    }
+     });
+      };
 
 
 /**
@@ -114,9 +124,6 @@ exports.createVehicleSetup = function(body,userID) {
   });
 }
 
-
-var updatedVehicleData = null;
-
 /**
  * Update vehicle setup
  * This endpoint allows the chief engineer to update the vehicle setup
@@ -152,44 +159,7 @@ exports.updateVehicleSetup = function(body, userID, elementID) {
   });
 };
 
-
-// Function to retrieve the updated data
-exports.getVehicleSetup = function(userID, elementID) {
-  return new Promise(function(resolve, reject) {
-    if (updatedVehicleData) {
-      // If updatedData is available, resolve with it
-      resolve(updatedVehicleData);
-    } else {
-      // If updatedData is not available, handle it accordingly (resolve with default or an error)
-      resolve(null);
-    }
-  });
+exports.getUpdatedVehicleData = function() {
+  return updatedVehicleData;
 };
-
-/**
- * Assign roles
- * The chief engineer must be able to edit the roles
- *
- * body AdminPanel_userID_body User model
- * userID Integer This is the unique identifier of the user
- * returns adminPanel_userID_body
- **/
-exports.userChiefEngineerUserIDAdminPanelUserIDPUT = function(body,userID) {
-  return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = {
-  "last-modified" : "2000-01-23T04:56:07.000+00:00",
-  "role" : "role",
-  "joined" : "2000-01-23T04:56:07.000+00:00",
-  "name" : "name",
-  "department" : "department",
-  "userID" : 0
-};
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
-    }
-  });
-}
 

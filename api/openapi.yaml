@@ -191,41 +191,6 @@ paths:
         "404":
           description: Vehicle setup not found
       x-swagger-router-controller: ChiefEngineer
-    get:
-      tags:
-      - chiefEngineer
-      summary: Get vehicle setup
-      description: This endpoint displays vehicle setup details
-      operationId: getVehicleSetup
-      parameters:
-      - name: userID
-        in: path
-        description: This is the unique identifier of the user
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: integer
-      - name: elementID
-        in: path
-        description: This is the unique identifier of the element
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: integer
-      responses:
-        "200":
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/inline_response_200_1'
-        "400":
-          description: Invalid input parameter
-        "404":
-          description: Vehicle setup not found
-      x-swagger-router-controller: ChiefEngineer
   /user/chiefEngineer/{userID}/vehicleSetUp:
     post:
       tags:
@@ -261,6 +226,33 @@ paths:
           description: Invalid action
         "500":
           description: Server error
+      x-swagger-router-controller: ChiefEngineer
+    get:
+      tags:
+      - chiefEngineer
+      summary: Get vehicle setup
+      description: This endpoint displays vehicle setup details
+      operationId: getVehicleSetup
+      parameters:
+      - name: userID
+        in: path
+        description: This is the unique identifier of the user
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_1'
+        "400":
+          description: Invalid input parameter
+        "404":
+          description: Vehicle setup not found
       x-swagger-router-controller: ChiefEngineer
   /user/{userID}/chart/{chartID}:
     get:
@@ -499,6 +491,55 @@ paths:
         "404":
           description: Not found
       x-swagger-router-controller: ChiefEngineer
+    get:
+      tags:
+      - chiefEngineer
+      summary: Get proposal
+      description: This endpoint displays proposal details
+      operationId: getProposal
+      parameters:
+        - name: userID
+          in: path
+          description: This is the unique identifier of the user
+          required: true
+          schema:
+            type: integer
+        - name: proposalID
+          in: path
+          description: This is the unique identifier of the proposal
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successfully Accepted or Declined a Proposal
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  prposalID:
+                    type: integer
+                  partID:
+                    type: integer
+                  userID:
+                    type: integer
+                  status:
+                    type: string
+                  title:
+                    type: string
+                  description:
+                    type: string
+                  currentValue:
+                    type: number
+                  newValue:
+                    type: number
+        '400':
+          description: Invalid input parameter
+        '404':
+          description: Proposal not found
   /user/engineer/{userID}/file:
     post:
       tags:
@@ -664,6 +705,8 @@ components:
           type: integer
         status:
           type: string
+        confirmation:
+          type: string
         title:
           type: string
         description:
@@ -798,6 +841,8 @@ components:
           type: integer
         status:
           type: string
+        confirmation:
+          type: string
         title:
           type: string
         description:
@@ -828,6 +873,8 @@ components:
         userID:
           type: integer
         status:
+          type: string        
+        confirmation:
           type: string
         title:
           type: string
@@ -1200,6 +1247,8 @@ components:
           type: integer
         status:
           type: string
+        confirmation:
+          type: string
         title:
           type: string
         description:
@@ -1310,6 +1359,8 @@ components:
               userID:
                 type: integer
               status:
+                type: string
+              confirmation:
                 type: string
               title:
                 type: string

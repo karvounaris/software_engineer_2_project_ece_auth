@@ -1,5 +1,6 @@
 'use strict';
 
+const ChiefEngineerService = require('./ChiefEngineerService.js');
 
 /**
  * Create a chatRoom
@@ -262,6 +263,8 @@ exports.viewChart = function(userID,chartID) {
 }
 
 
+
+
 /**
  * View vehicle setup
  * This endpoint displays vehicle setup details
@@ -271,7 +274,12 @@ exports.viewChart = function(userID,chartID) {
  **/
 exports.viewVehicleSetup = function(userID) {
   return new Promise(function(resolve, reject) {
-    var examples = {};
+    var updatedData = ChiefEngineerService.getUpdatedVehicleData();
+    if (updatedData) {
+      // If updatedData is available, resolve with it
+      resolve(updatedData);
+    } else {
+      var examples = {};
     examples['application/json'] = {
   "year" : 0,
   "systems" : [ {
@@ -334,10 +342,7 @@ exports.viewVehicleSetup = function(userID) {
   "name" : "name",
   "description" : "description"
 };
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
+    resolve(examples[Object.keys(examples)[0]]);
     }
   });
 }
