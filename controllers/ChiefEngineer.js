@@ -13,6 +13,16 @@ module.exports.acceptOrDeclineProposal = function acceptOrDeclineProposal (req, 
     });
 };
 
+module.exports.getProposal = function getProposal (req, res, next, userID, proposalID) {
+  ChiefEngineer.getProposal(userID, proposalID)
+    .then(function (response) {
+      utils.writeJson(res, response);
+    })
+    .catch(function (response) {
+      utils.writeJson(res, response);
+    });
+};
+
 module.exports.createVehicleSetup = function createVehicleSetup (req, res, next, body, userID) {
   ChiefEngineer.createVehicleSetup(body, userID)
     .then(function (response) {
@@ -33,8 +43,8 @@ module.exports.updateVehicleSetup = function updateVehicleSetup (req, res, next,
     });
 };
 
-module.exports.getVehicleSetup = function getVehicleSetup (req, res, next, userID, elementID) {
-  ChiefEngineer.getVehicleSetup(userID, elementID)
+module.exports.getVehicleSetup = function getVehicleSetup (req, res, next, userID) {
+  ChiefEngineer.getVehicleSetup(userID)
     .then(function (response) {
       utils.writeJson(res, response);
     })
