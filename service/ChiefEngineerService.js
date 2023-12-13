@@ -53,74 +53,115 @@ exports.getProposal = function(userID, proposalID) {
  **/
 exports.createVehicleSetup = function(body,userID) {
   return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = {
-  "year" : 0,
-  "systems" : [ {
-    "subSystems" : [ {
-      "name" : "name",
-      "parts" : [ {
-        "name" : "name",
-        "initialValue" : 6,
-        "measurementUnit" : "measurementUnit"
-      }, {
-        "name" : "name",
-        "initialValue" : 6,
-        "measurementUnit" : "measurementUnit"
-      } ],
-      "description" : "description"
-    }, {
-      "name" : "name",
-      "parts" : [ {
-        "name" : "name",
-        "initialValue" : 6,
-        "measurementUnit" : "measurementUnit"
-      }, {
-        "name" : "name",
-        "initialValue" : 6,
-        "measurementUnit" : "measurementUnit"
-      } ],
-      "description" : "description"
-    } ],
-    "name" : "name",
-    "description" : "description"
-  }, {
-    "subSystems" : [ {
-      "name" : "name",
-      "parts" : [ {
-        "name" : "name",
-        "initialValue" : 6,
-        "measurementUnit" : "measurementUnit"
-      }, {
-        "name" : "name",
-        "initialValue" : 6,
-        "measurementUnit" : "measurementUnit"
-      } ],
-      "description" : "description"
-    }, {
-      "name" : "name",
-      "parts" : [ {
-        "name" : "name",
-        "initialValue" : 6,
-        "measurementUnit" : "measurementUnit"
-      }, {
-        "name" : "name",
-        "initialValue" : 6,
-        "measurementUnit" : "measurementUnit"
-      } ],
-      "description" : "description"
-    } ],
-    "name" : "name",
-    "description" : "description"
-  } ],
-  "name" : "name",
-  "description" : "description"
-};
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
+    // updatedVehicleData = {
+    //   year: body.year || 0,
+    //   systems: (body.systems || []).map(system => ({
+    //     name: system.name || 'Default System Name',
+    //     description: system.description || 'Default System Description',
+    //     subSystems: (system.subSystems || []).map(subSystem => ({
+    //       name: subSystem.name || 'Default Subsystem Name',
+    //       description: subSystem.description || 'Default Subsystem Description',
+    //       parts: (subSystem.parts || []).map(part => ({
+    //         name: part.name || 'Default Part Name',
+    //         initialValue: part.initialValue || 6,
+    //         measurementUnit: part.measurementUnit || 'Default Measurement Unit'
+    //       }))
+    //     }))
+    //   })),
+    //   name: body.vehicleName || 'Default Vehicle Name',
+    //   description: body.vehicleDescription || 'Default Vehicle Description'
+    // };
+    updatedVehicleData = {
+      year: body.year,
+      systems: (body.systems).map(system => ({
+        name: system.name,
+        description: system.description ,
+        subSystems: (system.subSystems).map(subSystem => ({
+          name: subSystem.name,
+          description: subSystem.description,
+          parts: (subSystem.parts).map(part => ({
+            name: part.name,
+            initialValue: part.initialValue,
+            measurementUnit: part.measurementUnit
+          }))
+        }))
+      })),
+      name: body.name,
+      description: body.description
+    };
+    if (updatedVehicleData){
+      resolve(updatedVehicleData); // Resolve with the constructed dynamic response
     } else {
-      resolve();
+      reject(new Error('Critical Error.')); // Resolve with the constructed dynamic response
     }
+//     var examples = {};
+//     examples['application/json'] = {
+//   "year" : 0,
+//   "systems" : [ {
+//     "subSystems" : [ {
+//       "name" : "name",
+//       "parts" : [ {
+//         "name" : "name",
+//         "initialValue" : 6,
+//         "measurementUnit" : "measurementUnit"
+//       }, {
+//         "name" : "name",
+//         "initialValue" : 6,
+//         "measurementUnit" : "measurementUnit"
+//       } ],
+//       "description" : "description"
+//     }, {
+//       "name" : "name",
+//       "parts" : [ {
+//         "name" : "name",
+//         "initialValue" : 6,
+//         "measurementUnit" : "measurementUnit"
+//       }, {
+//         "name" : "name",
+//         "initialValue" : 6,
+//         "measurementUnit" : "measurementUnit"
+//       } ],
+//       "description" : "description"
+//     } ],
+//     "name" : "name",
+//     "description" : "description"
+//   }, {
+//     "subSystems" : [ {
+//       "name" : "name",
+//       "parts" : [ {
+//         "name" : "name",
+//         "initialValue" : 6,
+//         "measurementUnit" : "measurementUnit"
+//       }, {
+//         "name" : "name",
+//         "initialValue" : 6,
+//         "measurementUnit" : "measurementUnit"
+//       } ],
+//       "description" : "description"
+//     }, {
+//       "name" : "name",
+//       "parts" : [ {
+//         "name" : "name",
+//         "initialValue" : 6,
+//         "measurementUnit" : "measurementUnit"
+//       }, {
+//         "name" : "name",
+//         "initialValue" : 6,
+//         "measurementUnit" : "measurementUnit"
+//       } ],
+//       "description" : "description"
+//     } ],
+//     "name" : "name",
+//     "description" : "description"
+//   } ],
+//   "name" : "name",
+//   "description" : "description"
+// };
+//     if (Object.keys(examples).length > 0) {
+//       resolve(examples[Object.keys(examples)[0]]);
+//     } else {
+//       resolve();
+//     }
   });
 }
 
@@ -136,26 +177,49 @@ exports.createVehicleSetup = function(body,userID) {
 exports.updateVehicleSetup = function(body, userID, elementID) {
   return new Promise(function(resolve, reject) {
     // Sample logic to construct a response based on the input parameters
+    // updatedVehicleData = {
+    //   year: body.year || 0,
+    //   systems: (body.systems || []).map(system => ({
+    //     name: system.name || 'Default System Name',
+    //     description: system.description || 'Default System Description',
+    //     subSystems: (system.subSystems || []).map(subSystem => ({
+    //       name: subSystem.name || 'Default Subsystem Name',
+    //       description: subSystem.description || 'Default Subsystem Description',
+    //       parts: (subSystem.parts || []).map(part => ({
+    //         name: part.name || 'Default Part Name',
+    //         initialValue: part.initialValue || 6,
+    //         measurementUnit: part.measurementUnit || 'Default Measurement Unit'
+    //       }))
+    //     }))
+    //   })),
+    //   name: body.vehicleName || 'Default Vehicle Name',
+    //   description: body.vehicleDescription || 'Default Vehicle Description'
+    // };
+    if (Object.keys(body).length === 0 && body.constructor === Object) {
+      resolve('');
+    } else {
     updatedVehicleData = {
-      year: body.year || 0,
-      systems: (body.systems || []).map(system => ({
-        name: system.name || 'Default System Name',
-        description: system.description || 'Default System Description',
-        subSystems: (system.subSystems || []).map(subSystem => ({
-          name: subSystem.name || 'Default Subsystem Name',
-          description: subSystem.description || 'Default Subsystem Description',
-          parts: (subSystem.parts || []).map(part => ({
-            name: part.name || 'Default Part Name',
-            initialValue: part.initialValue || 6,
-            measurementUnit: part.measurementUnit || 'Default Measurement Unit'
+      year: body.year,
+      systems: (body.systems).map(system => ({
+        name: system.name,
+        description: system.description ,
+        subSystems: (system.subSystems).map(subSystem => ({
+          name: subSystem.name,
+          description: subSystem.description,
+          parts: (subSystem.parts).map(part => ({
+            name: part.name,
+            initialValue: part.initialValue,
+            measurementUnit: part.measurementUnit
           }))
         }))
       })),
-      name: body.vehicleName || 'Default Vehicle Name',
-      description: body.vehicleDescription || 'Default Vehicle Description'
+      name: body.name,
+      description: body.description
     };
-
-    resolve(updatedVehicleData); // Resolve with the constructed dynamic response
+      // Your current logic to construct updatedVehicleData
+      // Resolve with the constructed dynamic response
+      resolve(updatedVehicleData);
+    }
   });
 };
 
