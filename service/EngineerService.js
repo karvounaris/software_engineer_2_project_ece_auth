@@ -1,5 +1,5 @@
 'use strict';
-//var file = null;
+var EngineerProposalData =  null;
 
 /**
  * Uploads a file containing data from the sensors
@@ -26,25 +26,36 @@ exports.postFile = function(body,userID) {
  **/
 exports.postProposal = function(body,userID) {
   return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = {
-  "newValue" : 2.3021358869347655,
-  "prposalID" : 6,
-  "partID" : 1,
-  "description" : "description",
-  "id" : 0,
-  "title" : "title",
-  "userID" : 5,
-  "currentValue" : 5.637376656633329,
-  "status" : "status"
-};
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
+    EngineerProposalData = {
+      newValue : body.newValue,
+      prposalID : body.prposalID,
+      partID : body.partID,
+      description : body.description,
+      id : body.id,
+      title : body.title,
+      userID : body.userID,
+      currentValue : body.currentValue,
+      status : body.status
+    };
+    if (EngineerProposalData){
+      resolve(EngineerProposalData); // Resolve with the constructed dynamic response
     } else {
       resolve();
     }
   });
 }
+
+exports.getEngineerProposal = function(userID, proposalID) {
+  return new Promise(function(resolve, reject) {
+    if (EngineerProposalData) {
+      // If updatedData is available, resolve with it
+      resolve(EngineerProposalData);
+    } else {
+      // If updatedData is not available, handle it accordingly (resolve with default or an error)
+      resolve();
+    }
+  });
+};
 
 
 /**

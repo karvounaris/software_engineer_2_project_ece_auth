@@ -76,6 +76,50 @@ paths:
         "400":
           description: Invalid value or missing required parameter
       x-swagger-router-controller: Engineer
+    get:
+      tags:
+      - engineer
+      summary: Get the Engineer's proposal
+      description: This endpoint displays proposal details
+      operationId: getEngineerProposal
+      parameters:
+      - name: userID
+        in: path
+        description: This is the unique identifier of the user
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Successfully Accepted or Declined a Proposal
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  prposalID:
+                    type: integer
+                  partID:
+                    type: integer
+                  userID:
+                    type: integer
+                  status:
+                    type: string
+                  title:
+                    type: string
+                  description:
+                    type: string
+                  currentValue:
+                    type: number
+                  newValue:
+                    type: number
+        '400':
+          description: Invalid input parameter
+        '404':
+          description: Proposal not found  
+      x-swagger-router-controller: Engineer
   /user/handsOnEngineer/{userID}/proposals/{proposalID}:
     put:
       tags:
@@ -83,7 +127,7 @@ paths:
       summary: the hands-on engineer changes the proposal status
       description: Hands-on engineers must be able to change the proposal status to
         DONE
-      operationId: :"changeStatus"
+      operationId: changeStatus
       parameters:
       - name: userID
         in: path
@@ -120,6 +164,58 @@ paths:
         "404":
           description: Not found
       x-swagger-router-controller: HandsOnEngineer
+    get:
+      tags:
+      - handsOnEngineer
+      summary: Get HandsOnEngineer's proposal
+      description: This endpoint displays proposal details
+      operationId: getHandsOnEngineerProposal
+      parameters:
+      - name: userID
+        in: path
+        description: This is the unique identifier of the user
+        required: true
+        schema:
+          type: integer
+      - name: proposalID
+        in: path
+        description: This is the unique identifier of the proposal
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Successfully Accepted or Declined a Proposal
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  prposalID:
+                    type: integer
+                  partID:
+                    type: integer
+                  userID:
+                    type: integer
+                  status:
+                    type: string
+                  confirmation:
+                    type: string
+                  title:
+                    type: string
+                  description:
+                    type: string
+                  currentValue:
+                    type: number
+                  newValue:
+                    type: number
+        '400':
+          description: Invalid input parameter
+        '404':
+          description: Proposal not found
+      x-swagger-router-controller: HandsOnEngineer    
   /user/{userID}/vehicleSetUp:
     get:
       tags:
