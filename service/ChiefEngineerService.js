@@ -2,7 +2,7 @@
 
 var updatedVehicleData = null;
 var updatedProposalData = null;
-
+var createdVehicleData = null;
 /**
  * Accepts or Declines a proposal
  * Chief engineer must be able to accept or decline proposals
@@ -71,7 +71,7 @@ exports.createVehicleSetup = function(body,userID) {
     //   name: body.vehicleName || 'Default Vehicle Name',
     //   description: body.vehicleDescription || 'Default Vehicle Description'
     // };
-    updatedVehicleData = {
+    createdVehicleData = {
       year: body.year,
       systems: (body.systems).map(system => ({
         name: system.name,
@@ -89,10 +89,10 @@ exports.createVehicleSetup = function(body,userID) {
       name: body.name,
       description: body.description
     };
-    if (updatedVehicleData){
-      resolve(updatedVehicleData); // Resolve with the constructed dynamic response
+    if (createdVehicleData){
+      resolve(createdVehicleData); // Resolve with the constructed dynamic response
     } else {
-      reject(new Error('Critical Error.')); // Resolve with the constructed dynamic response
+      resolve();
     }
 //     var examples = {};
 //     examples['application/json'] = {
@@ -195,9 +195,6 @@ exports.updateVehicleSetup = function(body, userID, elementID) {
     //   name: body.vehicleName || 'Default Vehicle Name',
     //   description: body.vehicleDescription || 'Default Vehicle Description'
     // };
-    if (Object.keys(body).length === 0 && body.constructor === Object) {
-      resolve('');
-    } else {
     updatedVehicleData = {
       year: body.year,
       systems: (body.systems).map(system => ({
@@ -216,14 +213,34 @@ exports.updateVehicleSetup = function(body, userID, elementID) {
       name: body.name,
       description: body.description
     };
-      // Your current logic to construct updatedVehicleData
-      // Resolve with the constructed dynamic response
-      resolve(updatedVehicleData);
+    if (updatedVehicleData){
+      resolve(updatedVehicleData); // Resolve with the constructed dynamic response
+    } else {
+      resolve();
     }
   });
 };
 
-exports.getUpdatedVehicleData = function() {
-  return updatedVehicleData;
+exports.viewUpdatedVehicleSetup = function(userID, proposalID) {
+  return new Promise(function(resolve, reject) {
+    if (updatedVehicleData) {
+      // If updatedData is available, resolve with it
+      resolve(updatedVehicleData);
+    } else {
+      // If updatedData is not available, handle it accordingly (resolve with default or an error)
+      resolve(/* Default or appropriate response */);
+    }
+  });
 };
 
+exports.getCreatedVehicleSetup = function(userID, proposalID) {
+  return new Promise(function(resolve, reject) {
+    if (createdVehicleData) {
+      // If updatedData is available, resolve with it
+      resolve(createdVehicleData);
+    } else {
+      // If updatedData is not available, handle it accordingly (resolve with default or an error)
+      resolve(/* Default or appropriate response */);
+    }
+  });
+};

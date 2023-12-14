@@ -43,8 +43,18 @@ module.exports.updateVehicleSetup = function updateVehicleSetup (req, res, next,
     });
 };
 
-module.exports.getVehicleSetup = function getVehicleSetup (req, res, next, userID) {
-  ChiefEngineer.getVehicleSetup(userID)
+module.exports.getCreatedVehicleSetup = function getCreatedVehicleSetup (req, res, next, userID) {
+  ChiefEngineer.getCreatedVehicleSetup(userID)
+    .then(function (response) {
+      utils.writeJson(res, response);
+    })
+    .catch(function (response) {
+      utils.writeJson(res, response);
+    });
+};
+
+module.exports.viewUpdatedVehicleSetup = function viewUpdatedVehicleSetup (req, res, next, userID) {
+  ChiefEngineer.viewUpdatedVehicleSetup(userID)
     .then(function (response) {
       utils.writeJson(res, response);
     })

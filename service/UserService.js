@@ -1,7 +1,5 @@
 'use strict';
 
-const ChiefEngineerService = require('./ChiefEngineerService.js');
-
 var updatedProfileData = null;
 
 /**
@@ -276,82 +274,75 @@ exports.viewChart = function(userID,chartID) {
  **/
 exports.viewVehicleSetup = function(userID) {
   return new Promise(function(resolve, reject) {
-    var updatedData = ChiefEngineerService.getUpdatedVehicleData();
-    console.log(updatedData, 'PHILIP');
-
     if (updatedData) {
       // If updatedData is available, resolve with it
       resolve(updatedData);
      } else {
-      resolve();
-     }
-      
-      // else {
-//       var examples = {};
-//     examples['application/json'] = {
-//   "year" : 0,
-//   "systems" : [ {
-//     "subSystems" : [ {
-//       "name" : "name",
-//       "parts" : [ {
-//         "name" : "name",
-//         "initialValue" : 6,
-//         "measurementUnit" : "measurementUnit"
-//       }, {
-//         "name" : "name",
-//         "initialValue" : 6,
-//         "measurementUnit" : "measurementUnit"
-//       } ],
-//       "description" : "description"
-//     }, {
-//       "name" : "name",
-//       "parts" : [ {
-//         "name" : "name",
-//         "initialValue" : 6,
-//         "measurementUnit" : "measurementUnit"
-//       }, {
-//         "name" : "name",
-//         "initialValue" : 6,
-//         "measurementUnit" : "measurementUnit"
-//       } ],
-//       "description" : "description"
-//     } ],
-//     "name" : "name",
-//     "description" : "description"
-//   }, {
-//     "subSystems" : [ {
-//       "name" : "name",
-//       "parts" : [ {
-//         "name" : "name",
-//         "initialValue" : 6,
-//         "measurementUnit" : "measurementUnit"
-//       }, {
-//         "name" : "name",
-//         "initialValue" : 6,
-//         "measurementUnit" : "measurementUnit"
-//       } ],
-//       "description" : "description"
-//     }, {
-//       "name" : "name",
-//       "parts" : [ {
-//         "name" : "name",
-//         "initialValue" : 6,
-//         "measurementUnit" : "measurementUnit"
-//       }, {
-//         "name" : "name",
-//         "initialValue" : 6,
-//         "measurementUnit" : "measurementUnit"
-//       } ],
-//       "description" : "description"
-//     } ],
-//     "name" : "name",
-//     "description" : "description"
-//   } ],
-//   "name" : "name",
-//   "description" : "description"
-// };
-//     resolve(examples[Object.keys(examples)[0]]);
-//     }
+      var examples = {};
+    examples['application/json'] = {
+  "year" : 0,
+  "systems" : [ {
+    "subSystems" : [ {
+      "name" : "name",
+      "parts" : [ {
+        "name" : "name",
+        "initialValue" : 6,
+        "measurementUnit" : "measurementUnit"
+      }, {
+        "name" : "name",
+        "initialValue" : 6,
+        "measurementUnit" : "measurementUnit"
+      } ],
+      "description" : "description"
+    }, {
+      "name" : "name",
+      "parts" : [ {
+        "name" : "name",
+        "initialValue" : 6,
+        "measurementUnit" : "measurementUnit"
+      }, {
+        "name" : "name",
+        "initialValue" : 6,
+        "measurementUnit" : "measurementUnit"
+      } ],
+      "description" : "description"
+    } ],
+    "name" : "name",
+    "description" : "description"
+  }, {
+    "subSystems" : [ {
+      "name" : "name",
+      "parts" : [ {
+        "name" : "name",
+        "initialValue" : 6,
+        "measurementUnit" : "measurementUnit"
+      }, {
+        "name" : "name",
+        "initialValue" : 6,
+        "measurementUnit" : "measurementUnit"
+      } ],
+      "description" : "description"
+    }, {
+      "name" : "name",
+      "parts" : [ {
+        "name" : "name",
+        "initialValue" : 6,
+        "measurementUnit" : "measurementUnit"
+      }, {
+        "name" : "name",
+        "initialValue" : 6,
+        "measurementUnit" : "measurementUnit"
+      } ],
+      "description" : "description"
+    } ],
+    "name" : "name",
+    "description" : "description"
+  } ],
+  "name" : "name",
+  "description" : "description"
+};
+    resolve(examples[Object.keys(examples)[0]]);
+    }
   });
 }
 
