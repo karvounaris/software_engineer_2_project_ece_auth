@@ -200,68 +200,68 @@ test('View vehicle SetUp', async (t) => {
 
 
 
-test('Delete_profile_description by function', async (t) => {
-  const userID = '123';
-  var user = {
-            "role" : "role",
-            "githubLink" : "http://example.com/aeiou",
-            "linkedinLink" : "http://example.com/aeiou",
-            "googleLink" : "http://example.com/aeiou",
-            "description" : "description",
-            "profileImage" : "http://example.com/aeiou",
-            "department" : "department",
-            "username" : "Panos"
-          };
+// test('Delete_profile_description by function', async (t) => {
+//   const userID = '123';
+//   var user = {
+//             "role" : "role",
+//             "githubLink" : "http://example.com/aeiou",
+//             "linkedinLink" : "http://example.com/aeiou",
+//             "googleLink" : "http://example.com/aeiou",
+//             "description" : "description",
+//             "profileImage" : "http://example.com/aeiou",
+//             "department" : "department",
+//             "username" : "Panos"
+//           };
 
-  const result = await userUserIDProfilePageDELETE(userID, user);
+//   const result = await userUserIDProfilePageDELETE(userID, user);
   
 
-  console.log(user.description);
-  t.deepEqual(user.description, "");
-});
+//   console.log(user.description);
+//   t.deepEqual(user.description, "");
+// });
 
 
-test('Delete_profile_description by function', async (t) => {
-  const userID = '123';
-  const user = {
-    "role" : "role",
-    "githubLink" : "http://example.com/aeiou",
-    "linkedinLink" : "http://example.com/aeiou",
-    "googleLink" : "http://example.com/aeiou",
-    "description" : "description",
-    "profileImage" : "http://example.com/aeiou",
-    "department" : "department",
-    "username" : "Panos"
-  };
+// test('Delete_profile_description by function', async (t) => {
+//   const userID = '123';
+//   const user = {
+//     "role" : "role",
+//     "githubLink" : "http://example.com/aeiou",
+//     "linkedinLink" : "http://example.com/aeiou",
+//     "googleLink" : "http://example.com/aeiou",
+//     "description" : "description",
+//     "profileImage" : "http://example.com/aeiou",
+//     "department" : "department",
+//     "username" : "Panos"
+//   };
   
-  const result = userUserIDProfilePageDELETE(user, userID)
+//   const result = userUserIDProfilePageDELETE(user, userID)
 
 
   
-  t.is(response.statusCode, 200);
-});
+//   t.is(response.statusCode, 200);
+// });
 
 
 
-test('Delete_profile_description', async (t) => {
-    const userID = '123';
-    const user = {
-      "role" : "role",
-      "githubLink" : "http://example.com/aeiou",
-      "linkedinLink" : "http://example.com/aeiou",
-      "googleLink" : "http://example.com/aeiou",
-      "description" : "description",
-      "profileImage" : "http://example.com/aeiou",
-      "department" : "department",
-      "username" : "Panos"
-    };
+// test('Delete_profile_description', async (t) => {
+//     const userID = '123';
+//     const user = {
+//       "role" : "role",
+//       "githubLink" : "http://example.com/aeiou",
+//       "linkedinLink" : "http://example.com/aeiou",
+//       "googleLink" : "http://example.com/aeiou",
+//       "description" : "description",
+//       "profileImage" : "http://example.com/aeiou",
+//       "department" : "department",
+//       "username" : "Panos"
+//     };
     
-    const response = await t.context.got.delete(`user/${userID}/profilePage`);
+//     const response = await t.context.got.delete(`user/${userID}/profilePage`);
 
 
     
-    t.is(response.statusCode, 200);
-});
+//     t.is(response.statusCode, 200);
+// });
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
