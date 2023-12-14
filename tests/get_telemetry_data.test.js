@@ -40,16 +40,8 @@ test('GET /user/${userID}/chart/${chartID} endpoint returns correct data', async
 test('GET user/${userID}/Weather weather report', async (t) => {
     const userID = 2;
 
-    //const { body, statusCode } = await t.context.got(getWeather);
     const response = await t.context.got.get(`user/${userID}/Weather`);
     console.log(response.body);
-    // const expresponse = {
-    //     "temperature": 0,
-    //     "humidity": 6.027456183070403,
-    //     "windDirection": 5,
-    //     "windSpeed": 1.4658129805029452,
-    //     "chanceOfRain": 5
-    //   };
 
     t.is(response.body.temperature, 0);
     t.is(response.statusCode, 200);
@@ -60,7 +52,6 @@ test('GET user/${userID}/profilePage View the profile page of a user', async (t)
     const userID = 2;
 
     const response = await t.context.got.get(`user/${userID}/profilePage`);
-    //console.log(response.body);
     t.is(response.statusCode, 200);
 
 });
@@ -69,7 +60,6 @@ test('GET user/engineer/${userID}/file View the file', async (t) => {
     const userID = 2;
 
     const response = await t.context.got.get(`user/engineer/${userID}/file`);
-    //console.log(response.body);
     t.is(response.statusCode, 200);
     
 });

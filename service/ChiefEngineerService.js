@@ -37,7 +37,7 @@ exports.getProposal = function(userID, proposalID) {
       resolve(updatedProposalData);
     } else {
       // If updatedData is not available, handle it accordingly (resolve with default or an error)
-      resolve(/* Default or appropriate response */);
+      resolve();
     }
   });
 };
@@ -228,7 +228,7 @@ exports.viewUpdatedVehicleSetup = function(userID, proposalID) {
       resolve(updatedVehicleData);
     } else {
       // If updatedData is not available, handle it accordingly (resolve with default or an error)
-      resolve(/* Default or appropriate response */);
+      resolve();
     }
   });
 };
@@ -240,7 +240,7 @@ exports.getCreatedVehicleSetup = function(userID, proposalID) {
       resolve(createdVehicleData);
     } else {
       // If updatedData is not available, handle it accordingly (resolve with default or an error)
-      resolve(/* Default or appropriate response */);
+      resolve();
     }
   });
 };
