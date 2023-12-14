@@ -210,12 +210,12 @@ exports.userChiefEngineerUserIDAdminPanelUserIDPUT = function(body,userID) {
   return new Promise(function(resolve, reject) {
     var examples = {};
     examples['application/json'] = {
-  "last-modified" : "2000-01-23T04:56:07.000+00:00",
-  "role" : "role",
-  "joined" : "2000-01-23T04:56:07.000+00:00",
-  "name" : "name",
-  "department" : "department",
-  "userID" : 0
+  "last_modified" : body.last_modified,
+  "role" : body.role,
+  "joined" : body.joined,
+  "name" : body.name,
+  "department" : body.department,
+  "userID" : userID
 };
     if (Object.keys(examples).length > 0) {
       resolve(examples[Object.keys(examples)[0]]);
@@ -225,3 +225,13 @@ exports.userChiefEngineerUserIDAdminPanelUserIDPUT = function(body,userID) {
   });
 }
 
+// exports.userChiefEngineerUserIDAdminPanelUserIDPUT = function(body, userID, roleToBeAssigned) {
+//   return new Promise(function(resolve, reject){
+    
+//     if (roleToBeAssigned !== undefined && roleToBeAssigned !== null) {
+//       body.role = roleToBeAssigned;
+//     }
+    
+//       resolve(body);
+//   }
+// )};

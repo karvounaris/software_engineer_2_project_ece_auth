@@ -33,7 +33,7 @@ module.exports.updateVehicleSetup = function updateVehicleSetup (req, res, next,
     });
 };
 
-module.exports.userChiefEngineerUserIDAdminPanelUserIDPUT = function userChiefEngineerUserIDAdminPanelUserIDPUT (req, res, next, body, userID) {
+module.exports.userChiefEngineerUserIDAdminPanelUserIDPUT = function userChiefEngineerUserIDAdminPanelUserIDPUT (req, res, next, body, userID, roleToBeAssigned) {
   ChiefEngineer.userChiefEngineerUserIDAdminPanelUserIDPUT(body, userID)
     .then(function (response) {
       utils.writeJson(res, response);

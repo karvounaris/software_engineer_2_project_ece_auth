@@ -97,46 +97,25 @@ exports.sendChartToChat = function(body,userID,chartID,chatRoomID, confirmation)
   return new Promise(function(resolve, reject) {
     var examples = {};
     examples['application/json'] = {
-  "userList" : [ {
-    "last-modified" : "2000-01-23T04:56:07.000+00:00",
-    "role" : "role",
-    "joined" : "2000-01-23T04:56:07.000+00:00",
-    "name" : "name",
-    "department" : "department",
-    "userID" : 0
-  }, {
-    "last-modified" : "2000-01-23T04:56:07.000+00:00",
-    "role" : "role",
-    "joined" : "2000-01-23T04:56:07.000+00:00",
-    "name" : "name",
-    "department" : "department",
-    "userID" : 0
-  } ],
-  "messageList" : [ {
-    "image" : "http://example.com/aeiou",
-    "timeSent" : "2000-01-23T04:56:07.000+00:00",
-    "messageID" : 6,
-    "text" : "text",
-    "userID" : 1
-  }, {
-    "image" : "http://example.com/aeiou",
-    "timeSent" : "2000-01-23T04:56:07.000+00:00",
-    "messageID" : 6,
-    "text" : "text",
-    "userID" : 1
-  } ],
-  "chatRoomID" : 5,
-  "chatRoomName" : "chatRoomName",
-  "chatRoomIcon" : "http://example.com/aeiou"
-};
-    const rl = readline.createInterface({
-      input: process.stdin,
-      output: process.stdout
-    });
-
-    rl.question('Are you sure you want to send this Chart?: ', (confirmation) => {
-      rl.close();
-    });
+      "userList": body.userList.map(user => ({
+        "lastModified": user.lastModified,
+        "role": user.role,
+        "joined": user.joined,
+        "name": user.name,
+        "department": user.department,
+        "userID": user.userID
+      })),
+      "messageList": body.messageList.map(message => ({
+        "image": message.image,
+        "timeSent": message.timeSent,
+        "messageID": message.messageID,
+        "text": message.text,
+        "userID": message.userID
+      })),
+      "chatRoomID": body.chatRoomID,
+      "chatRoomName": body.chatRoomName,
+      "chatRoomIcon": body.chatRoomIcon
+    };
 
     if (Object.keys(examples).length > 0 && confirmation === "yes") {
       resolve(examples[Object.keys(examples)[0]]);
@@ -207,9 +186,24 @@ exports.sendMessageToChat = function(body,userID,chatRoomID) {
  * userID Integer This is the unique identifier of the user
  * no response value expected for this operation
  **/
-exports.userUserIDProfilePageDELETE = function(userID) {
+exports.userUserIDProfilePageDELETE = function(body,userID) {
   return new Promise(function(resolve, reject) {
-    resolve();
+    
+    updateProfileData = {
+      "role" : body.role,
+      "githubLink" : body.githubLink,
+      "linkedinLink" : body.linkedinLink,
+      "googleLink" : body.googleLink,
+      "description" : body.description,
+      "profileImage" : body.profileImage,
+      "department" : body.department,
+      "username" : body.username
+    };
+    if (updateProfileData) {
+      resolve(updateProfileData);
+    } else {
+      resolve();
+    }
   });
 }
 
@@ -282,8 +276,8 @@ exports.viewChart = function(userID,chartID) {
  **/
 exports.viewVehicleSetup = function(userID) {
   return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = {
+    var vehicleSetUpExample = {};
+    vehicleSetUpExample['application/json'] = {
   "year" : 0,
   "systems" : [ {
     "subSystems" : [ {
@@ -345,8 +339,8 @@ exports.viewVehicleSetup = function(userID) {
   "name" : "name",
   "description" : "description"
 };
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
+    if (Object.keys(vehicleSetUpExample).length > 0) {
+      resolve(vehicleSetUpExample[Object.keys(vehicleSetUpExample)[0]]);
     } else {
       resolve();
     }
