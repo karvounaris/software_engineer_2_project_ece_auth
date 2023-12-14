@@ -111,38 +111,14 @@ test('PUT /user/chiefEngineer/{userID}/vehicleSetUp/{elementID} adds new element
         
     t.is(updatedResource.statusCode, 200); 
     t.deepEqual(response.body.systems[0].subSystems[0].name , updatedResource.body.systems[0].subSystems[0].name);
-
-
-    // const invalidUserID = 'invaliduserID';
-    // try {
-    //     await t.context.got.put(`user/chiefEngineer/${invalidUserID}/vehicleSetUp/${elementID}`);
-    //     t.fail('The request should have failed but it succeeded.');
-    //   } catch (error) {
-    //     t.is(error.response?.statusCode, 415); // Check if statusCode is 404 if response exists
-    //   }
-
+    t.deepEqual(response.body.systems[1].subSystems[1].name , updatedResource.body.systems[1].subSystems[1].name);
+    t.deepEqual(response.body.systems[0].subSystems[0].parts[1].initialValue,
+         updatedResource.body.systems[0].subSystems[0].parts[1].initialValue);
+    t.deepEqual(response.body.systems[0].subSystems[0].measurementUnit , updatedResource.body.systems[0].subSystems[0].measurementUnit);
 });
 
 test('POST /user/chiefEngineer/{userID}/vehicleSetUp/ Create Vehicle setup', async t => {
     const userID = 11;
-
-    //Test unhappy path
-    //  const nullResponse = await t.context.got.post(`user/chiefEngineer/${userID}/vehicleSetUp/`, {
-    //      json: {}
-    //  });
-
-    //  console.log(nullResponse.body, 'ASADSADASD');
-
-    //   // Check if the response indicates a critical error due to a null request body
-    // t.is(nullResponse.statusCode, 200); 
-
-    // const nullUpdatedResource = await t.context.got.get(`user/${userID}/vehicleSetUp`);
-    // console.log(nullUpdatedResource.body, 'ASADSADASD');
-    // t.is(nullUpdatedResource.body, '');
-
-    //t.true(nullUpdatedResource instanceof Error); // Check if the error thrown is an instance of Error
-    //t.is(nullUpdatedResource.message, 'Critical Error.'); // Check if the error message matches the expected critical error message
-
 
     const response = await t.context.got.post(`user/chiefEngineer/${userID}/vehicleSetUp/`, {
         json: {
@@ -234,27 +210,16 @@ test('POST /user/chiefEngineer/{userID}/vehicleSetUp/ Create Vehicle setup', asy
     const updatedResource = await t.context.got.get(`user/chiefEngineer/${userID}/vehicleSetUp/`);
         
     t.is(updatedResource.statusCode, 200); 
-    t.deepEqual(response.body.systems[0].subSystems[0].description , updatedResource.body.systems[0].subSystems[0].description);
-
-
-    // const invalidUserID = 'invaliduserID';
-    // try {
-    //     await t.context.got.put(`user/chiefEngineer/${invalidUserID}/vehicleSetUp/${elementID}`);
-    //     t.fail('The request should have failed but it succeeded.');
-    //   } catch (error) {
-    //     t.is(error.response?.statusCode, 415); // Check if statusCode is 404 if response exists
-    //   }
-
+    t.deepEqual(response.body.systems[0].subSystems[0].name , updatedResource.body.systems[0].subSystems[0].name);
+    t.deepEqual(response.body.systems[1].subSystems[1].name , updatedResource.body.systems[1].subSystems[1].name);
+    t.deepEqual(response.body.systems[0].subSystems[0].parts[1].initialValue,
+         updatedResource.body.systems[0].subSystems[0].parts[1].initialValue);
+    t.deepEqual(response.body.systems[0].subSystems[0].measurementUnit , updatedResource.body.systems[0].subSystems[0].measurementUnit);
 });
 
 test('PUT /user/chiefEngineer/{userID}/proposals/{proposalID} change the proposal status', async (t) => {
     const userID = 2;
     const proposalID = 3;
-
-    // test the case where the updatedProposalData is null
-    // const nullUpdatedResource = await t.context.got.get(`user/chiefEngineer/${userID}/proposals/${proposalID}`);
-    // t.true(nullUpdatedResource.body === null || Object.keys(nullUpdatedResource.body).length === 0);
-    // t.is(nullUpdatedResource.body, '');
 
     const response = await t.context.got.put(`user/chiefEngineer/${userID}/proposals/${proposalID}`, {
         json: {
