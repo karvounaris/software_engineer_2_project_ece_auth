@@ -3,6 +3,7 @@
 var updatedVehicleData = null;
 var updatedProposalData = null;
 var createdVehicleData = null;
+var viewAdminPanelData = null;
 /**
  * Accepts or Declines a proposal
  * Chief engineer must be able to accept or decline proposals
@@ -254,21 +255,28 @@ exports.getCreatedVehicleSetup = function(userID, proposalID) {
  * userID Integer This is the unique identifier of the user
  * returns adminPanel_userID_body
  **/
-exports.userChiefEngineerUserIDAdminPanelUserIDPUT = function(body,userID) {
+exports.userChiefEngineerUserIDAdminPanelUserIDPUT = function(body, userID, adminUserID) {
   return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = {
-  "last-modified" : "2000-01-23T04:56:07.000+00:00",
-  "role" : "role",
-  "joined" : "2000-01-23T04:56:07.000+00:00",
-  "name" : "name",
-  "department" : "department",
-  "userID" : 0
-};
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
+    viewAdminPanelData = {
+      'last-modified': body['last-modified'] || 0,
+      role : body.role || "Default",
+      joined : body.joined || "Default",
+      name : body.name || "Default",
+      department : body.department || "Default",
+      userID : body.userID || 0
+    };
+    resolve(viewAdminPanelData);
+  });
+}
+
+exports.viewAdminPanel = function(userID, adminUserID) {
+  return new Promise(function(resolve, reject) {
+    if (viewAdminPanelData) {
+      // If updatedData is available, resolve with it
+      resolve(viewAdminPanelData);
     } else {
+      // If updatedData is not available, handle it accordingly (resolve with default or an error)
       resolve();
     }
   });
-}
+};
