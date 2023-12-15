@@ -76,6 +76,50 @@ paths:
         "400":
           description: Invalid value or missing required parameter
       x-swagger-router-controller: Engineer
+    get:
+      tags:
+      - engineer
+      summary: Get the Engineer's proposal
+      description: This endpoint displays proposal details
+      operationId: getEngineerProposal
+      parameters:
+      - name: userID
+        in: path
+        description: This is the unique identifier of the user
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Successfully Accepted or Declined a Proposal
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  prposalID:
+                    type: integer
+                  partID:
+                    type: integer
+                  userID:
+                    type: integer
+                  status:
+                    type: string
+                  title:
+                    type: string
+                  description:
+                    type: string
+                  currentValue:
+                    type: number
+                  newValue:
+                    type: number
+        '400':
+          description: Invalid input parameter
+        '404':
+          description: Proposal not found  
+      x-swagger-router-controller: Engineer
   /user/handsOnEngineer/{userID}/proposals/{proposalID}:
     put:
       tags:
@@ -83,7 +127,7 @@ paths:
       summary: the hands-on engineer changes the proposal status
       description: Hands-on engineers must be able to change the proposal status to
         DONE
-      operationId: :"changeStatus"
+      operationId: changeStatus
       parameters:
       - name: userID
         in: path
@@ -120,6 +164,58 @@ paths:
         "404":
           description: Not found
       x-swagger-router-controller: HandsOnEngineer
+    get:
+      tags:
+      - handsOnEngineer
+      summary: Get HandsOnEngineer's proposal
+      description: This endpoint displays proposal details
+      operationId: getHandsOnEngineerProposal
+      parameters:
+      - name: userID
+        in: path
+        description: This is the unique identifier of the user
+        required: true
+        schema:
+          type: integer
+      - name: proposalID
+        in: path
+        description: This is the unique identifier of the proposal
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Successfully Accepted or Declined a Proposal
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  prposalID:
+                    type: integer
+                  partID:
+                    type: integer
+                  userID:
+                    type: integer
+                  status:
+                    type: string
+                  confirmation:
+                    type: string
+                  title:
+                    type: string
+                  description:
+                    type: string
+                  currentValue:
+                    type: number
+                  newValue:
+                    type: number
+        '400':
+          description: Invalid input parameter
+        '404':
+          description: Proposal not found
+      x-swagger-router-controller: HandsOnEngineer    
   /user/{userID}/vehicleSetUp:
     get:
       tags:
@@ -191,6 +287,39 @@ paths:
         "404":
           description: Vehicle setup not found
       x-swagger-router-controller: ChiefEngineer
+    get:
+      tags:
+      - chiefEngineer
+      summary: View updated vehicle setup
+      description: This endpoint displays updated vehicle setup details
+      operationId: viewUpdatedVehicleSetup
+      parameters:
+      - name: userID
+        in: path
+        description: This is the unique identifier of the user
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      - name: elementID
+        in: path
+        description: This is the unique identifier of the element
+        required: true
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_1'
+        "400":
+          description: Invalid input parameter
+        "404":
+          description: Vehicle setup not found
+      x-swagger-router-controller: ChiefEngineer     
   /user/chiefEngineer/{userID}/vehicleSetUp:
     post:
       tags:
@@ -226,6 +355,33 @@ paths:
           description: Invalid action
         "500":
           description: Server error
+      x-swagger-router-controller: ChiefEngineer
+    get:
+      tags:
+      - chiefEngineer
+      summary: Get created vehicle setup
+      description: This endpoint displays Created vehicle setup details
+      operationId: getCreatedVehicleSetup
+      parameters:
+      - name: userID
+        in: path
+        description: This is the unique identifier of the user
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_1'
+        "400":
+          description: Invalid input parameter
+        "404":
+          description: Vehicle setup not found
       x-swagger-router-controller: ChiefEngineer
   /user/{userID}/chart/{chartID}:
     get:
@@ -464,6 +620,58 @@ paths:
         "404":
           description: Not found
       x-swagger-router-controller: ChiefEngineer
+    get:
+      tags:
+      - chiefEngineer
+      summary: Get proposal
+      description: This endpoint displays proposal details
+      operationId: getProposal
+      parameters:
+        - name: userID
+          in: path
+          description: This is the unique identifier of the user
+          required: true
+          schema:
+            type: integer
+        - name: proposalID
+          in: path
+          description: This is the unique identifier of the proposal
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successfully Accepted or Declined a Proposal
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  prposalID:
+                    type: integer
+                  partID:
+                    type: integer
+                  userID:
+                    type: integer
+                  status:
+                    type: string
+                  confirmation:
+                    type: string
+                  title:
+                    type: string
+                  description:
+                    type: string
+                  currentValue:
+                    type: number
+                  newValue:
+                    type: number
+        '400':
+          description: Invalid input parameter
+        '404':
+          description: Proposal not found
+      x-swagger-router-controller: ChiefEngineer
   /user/engineer/{userID}/file:
     post:
       tags:
@@ -495,6 +703,29 @@ paths:
           description: Invalid action
         "500":
           description: Server error
+      x-swagger-router-controller: Engineer
+    get:
+      tags:
+        - engineer
+      summary: View the file containing data from the sensors
+      description: Returns a file containing data from the sensors based on a single ID
+      operationId: viewFile
+      parameters:
+        - name: userID
+          in: path
+          description: This is the unique identifier of the user
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: File successfully fetched.
+          content:
+            application/json:
+              schema:
+                type: object
+        '404':
+          description: File not found.  
       x-swagger-router-controller: Engineer
   /user/{userID}/profilePage:
     put:
@@ -556,6 +787,50 @@ paths:
           description: User not found
         "500":
           description: Server Error
+      x-swagger-router-controller: User
+    get:
+      tags:
+      - user
+      summary: View the profile page of a user
+      description: Returns a profile page based on a single ID
+      operationId: viewProfile
+      parameters:
+      - name: userID
+        in: path
+        description: This is the unique identifier of the user
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Profile successfully fetched.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  username:
+                    type: string
+                  role:
+                    type: string
+                  department:
+                    type: string
+                  description:
+                    type: string
+                  googleLink:
+                    type: string
+                    format: uri
+                  githubLink:
+                    type: string
+                    format: uri
+                  linkedinLink:
+                    type: string
+                    format: uri
+                  profileImage:
+                    type: string
+                    format: uri
+        '404':
+          description: Profile page not found.
       x-swagger-router-controller: User
 components:
   schemas:
@@ -628,6 +903,8 @@ components:
         userID:
           type: integer
         status:
+          type: string
+        confirmation:
           type: string
         title:
           type: string
@@ -763,6 +1040,8 @@ components:
           type: integer
         status:
           type: string
+        confirmation:
+          type: string
         title:
           type: string
         description:
@@ -781,6 +1060,7 @@ components:
         userID: 5
         currentValue: 5.63737665663332876420099637471139430999755859375
         status: status
+        confirmation: confirmation 
     proposals_proposalID_body:
       type: object
       properties:
@@ -793,6 +1073,8 @@ components:
         userID:
           type: integer
         status:
+          type: string        
+        confirmation:
           type: string
         title:
           type: string
@@ -812,6 +1094,7 @@ components:
         userID: 5
         currentValue: 5.63737665663332876420099637471139430999755859375
         status: status
+        confirmation: confirmation
     inline_response_200_1:
       type: object
       properties:
@@ -1165,6 +1448,8 @@ components:
           type: integer
         status:
           type: string
+        confirmation:
+          type: string
         title:
           type: string
         description:
@@ -1183,6 +1468,7 @@ components:
         userID: 5
         currentValue: 5.63737665663332876420099637471139430999755859375
         status: status
+        confirmation: confirmation
     userID_profilePage_body:
       type: object
       properties:
@@ -1275,6 +1561,8 @@ components:
               userID:
                 type: integer
               status:
+                type: string
+              confirmation:
                 type: string
               title:
                 type: string
