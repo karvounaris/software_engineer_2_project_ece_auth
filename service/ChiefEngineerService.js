@@ -244,3 +244,31 @@ exports.getCreatedVehicleSetup = function(userID, proposalID) {
     }
   });
 };
+
+
+/**
+ * Assign roles
+ * The chief engineer must be able to edit the roles
+ *
+ * body AdminPanel_userID_body User model
+ * userID Integer This is the unique identifier of the user
+ * returns adminPanel_userID_body
+ **/
+exports.userChiefEngineerUserIDAdminPanelUserIDPUT = function(body,userID) {
+  return new Promise(function(resolve, reject) {
+    var examples = {};
+    examples['application/json'] = {
+  "last-modified" : "2000-01-23T04:56:07.000+00:00",
+  "role" : "role",
+  "joined" : "2000-01-23T04:56:07.000+00:00",
+  "name" : "name",
+  "department" : "department",
+  "userID" : 0
+};
+    if (Object.keys(examples).length > 0) {
+      resolve(examples[Object.keys(examples)[0]]);
+    } else {
+      resolve();
+    }
+  });
+}
