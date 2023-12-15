@@ -3,6 +3,7 @@ const test = require('ava').default;
 const listen = require('test-listen');
 const got = require('got');
 
+const {viewChart} = require('../service/UserService.js');
 const app = require('../index.js');
 
 test.before(async (t) => {
@@ -20,20 +21,21 @@ test('GET /user/${userID}/chart/${chartID} endpoint returns correct data', async
     const chartID = 1;
   
     const response = await t.context.got.get(`user/${userID}/chart/${chartID}`);
-  
-    const expectedResponse = {
-      "date": 6,
-      "data": 5.962133916683182,
-      "dataCategory": "dataCategory",
-      "name": "name",
-      "lap": 1,
-      "id": 0,
-      "track": "track"
-    };
     
     t.is(response.statusCode, 200);
-    t.deepEqual(response.body, expectedResponse);
-
+    t.is(response.body.date, 6);
+    t.deepEqual(response.body.name, "name");
   });
 
+test('GET telemetry data from function', async t => {
+  const result = await viewChart();
+
+  t.is(result.date, 6);
+  t.is(result.data, 5.962133916683182);
+  t.deepEqual(result.dataCategory, "dataCategory");
+  t.deepEqual(result.name, "name");
+  t.is(result.lap, 1);
+  t.is(result.id, 0);
+  t.deepEqual(result.track, "track");
+});
 
