@@ -16,7 +16,7 @@ exports.acceptOrDeclineProposal = function(body,userID,proposalID) {
   return new Promise(function(resolve, reject) {
     updatedProposalData = {
       id : body.id || 0,
-      prposalID : body.proposalID || 0,
+      prposalID : body.prposalID || 0,
       partID : body.partID || 0,
       userID : body.userID || 0,
       status : body.status || "Default",

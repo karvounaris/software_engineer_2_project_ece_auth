@@ -35,7 +35,8 @@ exports.postProposal = function(body,userID) {
       title : body.title,
       userID : body.userID,
       currentValue : body.currentValue,
-      status : body.status
+      status : body.status,
+      confirmation: body.confirmation
     };
     if (EngineerProposalData){
       resolve(EngineerProposalData); // Resolve with the constructed dynamic response

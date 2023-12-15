@@ -1,3 +1,4 @@
+const {changeStatus} = require('../service/HandsOnEngineerService.js');
 const http = require('http');
 const test = require('ava').default;
 const listen = require('test-listen');
@@ -42,4 +43,25 @@ test('PUT /user/handsOnEngineer/{userID}/proposals/{proposalID} change the propo
     t.deepEqual(response.body.status, updatedResource.body.status);
     t.deepEqual(response.body.confirmation, updatedResource.body.confirmation);
     t.deepEqual(response.body.description, updatedResource.body.description);
+});
+
+test('PUT change the proposal status by function' , async (t) => {
+    const userID = 24;
+    const proposalID = 6;
+
+    const new_user = {
+        "newValue" : 2.3021358869347655,
+        "prposalID" : 3,
+        "partID" : 1,
+        "description" : "Critical change for tires",
+        "id" : 0,
+        "title" : "title",
+        "userID" : 2,
+        "currentValue" : 5.637376656633329,
+        "status" : "Done",
+        "confirmation": "Accepted"
+        };
+
+        const result = await changeStatus(new_user, userID, proposalID);
+        t.deepEqual(result, new_user);
 });

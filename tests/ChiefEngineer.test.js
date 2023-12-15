@@ -1,3 +1,6 @@
+const {updateVehicleSetup} = require('../service/ChiefEngineerService.js');
+const {createVehicleSetup} = require('../service/ChiefEngineerService.js');
+const {acceptOrDeclineProposal} = require('../service/ChiefEngineerService.js');
 const http = require('http');
 const test = require('ava').default;
 const listen = require('test-listen');
@@ -117,6 +120,100 @@ test('PUT /user/chiefEngineer/{userID}/vehicleSetUp/{elementID} adds new element
     t.deepEqual(response.body.systems[0].subSystems[0].measurementUnit , updatedResource.body.systems[0].subSystems[0].measurementUnit);
 });
 
+
+test('PUT adds new element to the Vehicle by function', async t => {
+    const userID = 2;
+    const elementID = 3;
+    const new_user = {
+        "year": 0,
+            "systems": [
+            {
+                "subSystems": [
+                {
+                    "name": "Engine",
+                    "parts": [
+                    {
+                        "name": "name",
+                        "initialValue": 6,
+                        "measurementUnit": "measurementUnit"
+                    },
+                    {
+                        "name": "name",
+                        "initialValue": 6,
+                        "measurementUnit": "measurementUnit"
+                    }
+                    ],
+                "description": "description"
+                },
+                {
+                    "name": "name",
+                    "parts": [
+                    {
+                        "name": "name",
+                        "initialValue": 6,
+                        "measurementUnit": "measurementUnit"
+                    },
+                    {
+                        "name": "name",
+                        "initialValue": 6,
+                        "measurementUnit": "measurementUnit"
+                    }
+                    ],
+                    "description": "description"
+                }
+            ],
+                "name": "name",
+                "description": "description"
+            },
+            {
+                "subSystems": [
+                {
+                    "name": "name",
+                    "parts": [
+                    {
+                        "name": "name",
+                        "initialValue": 6,
+                        "measurementUnit": "measurementUnit"
+                    },
+                    {
+                        "name": "name",
+                        "initialValue": 6,
+                        "measurementUnit": "measurementUnit"
+                    }
+                    ],
+                    "description": "description"
+                },
+                {
+                    "name": "name",
+                    "parts": [
+                    {
+                        "name": "name",
+                        "initialValue": 6,
+                        "measurementUnit": "measurementUnit"
+                    },
+                    {
+                        "name": "name",
+                        "initialValue": 6,
+                        "measurementUnit": "measurementUnit"
+                    }
+                    ],
+                    "description": "description"
+                }
+                ],
+                "name": "name",
+                "description": "description"
+                }   
+            ],
+            "name": "name",
+            "description": "description"
+            };
+
+    const result = await updateVehicleSetup(new_user, userID, elementID);
+    t.deepEqual(result, new_user);
+
+});
+
+
 test('POST /user/chiefEngineer/{userID}/vehicleSetUp/ Create Vehicle setup', async t => {
     const userID = 11;
 
@@ -217,6 +314,98 @@ test('POST /user/chiefEngineer/{userID}/vehicleSetUp/ Create Vehicle setup', asy
     t.deepEqual(response.body.systems[0].subSystems[0].measurementUnit , updatedResource.body.systems[0].subSystems[0].measurementUnit);
 });
 
+test('POST Create setup Vehicle by function', async t => {
+    const userID = 2;
+    const elementID = 4;
+    const new_user = {
+        "year": 0,
+            "systems": [
+            {
+                "subSystems": [
+                {
+                    "name": "Engine",
+                    "parts": [
+                    {
+                        "name": "name",
+                        "initialValue": 6,
+                        "measurementUnit": "measurementUnit"
+                    },
+                    {
+                        "name": "name",
+                        "initialValue": 6,
+                        "measurementUnit": "measurementUnit"
+                    }
+                    ],
+                "description": "description"
+                },
+                {
+                    "name": "name",
+                    "parts": [
+                    {
+                        "name": "name",
+                        "initialValue": 6,
+                        "measurementUnit": "measurementUnit"
+                    },
+                    {
+                        "name": "name",
+                        "initialValue": 6,
+                        "measurementUnit": "measurementUnit"
+                    }
+                    ],
+                    "description": "description"
+                }
+            ],
+                "name": "name",
+                "description": "description"
+            },
+            {
+                "subSystems": [
+                {
+                    "name": "name",
+                    "parts": [
+                    {
+                        "name": "name",
+                        "initialValue": 6,
+                        "measurementUnit": "measurementUnit"
+                    },
+                    {
+                        "name": "name",
+                        "initialValue": 6,
+                        "measurementUnit": "measurementUnit"
+                    }
+                    ],
+                    "description": "description"
+                },
+                {
+                    "name": "name",
+                    "parts": [
+                    {
+                        "name": "name",
+                        "initialValue": 6,
+                        "measurementUnit": "measurementUnit"
+                    },
+                    {
+                        "name": "name",
+                        "initialValue": 6,
+                        "measurementUnit": "measurementUnit"
+                    }
+                    ],
+                    "description": "description"
+                }
+                ],
+                "name": "name",
+                "description": "description"
+                }   
+            ],
+            "name": "name",
+            "description": "description"
+            };
+
+    const result = await createVehicleSetup(new_user, userID, elementID);
+    t.deepEqual(result, new_user);
+
+});
+
 test('PUT /user/chiefEngineer/{userID}/proposals/{proposalID} change the proposal status', async (t) => {
     const userID = 2;
     const proposalID = 3;
@@ -244,4 +433,26 @@ test('PUT /user/chiefEngineer/{userID}/proposals/{proposalID} change the proposa
      t.deepEqual(response.body.status, updatedResource.body.status);
      t.deepEqual(response.body.confirmation, updatedResource.body.confirmation);
      t.deepEqual(response.body.description, updatedResource.body.description);
+});
+
+
+test('PUT change the proposal status by function', async (t) => {
+    const userID = 7;
+    const proposalID = 3;
+    const new_user = {
+        "newValue" : 2.3021358869347655,
+        "prposalID" : 3,
+        "partID" : 1,
+        "description" : "Critical change for tires",
+        "id" : 0,
+        "title" : "title",
+        "userID" : 2,
+        "currentValue" : 5.637376656633329,
+        "status" : "Done",
+        "confirmation": "Accepted"
+        };
+
+    const result = await acceptOrDeclineProposal(new_user, userID, proposalID);
+    t.deepEqual(result, new_user);
+
 });

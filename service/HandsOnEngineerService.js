@@ -21,7 +21,8 @@ exports.changeStatus = function(body,userID,proposalID) {
       title : body.title,
       userID : body.userID,
       currentValue : body.currentValue,
-      status : body.status
+      status : body.status,
+      confirmation : body.confirmation
     };
     if (handsOnEngineerProposalData){
       resolve(handsOnEngineerProposalData); // Resolve with the constructed dynamic response
