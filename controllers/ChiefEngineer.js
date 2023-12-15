@@ -13,6 +13,16 @@ module.exports.acceptOrDeclineProposal = function acceptOrDeclineProposal (req, 
     });
 };
 
+module.exports.getProposal = function getProposal (req, res, next, userID, proposalID) {
+  ChiefEngineer.getProposal(userID, proposalID)
+    .then(function (response) {
+      utils.writeJson(res, response);
+    })
+    .catch(function (response) {
+      utils.writeJson(res, response);
+    });
+};
+
 module.exports.createVehicleSetup = function createVehicleSetup (req, res, next, body, userID) {
   ChiefEngineer.createVehicleSetup(body, userID)
     .then(function (response) {
@@ -25,6 +35,26 @@ module.exports.createVehicleSetup = function createVehicleSetup (req, res, next,
 
 module.exports.updateVehicleSetup = function updateVehicleSetup (req, res, next, body, userID, elementID) {
   ChiefEngineer.updateVehicleSetup(body, userID, elementID)
+    .then(function (response) {
+      utils.writeJson(res, response);
+    })
+    .catch(function (response) {
+      utils.writeJson(res, response);
+    });
+};
+
+module.exports.getCreatedVehicleSetup = function getCreatedVehicleSetup (req, res, next, userID) {
+  ChiefEngineer.getCreatedVehicleSetup(userID)
+    .then(function (response) {
+      utils.writeJson(res, response);
+    })
+    .catch(function (response) {
+      utils.writeJson(res, response);
+    });
+};
+
+module.exports.viewUpdatedVehicleSetup = function viewUpdatedVehicleSetup (req, res, next, userID) {
+  ChiefEngineer.viewUpdatedVehicleSetup(userID)
     .then(function (response) {
       utils.writeJson(res, response);
     })
