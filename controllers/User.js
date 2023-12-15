@@ -82,3 +82,14 @@ module.exports.viewVehicleSetup = function viewVehicleSetup (req, res, next, use
       utils.writeJson(res, response);
     });
 };
+
+
+module.exports.viewProfile = function viewProfile (req, res, next, userID) {
+  User.viewProfile(userID)
+    .then(function (response) {
+      utils.writeJson(res, response);
+    })
+    .catch(function (response) {
+      utils.writeJson(res, response);
+    });
+};
