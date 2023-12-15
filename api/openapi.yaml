@@ -542,7 +542,42 @@ paths:
         "400":
           description: "Invalid chatRoom name or Error: Empty user list."
       x-swagger-router-controller: User
-  /user/chiefEngineer/{userID}/adminPanel/{userID}:
+  /user/chiefEngineer/{adminUserID}/adminPanel/{userID}:
+    get:
+        tags:
+        - chiefEngineer
+        summary: Get Admin Panel
+        description: This endpoint displays the admin panel
+        operationId: getAdminPanel
+        parameters:
+          - name: adminUserID
+            in: path
+            description: This is the unique identifier of the admin user
+            required: true
+            style: simple
+            explode: false
+            schema:
+              type: integer
+          - name: userID
+            in: path
+            description: This is the unique identifier of the user
+            required: true
+            style: simple
+            explode: false
+            schema:
+              type: integer
+        responses:
+          '200':
+            description: Successfully load admin panel data
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/adminPanel_userID_body'
+          '400':
+            description: Invalid input parameter
+          '404':
+            description: user not found
+        x-swagger-router-controller: ChiefEngineer
     put:
       tags:
       - chiefEngineer
@@ -550,6 +585,14 @@ paths:
       description: The chief engineer must be able to edit the roles
       operationId: userChiefEngineerUserIDAdminPanelUserIDPUT
       parameters:
+      - name: adminUserID
+        in: path
+        description: This is the unique identifier of the admin user
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
       - name: userID
         in: path
         description: This is the unique identifier of the user
