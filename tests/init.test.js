@@ -94,21 +94,8 @@ test('Send Chart to Chat', async (t) => {
           "name" : "name",
           "department" : "department",
           "userID" : 1
-        }, {
-          "lastModified" : "2000-01-23T04:56:07.000+00:00",
-          "role" : "role",
-          "joined" : "2000-01-23T04:56:07.000+00:00",
-          "name" : "name",
-          "department" : "department",
-          "userID" : 0
         } ],
         "messageList" : [ {
-          "image" : "http://example.com/aeiou",
-          "timeSent" : "2000-01-23T04:56:07.000+00:00",
-          "messageID" : 6,
-          "text" : "text",
-          "userID" : 1
-        }, {
           "image" : "http://example.com/aeiou",
           "timeSent" : "2000-01-23T04:56:07.000+00:00",
           "messageID" : 6,
