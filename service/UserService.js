@@ -93,7 +93,7 @@ exports.getWeather = function(userID) {
 
 const readline = require('readline');
 
-exports.sendChartToChat = function(body,userID,chartID,chatRoomID, confirmation) {
+exports.sendChartToChat = function(body,userID,chartID,chatRoomID){
   return new Promise(function(resolve, reject) {
     var examples = {};
     examples['application/json'] = {
@@ -117,7 +117,7 @@ exports.sendChartToChat = function(body,userID,chartID,chatRoomID, confirmation)
       "chatRoomIcon": body.chatRoomIcon
     };
 
-    if (Object.keys(examples).length > 0 && confirmation === "yes") {
+    if (Object.keys(examples).length > 0) {
       resolve(examples[Object.keys(examples)[0]]);
     } else {
       resolve();

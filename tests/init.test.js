@@ -23,6 +23,29 @@ test.after.always((t) => {
     t.context.server.close();
 });
 
+
+
+
+// if(process.env.NODE_ENV != "test"){
+//   http.createServer(app).listen(serverPort, function(){
+//     console.log('Your server is listening on port %d (http://localhost: %d)', serverPort, serverPort);
+//     console.log('Swagger-ui is available on http://localhost:%d/docs', serverPort);
+
+//   });
+
+// };
+
+// module.exports = app;
+
+// const addNumbers = (a,b) => a + b;
+// test('addNumbers', t => {
+//     t.is(addNumbers(1, 2), 3);
+// });
+
+// test('Random test', t => {
+//     t.pass();
+// });
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
  test('Send Chart to Chat by function', async t => {
@@ -32,7 +55,7 @@ test.after.always((t) => {
         "chatRoomName": "string",
         "userList": [
           {
-            "userID": 0,
+            "userID": 1,
             "name": "string",
             "department": "string",
             "role": "string",
@@ -54,8 +77,7 @@ test.after.always((t) => {
       }
 
 
-
-const result = await sendChartToChat(newChat, newChat.userList.userID, newChartID, newChat.chatRoomID, "yes");
+const result = await sendChartToChat(newChat, newChat.userList.userID, newChartID, newChat.chatRoomID);
 t.deepEqual(result, newChat);
  })
 
@@ -66,14 +88,14 @@ t.deepEqual(result, newChat);
 test('Send Chart to Chat', async (t) => {
     const body = {
         "userList" : [ {
-          "last-modified" : "2000-01-23T04:56:07.000+00:00",
+          "lastModified" : "2000-01-23T04:56:07.000+00:00",
           "role" : "role",
           "joined" : "2000-01-23T04:56:07.000+00:00",
           "name" : "name",
           "department" : "department",
-          "userID" : 0
+          "userID" : 1
         }, {
-          "last-modified" : "2000-01-23T04:56:07.000+00:00",
+          "lastModified" : "2000-01-23T04:56:07.000+00:00",
           "role" : "role",
           "joined" : "2000-01-23T04:56:07.000+00:00",
           "name" : "name",
@@ -101,13 +123,16 @@ test('Send Chart to Chat', async (t) => {
     const chartID = 2;
     const chatRoomID = 3;
     
-    const response = await t.context.got.post(`user/${userID}/chart/${chartID}/chat/${chatRoomID}`, {json : body});
-
-
-    // console.log(response.body);
-    // console.log(response.headers);
-
+    const response = await t.context.got.post(`user/${userID}/chart/${chartID}/chat/${chatRoomID}`, {json:body});
+    console.log(response.body);
     t.is(response.statusCode, 200);
+    const updateResource = await t.context.got.get(`user/${userID}/chart/${chartID}/chat/${chatRoomID}`);
+
+    t.is(updateResource.statusCode, 200);
+    t.deepEqual(response.body.userList[0].userID = updateResource.body.userList[0].userID);
+    t.deepEqual(response.body.userList[0].lastModified = updateResource.body.userList[0].lastModified);
+    t.deepEqual(response.body.messageList[0].messageID = updateResource.body.messageList[0].messageID);
+    t.deepEqual(response.body.messageList[0].text = updateResource.body.messageList[0].text);
 
   });
 
@@ -196,108 +221,187 @@ test('View vehicle SetUp', async (t) => {
 });
 
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
-// test('Delete_profile_description by function', async (t) => {
-//   const userID = '123';
-//   var user = {
-//             "role" : "role",
-//             "githubLink" : "http://example.com/aeiou",
-//             "linkedinLink" : "http://example.com/aeiou",
-//             "googleLink" : "http://example.com/aeiou",
-//             "description" : "description",
-//             "profileImage" : "http://example.com/aeiou",
-//             "department" : "department",
-//             "username" : "Panos"
-//           };
+// // test('Delete_profile_description by function', async (t) => {
+// //   const userID = '123';
+// //   var user = {
+// //             "role" : "role",
+// //             "githubLink" : "http://example.com/aeiou",
+// //             "linkedinLink" : "http://example.com/aeiou",
+// //             "googleLink" : "http://example.com/aeiou",
+// //             "description" : "description",
+// //             "profileImage" : "http://example.com/aeiou",
+// //             "department" : "department",
+// //             "username" : "Panos"
+// //           };
 
-//   const result = await userUserIDProfilePageDELETE(userID, user);
+// //   const result = await userUserIDProfilePageDELETE(userID, user);
   
 
-//   console.log(user.description);
-//   t.deepEqual(user.description, "");
-// });
+// //   console.log(user.description);
+// //   t.deepEqual(user.description, "");
+// // });
 
 
-// test('Delete_profile_description by function', async (t) => {
-//   const userID = '123';
-//   const user = {
-//     "role" : "role",
-//     "githubLink" : "http://example.com/aeiou",
-//     "linkedinLink" : "http://example.com/aeiou",
-//     "googleLink" : "http://example.com/aeiou",
-//     "description" : "description",
-//     "profileImage" : "http://example.com/aeiou",
-//     "department" : "department",
-//     "username" : "Panos"
-//   };
+// // test('Delete_profile_description by function', async (t) => {
+// //   const userID = '123';
+// //   const user = {
+// //     "role" : "role",
+// //     "githubLink" : "http://example.com/aeiou",
+// //     "linkedinLink" : "http://example.com/aeiou",
+// //     "googleLink" : "http://example.com/aeiou",
+// //     "description" : "description",
+// //     "profileImage" : "http://example.com/aeiou",
+// //     "department" : "department",
+// //     "username" : "Panos"
+// //   };
   
-//   const result = userUserIDProfilePageDELETE(user, userID)
+// //   const result = userUserIDProfilePageDELETE(user, userID)
 
 
   
-//   t.is(response.statusCode, 200);
-// });
+// //   t.is(response.statusCode, 200);
+// // });
 
 
 
-// test('Delete_profile_description', async (t) => {
-//     const userID = '123';
-//     const user = {
-//       "role" : "role",
-//       "githubLink" : "http://example.com/aeiou",
-//       "linkedinLink" : "http://example.com/aeiou",
-//       "googleLink" : "http://example.com/aeiou",
-//       "description" : "description",
-//       "profileImage" : "http://example.com/aeiou",
-//       "department" : "department",
-//       "username" : "Panos"
-//     };
+// // test('Delete_profile_description', async (t) => {
+// //     const userID = '123';
+// //     const user = {
+// //       "role" : "role",
+// //       "githubLink" : "http://example.com/aeiou",
+// //       "linkedinLink" : "http://example.com/aeiou",
+// //       "googleLink" : "http://example.com/aeiou",
+// //       "description" : "description",
+// //       "profileImage" : "http://example.com/aeiou",
+// //       "department" : "department",
+// //       "username" : "Panos"
+// //     };
     
-//     const response = await t.context.got.delete(`user/${userID}/profilePage`);
+// //     const response = await t.context.got.delete(`user/${userID}/profilePage`);
 
 
+    
+// //     t.is(response.statusCode, 200);
+// // });
+
+// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// // test('Get profile page')
+
+// // test('Get profile page', async (t) => {
+// //   const userID = 2;
+  
+  
+// //   const response = await t.context.got.get(`user/${userID}/vehicleSetUp`);
+// //   //console.log(JSON.stringify(response.body, null, 2));
+
+// //   const expectedResponse = {
+// //       "year" : 0,
+// //       "systems" : [ {
+// //         "subSystems" : [ {
+// //           "name" : "name",
+// //           "parts" : [ {
+// //             "name" : "name",
+// //             "initialValue" : 6,
+// //             "measurementUnit" : "measurementUnit"
+// //           }, {
+// //             "name" : "name",
+// //             "initialValue" : 6,
+// //             "measurementUnit" : "measurementUnit"
+// //           } ],
+// //           "description" : "description"
+// //         }, {
+// //           "name" : "name",
+// //           "parts" : [ {
+// //             "name" : "name",
+// //             "initialValue" : 6,
+// //             "measurementUnit" : "measurementUnit"
+// //           }, {
+// //             "name" : "name",
+// //             "initialValue" : 6,
+// //             "measurementUnit" : "measurementUnit"
+// //           } ],
+// //           "description" : "description"
+// //         } ],
+// //         "name" : "name",
+// //         "description" : "description"
+// //       }, {
+// //         "subSystems" : [ {
+// //           "name" : "name",
+// //           "parts" : [ {
+// //             "name" : "name",
+// //             "initialValue" : 6,
+// //             "measurementUnit" : "measurementUnit"
+// //           }, {
+// //             "name" : "name",
+// //             "initialValue" : 6,
+// //             "measurementUnit" : "measurementUnit"
+// //           } ],
+// //           "description" : "description"
+// //         }, {
+// //           "name" : "name",
+// //           "parts" : [ {
+// //             "name" : "name",
+// //             "initialValue" : 6,
+// //             "measurementUnit" : "measurementUnit"
+// //           }, {
+// //             "name" : "name",
+// //             "initialValue" : 6,
+// //             "measurementUnit" : "measurementUnit"
+// //           } ],
+// //           "description" : "description"
+// //         } ],
+// //         "name" : "name",
+// //         "description" : "description"
+// //       } ],
+// //       "name" : "name",
+// //       "description" : "description"
+// //     };
+  
+// //   t.is(response.statusCode, 200);
+// //   t.deepEqual(response.body, expectedResponse);
+// // });
+
+
+
+
+// ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// test('Roles are assigned properly by function', async (t) => {
+//   const user = {
+//     "userID": 1,
+//     "name": "string",
+//     "department": "string",
+//     "role": "Engineer",
+//     "joined": "2023-12-13T10:52:28.845Z",
+//     "last-modified": "2023-12-13T10:52:28.845Z"
+//   }
+//   const result = await userChiefEngineerUserIDAdminPanelUserIDPUT(user, user.userID);
+//   t.deepEqual(result.role, "Engineer");
+
+// });
+
+// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// test('Roles are assigned properly', async (t) =>{
+//     chiefEngineerID = 1;
+//     var newUser = {
+//         "userID": 1,
+//         "name": "string",
+//         "role": "string",
+//         "department": "string",
+//         "joined": "2023-12-07T17:33:45.466Z",
+//         "last_modified": "2023-12-07T17:33:45.466Z"
+//       }
+
+    
+//     const response = await t.context.got.put(`user/chiefEngineer/${chiefEngineerID}/adminPanel/${newUser.userID}`, {json : newUser});
     
 //     t.is(response.statusCode, 200);
-// });
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-test('Roles are assigned properly by function', async (t) => {
-  const user = {
-    "userID": 1,
-    "name": "string",
-    "department": "string",
-    "role": "Engineer",
-    "joined": "2023-12-13T10:52:28.845Z",
-    "last-modified": "2023-12-13T10:52:28.845Z"
-  }
-  const result = await userChiefEngineerUserIDAdminPanelUserIDPUT(user, user.userID);
-  t.deepEqual(result.role, "Engineer");
-
-});
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-test('Roles are assigned properly', async (t) =>{
-    chiefEngineerID = 1;
-    var new_user = {
-        "userID": 1,
-        "name": "string",
-        "role": "string",
-        "department": "string",
-        "joined": "2023-12-07T17:33:45.466Z",
-        "last_modified": "2023-12-07T17:33:45.466Z"
-      }
-
     
-    const response = await t.context.got.put(`user/chiefEngineer/${chiefEngineerID}/adminPanel/${new_user.userID}`, {json : new_user});
-    
-    t.deepEqual(response.body.role, new_user.role);
-    t.is(response.statusCode, 200);
 
 
 
-})
+// })

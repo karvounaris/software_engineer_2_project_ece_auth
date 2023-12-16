@@ -43,6 +43,138 @@ paths:
         "500":
           description: Server error
       x-swagger-router-controller: User
+  
+  /user/{userID}/chart/{chartID}/chat/{chatRoomID}:
+    post:
+      tags:
+      - user
+      summary: Send data chart to chat
+      description: Send a data chart based on a user ID
+      operationId: sendChartToChat
+      parameters:
+      - name: userID
+        in: path
+        description: This is the unique identifier of the user
+        required: true
+        schema:
+          type: integer
+      - name: chartID
+        in: path
+        description: This is the unique identifier of the chart
+        required: true
+        schema:
+          type: integer
+      - name: chatRoomID
+        in: path
+        description: This is the unique identifier of the chatroom
+        required: true
+        schema:
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                chatRoomName:
+                  type: string
+                userList:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      userID:
+                        type: integer
+                      name:
+                        type: string
+                      department:
+                        type: string
+                      role:
+                        type: string
+                      joined:
+                        type: string
+                        format: date-time
+                      last-modified:
+                        type: string
+                        format: date-time
+                messageList:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      text:
+                        type: string
+                      messageID:
+                        type: integer
+                      userID:
+                        type: integer
+                      timeSent:
+                        type: string
+                        format: date-time
+                      image:
+                        type: string
+                        format: uri
+                chatRoomID:
+                  type: integer
+                chatRoomIcon:
+                  type: string
+                  format: uri
+        description: User model
+        required: true
+      responses:
+        '200':
+          description: Chart successfully fetched.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  chatRoomName:
+                    type: string
+                  userList:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        userID:
+                          type: integer
+                        name:
+                          type: string
+                        department:
+                          type: string
+                        role:
+                          type: string
+                        joined:
+                          type: string
+                          format: date-time
+                        last-modified:
+                          type: string
+                          format: date-time
+                  messageList:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        text:
+                          type: string
+                        messageID:
+                          type: integer
+                        userID:
+                          type: integer
+                        timeSent:
+                          type: string
+                          format: date-time
+                        image:
+                          type: string
+                          format: uri
+                  chatRoomID:
+                    type: integer
+                  chatRoomIcon:
+                    type: string
+                    format: uri
+        '400':
+          description: Invalid data details. Data don't exist.
+
   /user/engineer/{userID}/proposals:
     post:
       tags:
@@ -258,55 +390,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/inline_response_200_2'
-        "400":
-          description: Invalid data details. Data don't exist.
-      x-swagger-router-controller: User
-  /user/{userID}/chart/{chartID}/chat/{chatRoomID}:
-    post:
-      tags:
-      - user
-      summary: Send data chart to chat
-      description: Send a data chart based on a user ID
-      operationId: sendChartToChat
-      parameters:
-      - name: userID
-        in: path
-        description: This is the unique identifier of the user
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: integer
-      - name: chartID
-        in: path
-        description: This is the unique identifier of the chart
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: integer
-      - name: chatRoomID
-        in: path
-        description: This is the unique identifier of the chatroom
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: integer
-      requestBody:
-        description: User model
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/chat_chatRoomID_body'
-        required: true
-      responses:
-        "200":
-          description: Chart successfully fetched.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/inline_response_200_3'
         "400":
           description: Invalid data details. Data don't exist.
       x-swagger-router-controller: User
@@ -728,7 +811,7 @@ components:
         joined:
           type: string
           format: date-time
-        last-modified:
+        lastModified:
           type: string
           format: date-time
     inline_response_200:
@@ -1004,7 +1087,7 @@ components:
         joined:
           type: string
           format: date-time
-        last-modified:
+        lastModified:
           type: string
           format: date-time
     useruserIDchartchartIDchatchatRoomID_messageList:
@@ -1066,13 +1149,13 @@ components:
           format: uri
       example:
         userList:
-        - last-modified: 2000-01-23T04:56:07.000+00:00
+        - lastodified: 2000-01-23T04:56:07.000+00:00
           role: role
           joined: 2000-01-23T04:56:07.000+00:00
           name: name
           department: department
           userID: 0
-        - last-modified: 2000-01-23T04:56:07.000+00:00
+        - lastModified: 2000-01-23T04:56:07.000+00:00
           role: role
           joined: 2000-01-23T04:56:07.000+00:00
           name: name
@@ -1142,11 +1225,11 @@ components:
         joined:
           type: string
           format: date-time
-        last-modified:
+        lastModified:
           type: string
           format: date-time
       example:
-        last-modified: 2000-01-23T04:56:07.000+00:00
+        lastModified: 2000-01-23T04:56:07.000+00:00
         role: role
         joined: 2000-01-23T04:56:07.000+00:00
         name: name
@@ -1325,7 +1408,7 @@ components:
               joined:
                 type: string
                 format: date-time
-              last-modified:
+              lastModified:
                 type: string
                 format: date-time
       required: true
@@ -1354,7 +1437,7 @@ components:
                     joined:
                       type: string
                       format: date-time
-                    last-modified:
+                    lastModified:
                       type: string
                       format: date-time
               messageList:
