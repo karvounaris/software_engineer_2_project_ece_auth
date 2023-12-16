@@ -111,7 +111,7 @@ test('Send Chart to Chat', async (t) => {
     const chatRoomID = 3;
     
     const response = await t.context.got.post(`user/${userID}/chart/${chartID}/chat/${chatRoomID}`, {json:body});
-    console.log(response.body);
+    
     t.is(response.statusCode, 200);
     const updateResource = await t.context.got.get(`user/${userID}/chart/${chartID}/chat/${chatRoomID}`);
 
