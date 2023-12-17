@@ -22,7 +22,7 @@ test('PUT /user/chiefEngineer/{adminUserID}/adminPanel/{userID} changes the role
 
     const response = await t.context.got.put(`user/chiefEngineer/${adminUserID}/adminPanel/${userID}`, {
         json: {
-            "last-modified" : "2000-01-23T04:56:07.000+00:00",
+            "lastModified" : "2000-01-23T04:56:07.000+00:00",
             "role" : "waterBoy",
             "joined" : "2000-01-23T04:56:07.000+00:00",
             "name" : "name",
@@ -32,7 +32,7 @@ test('PUT /user/chiefEngineer/{adminUserID}/adminPanel/{userID} changes the role
     });
     t.is(response.statusCode, 200);
 
-    // const result = await t.context.got.get(`user/chiefEngineer/${adminUserID}/adminPanel/${userID}`);
-    // t.is(result.statusCode, 200);
-    // t.deepEqual(response.body.role, result.body.role);
+    const result = await t.context.got.get(`user/chiefEngineer/${adminUserID}/adminPanel/${userID}`);
+    t.is(result.statusCode, 200);
+    t.deepEqual(response.body.role, result.body.role);
 });

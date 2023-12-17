@@ -548,7 +548,7 @@ paths:
         - chiefEngineer
         summary: Get Admin Panel
         description: This endpoint displays the admin panel
-        operationId: getAdminPanel
+        operationId: viewAdminPanel
         parameters:
           - name: adminUserID
             in: path
