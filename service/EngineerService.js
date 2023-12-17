@@ -27,22 +27,18 @@ exports.postFile = function(body,userID) {
 exports.postProposal = function(body,userID) {
   return new Promise(function(resolve, reject) {
     EngineerProposalData = {
-      newValue : body.newValue,
-      prposalID : body.prposalID,
-      partID : body.partID,
-      description : body.description,
-      id : body.id,
-      title : body.title,
-      userID : body.userID,
-      currentValue : body.currentValue,
-      status : body.status,
-      confirmation: body.confirmation
+      newValue : body.newValue || 0.0,
+      prposalID : body.prposalID || 0,
+      partID : body.partID || 0,
+      description : body.description || "Default Description",
+      id : body.id || 0,
+      title : body.title || "Default Title",
+      userID : body.userID || 0,
+      currentValue : body.currentValue || 0.0,
+      status : body.status || "Default Status",
+      confirmation : body.confirmation || "Default Confirmation"
     };
-    if (EngineerProposalData){
       resolve(EngineerProposalData); // Resolve with the constructed dynamic response
-    } else {
-      resolve();
-    }
   });
 }
 
