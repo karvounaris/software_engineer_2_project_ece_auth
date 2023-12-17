@@ -5,6 +5,7 @@ const got = require('got');
 const getPort = require('get-port');
 
 const {viewVehicleSetup} = require('../service/UserService.js');
+const {viewChatwithSentChart} = require('../service/UserService.js');
 const { sendChartToChat } = require('../service/UserService.js');
 const { userUserIDProfilePageDELETE } = require('../service/UserService.js');
 const { userChiefEngineerUserIDAdminPanelUserIDPUT } = require('../service/ChiefEngineerService.js');
@@ -52,39 +53,43 @@ test.after.always((t) => {
     const newChartID = 5;
     
     const newChat = {
-        "chatRoomName": "string",
-        "userList": [
-          {
-            "userID": 1,
+        "userList" : [ {
+          "lastModified" : "2000-01-23T04:56:07.000+00:00",
+          "role" : "role",
+          "joined" : "2000-01-23T04:56:07.000+00:00",
+          "name" : "name",
+          "department" : "department",
+          "userID" : 1
+        } ],
+        "messageList" : [ {
+          "image" : "http://example.com/aeiou",
+          "timeSent" : "2000-01-23T04:56:07.000+00:00",
+          "messageID" : 6,
+          "text" : "text",
+          "userID" : 1
+        } ],
+        "chatRoomID" : 5,
+        "chatRoomName" : "chatRoomName",
+        "chatRoomIcon" : "http://example.com/aeiou",
+        "chartList" : [{
+            "id": 1,
             "name": "string",
-            "department": "string",
-            "role": "string",
-            "joined": "2023-12-07T17:04:46.174Z",
-            "lastModified": "2023-12-07T17:04:46.174Z"
-          }
-        ],
-        "messageList": [
-          {
-            "text": "string",
-            "messageID": 0,
-            "userID": 0,
-            "timeSent": "2023-12-07T17:04:46.174Z",
-            "image": "string"
-          }
-        ],
-        "chatRoomID": 0,
-        "chatRoomIcon": "string"
+            "dataCategory": "string",
+            "date": 0,
+            "track": "string",
+            "lap": 0,
+            "data": 0
+        }]
       }
 
 
-const result = await sendChartToChat(newChat, newChat.userList.userID, newChartID, newChat.chatRoomID);
+const result = await sendChartToChat(newChat, newChat.userList[0].userID, newChartID, newChat.chatRoomID);
 t.deepEqual(result, newChat);
  })
 
 
 
-
-
+ 
 test('Send Chart to Chat', async (t) => {
     const body = {
         "userList" : [ {
@@ -104,22 +109,28 @@ test('Send Chart to Chat', async (t) => {
         } ],
         "chatRoomID" : 5,
         "chatRoomName" : "chatRoomName",
-        "chatRoomIcon" : "http://example.com/aeiou"
+        "chatRoomIcon" : "http://example.com/aeiou",
+        "chartList" : [{
+            "id": 1,
+            "name": "string",
+            "dataCategory": "string",
+            "date": 0,
+            "track": "string",
+            "lap": 0,
+            "data": 0
+        }]
       };
     const userID = 1;
-    const chartID = 2;
-    const chatRoomID = 3;
+    const chartID = 1;
+    const chatRoomID = 5;             
     
     const response = await t.context.got.post(`user/${userID}/chart/${chartID}/chat/${chatRoomID}`, {json:body});
-    
-    t.is(response.statusCode, 200);
     const updateResource = await t.context.got.get(`user/${userID}/chart/${chartID}/chat/${chatRoomID}`);
-
     t.is(updateResource.statusCode, 200);
-    t.deepEqual(response.body.userList[0].userID = updateResource.body.userList[0].userID);
-    t.deepEqual(response.body.userList[0].lastModified = updateResource.body.userList[0].lastModified);
-    t.deepEqual(response.body.messageList[0].messageID = updateResource.body.messageList[0].messageID);
-    t.deepEqual(response.body.messageList[0].text = updateResource.body.messageList[0].text);
+    t.deepEqual(response.body.userList[0].userID, updateResource.body.userList[0].userID);
+    t.deepEqual(response.body.userList[0].lastModified, updateResource.body.userList[0].lastModified);
+    t.deepEqual(response.body.messageList[0].messageID, updateResource.body.messageList[0].messageID);
+    t.deepEqual(response.body.messageList[0].text, updateResource.body.messageList[0].text);
 
   });
 

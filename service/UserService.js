@@ -14,14 +14,14 @@ exports.createChatRoom = function(body,userID) {
     var examples = {};
     examples['application/json'] = {
   "userList" : [ {
-    "last-modified" : "2000-01-23T04:56:07.000+00:00",
+    "lastModified" : "2000-01-23T04:56:07.000+00:00",
     "role" : "role",
     "joined" : "2000-01-23T04:56:07.000+00:00",
     "name" : "name",
     "department" : "department",
     "userID" : 0
   }, {
-    "last-modified" : "2000-01-23T04:56:07.000+00:00",
+    "lastModified" : "2000-01-23T04:56:07.000+00:00",
     "role" : "role",
     "joined" : "2000-01-23T04:56:07.000+00:00",
     "name" : "name",
@@ -114,7 +114,17 @@ exports.sendChartToChat = function(body,userID,chartID,chatRoomID){
       })),
       "chatRoomID": body.chatRoomID,
       "chatRoomName": body.chatRoomName,
-      "chatRoomIcon": body.chatRoomIcon
+      "chatRoomIcon": body.chatRoomIcon,
+      "chartList" : body.chartList.map(chart =>({
+        "id": chart.id,
+        "name": chart.name,
+        "dataCategory": chart.dataCategory,
+        "date": chart.date,
+        "track": chart.track,
+        "lap": chart.lap,
+        "data": chart.data
+    }))
+    
     };
 
     if (Object.keys(examples).length > 0) {
@@ -145,27 +155,14 @@ exports.sendMessageToChat = function(body,userID,chatRoomID) {
     "name" : "name",
     "department" : "department",
     "userID" : 0
-  }, {
-    "last-modified" : "2000-01-23T04:56:07.000+00:00",
-    "role" : "role",
-    "joined" : "2000-01-23T04:56:07.000+00:00",
-    "name" : "name",
-    "department" : "department",
-    "userID" : 0
-  } ],
+  }],
   "messageList" : [ {
     "image" : "http://example.com/aeiou",
     "timeSent" : "2000-01-23T04:56:07.000+00:00",
     "messageID" : 6,
     "text" : "text",
     "userID" : 1
-  }, {
-    "image" : "http://example.com/aeiou",
-    "timeSent" : "2000-01-23T04:56:07.000+00:00",
-    "messageID" : 6,
-    "text" : "text",
-    "userID" : 1
-  } ],
+  }],
   "chatRoomID" : 5,
   "chatRoomName" : "chatRoomName",
   "chatRoomIcon" : "http://example.com/aeiou"
@@ -266,6 +263,53 @@ exports.viewChart = function(userID,chartID) {
   });
 }
 
+/**
+ * Get Chat with User's sent Chat
+ * This endpoint displays vehicle setup details
+ *
+ * userID Integer This is the unique identifier of the user
+ * returns inline_response_200
+ **/
+exports.viewChatWithSentChart = function(userID, chartID, chatRoomID) {
+  return new Promise(function(resolve, reject) {
+    var chatExample = {};
+    chatExample['application/json'] = {
+      "userList" : [ {
+        "lastModified" : "2000-01-23T04:56:07.000+00:00",
+        "role" : "role",
+        "joined" : "2000-01-23T04:56:07.000+00:00",
+        "name" : "name",
+        "department" : "department",
+        "userID" : 1
+      } ],
+      "messageList" : [ {
+        "image" : "http://example.com/aeiou",
+        "timeSent" : "2000-01-23T04:56:07.000+00:00",
+        "messageID" : 6,
+        "text" : "text",
+        "userID" : 1
+      } ],
+      "chatRoomID" : 5,
+      "chatRoomName" : "chatRoomName",
+      "chatRoomIcon" : "http://example.com/aeiou",
+      "chartList" : [{
+          "id": 1,
+          "name": "string",
+          "dataCategory": "string",
+          "date": 0,
+          "track": "string",
+          "lap": 0,
+          "data": 0
+      }]
+      };
+    
+    if (Object.keys(chatExample).length > 0) {
+      resolve(chatExample[Object.keys(chatExample)[0]]);
+    } else {
+      resolve();
+    }
+  });
+}
 
 /**
  * View vehicle setup
@@ -342,7 +386,7 @@ exports.viewVehicleSetup = function(userID) {
     if (Object.keys(vehicleSetUpExample).length > 0) {
       resolve(vehicleSetUpExample[Object.keys(vehicleSetUpExample)[0]]);
     } else {
-      resolve();
+      resolve();                                                                                                                                                                                                                                                                     
     }
   });
 }

@@ -119,10 +119,29 @@ paths:
                 chatRoomIcon:
                   type: string
                   format: uri
+                chartList:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        name:
+                          type: string
+                        dataCategory:
+                          type: string
+                        date:
+                          type: integer
+                        track:
+                          type: string
+                        lap:
+                          type: integer
+                        data:
+                          type: number
         description: User model
         required: true
       responses:
-        '200':
+        "200":
           description: Chart successfully fetched.
           content:
             application/json:
@@ -172,40 +191,60 @@ paths:
                   chatRoomIcon:
                     type: string
                     format: uri
-        '400':
+                  chartList:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        name:
+                          type: string
+                        dataCategory:
+                          type: string
+                        date:
+                          type: integer
+                        track:
+                          type: string
+                        lap:
+                          type: integer
+                        data:
+                          type: number
+
+        "400":
           description: Invalid data details. Data don't exist.
       x-swagger-router-controller: User
     get:
       tags:
-      - user
+        - user
       summary: Get the ChatRoom with the User's sent Data Chart
       description: This endpoint displays Chat details
-      operationId: getUserChatRoom
+      operationId: viewChatWithSentChart
       parameters:
-      - name: userID
-        in: path
-        description: This is the unique identifier of the user
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: integer
-      - name: chartID
-        in: path
-        description: This is the unique identifier of the chart
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: integer
-      - name: chatRoomID
-        in: path
-        description: This is the unique identifier of the chatRoom
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: integer
+        - name: userID
+          in: path
+          description: This is the unique identifier of the user
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+        - name: chartID
+          in: path
+          description: This is the unique identifier of the chart
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+        - name: chatRoomID
+          in: path
+          description: This is the unique identifier of the chatRoom
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
       responses:
         "200":
           description: Successful operation
@@ -257,6 +296,25 @@ paths:
                   chatRoomIcon:
                     type: string
                     format: uri
+                  chartList:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        name:
+                          type: string
+                        dataCategory:
+                          type: string
+                        date:
+                          type: integer
+                        track:
+                          type: string
+                        lap:
+                          type: integer
+                        data:
+                          type: number            
         "400":
           description: Invalid input parameter
         "404":
