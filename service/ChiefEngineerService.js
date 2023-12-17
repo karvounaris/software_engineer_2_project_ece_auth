@@ -258,18 +258,14 @@ exports.getCreatedVehicleSetup = function(userID, proposalID) {
 exports.userChiefEngineerUserIDAdminPanelUserIDPUT = function(body, userID, adminUserID) {
   return new Promise(function(resolve, reject) {
     viewAdminPanelData = {
-      'lastModified': body.lastModified,
-      role : body.role,
-      joined : body.joined,
-      name : body.name,
-      department : body.department,
-      userID : body.userID
+      'lastModified': body.lastModified || 0,
+      role : body.role || "Default",
+      joined : body.joined || "Default",
+      name : body.name || "Default",
+      department : body.department || "Default",
+      userID : body.userID || 0
     };
-    if (viewAdminPanelData) {
-      resolve(viewAdminPanelData);
-    } else {
-      resolve();
-    }
+    resolve(viewAdminPanelData);
   });
 }
 

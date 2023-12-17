@@ -3,7 +3,7 @@ const test = require('ava').default;
 const listen = require('test-listen');
 const got = require('got');
 
-const {changeRole} = require('../service/ChiefEngineerService.js');
+const {userChiefEngineerUserIDAdminPanelUserIDPUT} = require('../service/ChiefEngineerService.js');
 const app = require('../index.js');
 
 test.before(async (t) => {
@@ -35,4 +35,21 @@ test('PUT /user/chiefEngineer/{adminUserID}/adminPanel/{userID} changes the role
     const result = await t.context.got.get(`user/chiefEngineer/${adminUserID}/adminPanel/${userID}`);
     t.is(result.statusCode, 200);
     t.deepEqual(response.body.role, result.body.role);
+});
+
+test('PUT changes the role of a user', async t => {
+    const adminUserID = 2;
+    const userID = 6;
+
+    const newData = {
+        'lastModified': 0,
+        role : "Default",
+        joined : "Default",
+        name : "Default",
+        department :  "Default",
+        userID : 0
+      };
+
+    const result = await userChiefEngineerUserIDAdminPanelUserIDPUT(adminUserID, userID);
+    t.deepEqual(result.role, newData.role);
 });
