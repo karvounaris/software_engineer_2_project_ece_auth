@@ -1,6 +1,9 @@
 const {updateVehicleSetup} = require('../service/ChiefEngineerService.js');
 const {createVehicleSetup} = require('../service/ChiefEngineerService.js');
 const {acceptOrDeclineProposal} = require('../service/ChiefEngineerService.js');
+const {userChiefEngineerUserIDAdminPanelUserIDPUT} = require('../service/ChiefEngineerService.js');
+
+
 const http = require('http');
 const test = require('ava').default;
 const listen = require('test-listen');
@@ -16,6 +19,14 @@ test.before(async (t) => {
 
 test.after.always((t) => {
     t.context.server.close();
+});
+
+
+test('View vehicle SetUp', async (t) => {
+    const userID = 2;
+    const response = await t.context.got.get(`user/${userID}/vehicleSetUp`);
+    
+    t.is(response.statusCode, 200);
 });
 
 test('PUT /user/chiefEngineer/{userID}/vehicleSetUp/{elementID} adds new element to the Vehicle', async t => {
@@ -455,4 +466,42 @@ test('PUT change the proposal status by function', async (t) => {
     const result = await acceptOrDeclineProposal(new_user, userID, proposalID);
     t.deepEqual(result, new_user);
 
+});
+
+
+test('PUT /user/chiefEngineer/{adminUserID}/adminPanel/{userID} changes the role of a user', async t => {
+    const adminUserID = 1;
+    const userID = 5;
+
+    const response = await t.context.got.put(`user/chiefEngineer/${adminUserID}/adminPanel/${userID}`, {
+        json: {
+            "lastModified" : "2000-01-23T04:56:07.000+00:00",
+            "role" : "waterBoy",
+            "joined" : "2000-01-23T04:56:07.000+00:00",
+            "name" : "name",
+            "department" : "department",
+            "userID" : 0
+        }
+    });
+    t.is(response.statusCode, 200);
+    const result = await t.context.got.get(`user/chiefEngineer/${adminUserID}/adminPanel/${userID}`);
+    t.is(result.statusCode, 200);
+    t.deepEqual(response.body.role, result.body.role);
+});
+
+test('PUT changes the role of a user', async t => {
+    const adminUserID = 2;
+    const userID = 6;
+
+    const newData = {
+        'lastModified': 0,
+        role : "Default",
+        joined : "Default",
+        name : "Default",
+        department :  "Default",
+        userID : 0
+      };
+
+    const result = await userChiefEngineerUserIDAdminPanelUserIDPUT(adminUserID, userID);
+    t.deepEqual(result.role, newData.role);
 });
