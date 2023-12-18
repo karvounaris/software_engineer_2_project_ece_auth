@@ -31,7 +31,6 @@ test('PUT /user/chiefEngineer/{adminUserID}/adminPanel/{userID} changes the role
         }
     });
     t.is(response.statusCode, 200);
-
     const result = await t.context.got.get(`user/chiefEngineer/${adminUserID}/adminPanel/${userID}`);
     t.is(result.statusCode, 200);
     t.deepEqual(response.body.role, result.body.role);
