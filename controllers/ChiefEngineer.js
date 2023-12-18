@@ -63,8 +63,18 @@ module.exports.viewUpdatedVehicleSetup = function viewUpdatedVehicleSetup (req, 
     });
 };
 
-module.exports.userChiefEngineerUserIDAdminPanelUserIDPUT = function userChiefEngineerUserIDAdminPanelUserIDPUT (req, res, next, body, userID) {
-  ChiefEngineer.userChiefEngineerUserIDAdminPanelUserIDPUT(body, userID)
+module.exports.userChiefEngineerUserIDAdminPanelUserIDPUT = function userChiefEngineerUserIDAdminPanelUserIDPUT (req, res, next, body, userID, adminUserID) {
+  ChiefEngineer.userChiefEngineerUserIDAdminPanelUserIDPUT(body, userID, adminUserID)
+    .then(function (response) {
+      utils.writeJson(res, response);
+    })
+    .catch(function (response) {
+      utils.writeJson(res, response);
+    });
+};
+
+module.exports.viewAdminPanel = function viewAdminPanel (req, res, next, body, userID, adminUserID) {
+  ChiefEngineer.viewAdminPanel(body, userID, adminUserID)
     .then(function (response) {
       utils.writeJson(res, response);
     })

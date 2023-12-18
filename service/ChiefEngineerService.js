@@ -3,6 +3,7 @@
 var updatedVehicleData = null;
 var updatedProposalData = null;
 var createdVehicleData = null;
+var viewAdminPanelData = null;
 /**
  * Accepts or Declines a proposal
  * Chief engineer must be able to accept or decline proposals
@@ -125,6 +126,32 @@ exports.getCreatedVehicleSetup = function(userID, proposalID) {
     if (createdVehicleData) {
       // If updatedData is available, resolve with it
       resolve(createdVehicleData);
+    } else {
+      // If updatedData is not available, handle it accordingly (resolve with default or an error)
+      resolve();
+    }
+  });
+};
+
+exports.userChiefEngineerUserIDAdminPanelUserIDPUT = function(body, userID, adminUserID) {
+  return new Promise(function(resolve, reject) {
+    viewAdminPanelData = {
+      'lastModified': body.lastModified || 0,
+      role: body.role || "Default",
+      joined: body.joined || "Default",
+      name: body.name || "Default",
+      department: body.department || "Default",
+      userID: body.userID || 0
+    };
+    resolve(viewAdminPanelData);
+  });
+}
+
+exports.viewAdminPanel = function(body, userID, adminUserID) {
+  return new Promise(function(resolve, reject) {
+    if (viewAdminPanelData) {
+      // If updatedData is available, resolve with it
+      resolve(viewAdminPanelData);
     } else {
       // If updatedData is not available, handle it accordingly (resolve with default or an error)
       resolve();

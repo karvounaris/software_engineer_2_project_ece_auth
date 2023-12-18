@@ -41,7 +41,6 @@ test('GET user/${userID}/Weather weather report', async (t) => {
     const userID = 2;
 
     const response = await t.context.got.get(`user/${userID}/Weather`);
-    console.log(response.body);
 
     t.is(response.body.temperature, 0);
     t.is(response.statusCode, 200);
