@@ -3,7 +3,6 @@
 var updatedVehicleData = null;
 var updatedProposalData = null;
 var createdVehicleData = null;
-var viewAdminPanelData = null;
 /**
  * Accepts or Declines a proposal
  * Chief engineer must be able to accept or decline proposals
@@ -54,115 +53,25 @@ exports.getProposal = function(userID, proposalID) {
  **/
 exports.createVehicleSetup = function(body,userID) {
   return new Promise(function(resolve, reject) {
-    // updatedVehicleData = {
-    //   year: body.year || 0,
-    //   systems: (body.systems || []).map(system => ({
-    //     name: system.name || 'Default System Name',
-    //     description: system.description || 'Default System Description',
-    //     subSystems: (system.subSystems || []).map(subSystem => ({
-    //       name: subSystem.name || 'Default Subsystem Name',
-    //       description: subSystem.description || 'Default Subsystem Description',
-    //       parts: (subSystem.parts || []).map(part => ({
-    //         name: part.name || 'Default Part Name',
-    //         initialValue: part.initialValue || 6,
-    //         measurementUnit: part.measurementUnit || 'Default Measurement Unit'
-    //       }))
-    //     }))
-    //   })),
-    //   name: body.vehicleName || 'Default Vehicle Name',
-    //   description: body.vehicleDescription || 'Default Vehicle Description'
-    // };
     createdVehicleData = {
-      year: body.year,
-      systems: (body.systems).map(system => ({
-        name: system.name,
-        description: system.description ,
-        subSystems: (system.subSystems).map(subSystem => ({
-          name: subSystem.name,
-          description: subSystem.description,
-          parts: (subSystem.parts).map(part => ({
-            name: part.name,
-            initialValue: part.initialValue,
-            measurementUnit: part.measurementUnit
+      year: body.year || 0,
+      systems: (body.systems || []).map(system => ({
+        name: system.name || 'Default System Name',
+        description: system.description || 'Default System Description',
+        subSystems: (system.subSystems || []).map(subSystem => ({
+          name: subSystem.name || 'Default Subsystem Name',
+          description: subSystem.description || 'Default Subsystem Description',
+          parts: (subSystem.parts || []).map(part => ({
+            name: part.name || 'Default Part Name',
+            initialValue: part.initialValue || 6,
+            measurementUnit: part.measurementUnit || 'Default Measurement Unit'
           }))
         }))
       })),
-      name: body.name,
-      description: body.description
+      name: body.name || 'Default Vehicle Name',
+      description: body.description || 'Default Vehicle Description'
     };
-    if (createdVehicleData){
-      resolve(createdVehicleData); // Resolve with the constructed dynamic response
-    } else {
-      resolve();
-    }
-//     var examples = {};
-//     examples['application/json'] = {
-//   "year" : 0,
-//   "systems" : [ {
-//     "subSystems" : [ {
-//       "name" : "name",
-//       "parts" : [ {
-//         "name" : "name",
-//         "initialValue" : 6,
-//         "measurementUnit" : "measurementUnit"
-//       }, {
-//         "name" : "name",
-//         "initialValue" : 6,
-//         "measurementUnit" : "measurementUnit"
-//       } ],
-//       "description" : "description"
-//     }, {
-//       "name" : "name",
-//       "parts" : [ {
-//         "name" : "name",
-//         "initialValue" : 6,
-//         "measurementUnit" : "measurementUnit"
-//       }, {
-//         "name" : "name",
-//         "initialValue" : 6,
-//         "measurementUnit" : "measurementUnit"
-//       } ],
-//       "description" : "description"
-//     } ],
-//     "name" : "name",
-//     "description" : "description"
-//   }, {
-//     "subSystems" : [ {
-//       "name" : "name",
-//       "parts" : [ {
-//         "name" : "name",
-//         "initialValue" : 6,
-//         "measurementUnit" : "measurementUnit"
-//       }, {
-//         "name" : "name",
-//         "initialValue" : 6,
-//         "measurementUnit" : "measurementUnit"
-//       } ],
-//       "description" : "description"
-//     }, {
-//       "name" : "name",
-//       "parts" : [ {
-//         "name" : "name",
-//         "initialValue" : 6,
-//         "measurementUnit" : "measurementUnit"
-//       }, {
-//         "name" : "name",
-//         "initialValue" : 6,
-//         "measurementUnit" : "measurementUnit"
-//       } ],
-//       "description" : "description"
-//     } ],
-//     "name" : "name",
-//     "description" : "description"
-//   } ],
-//   "name" : "name",
-//   "description" : "description"
-// };
-//     if (Object.keys(examples).length > 0) {
-//       resolve(examples[Object.keys(examples)[0]]);
-//     } else {
-//       resolve();
-//     }
+    resolve(createdVehicleData); // Resolve with the constructed dynamic response
   });
 }
 
@@ -177,48 +86,25 @@ exports.createVehicleSetup = function(body,userID) {
  **/
 exports.updateVehicleSetup = function(body, userID, elementID) {
   return new Promise(function(resolve, reject) {
-    // Sample logic to construct a response based on the input parameters
-    // updatedVehicleData = {
-    //   year: body.year || 0,
-    //   systems: (body.systems || []).map(system => ({
-    //     name: system.name || 'Default System Name',
-    //     description: system.description || 'Default System Description',
-    //     subSystems: (system.subSystems || []).map(subSystem => ({
-    //       name: subSystem.name || 'Default Subsystem Name',
-    //       description: subSystem.description || 'Default Subsystem Description',
-    //       parts: (subSystem.parts || []).map(part => ({
-    //         name: part.name || 'Default Part Name',
-    //         initialValue: part.initialValue || 6,
-    //         measurementUnit: part.measurementUnit || 'Default Measurement Unit'
-    //       }))
-    //     }))
-    //   })),
-    //   name: body.vehicleName || 'Default Vehicle Name',
-    //   description: body.vehicleDescription || 'Default Vehicle Description'
-    // };
     updatedVehicleData = {
-      year: body.year,
-      systems: (body.systems).map(system => ({
-        name: system.name,
-        description: system.description ,
-        subSystems: (system.subSystems).map(subSystem => ({
-          name: subSystem.name,
-          description: subSystem.description,
-          parts: (subSystem.parts).map(part => ({
-            name: part.name,
-            initialValue: part.initialValue,
-            measurementUnit: part.measurementUnit
+      year: body.year || 0,
+      systems: (body.systems || []).map(system => ({
+        name: system.name || 'Default System Name',
+        description: system.description || 'Default System Description',
+        subSystems: (system.subSystems || []).map(subSystem => ({
+          name: subSystem.name || 'Default Subsystem Name',
+          description: subSystem.description || 'Default Subsystem Description',
+          parts: (subSystem.parts || []).map(part => ({
+            name: part.name || 'Default Part Name',
+            initialValue: part.initialValue || 6,
+            measurementUnit: part.measurementUnit || 'Default Measurement Unit'
           }))
         }))
       })),
-      name: body.name,
-      description: body.description
+      name: body.name || 'Default Vehicle Name',
+      description: body.description || 'Default Vehicle Description'
     };
-    if (updatedVehicleData){
-      resolve(updatedVehicleData); // Resolve with the constructed dynamic response
-    } else {
-      resolve();
-    }
+    resolve(updatedVehicleData); // Resolve with the constructed dynamic response
   });
 };
 
@@ -239,41 +125,6 @@ exports.getCreatedVehicleSetup = function(userID, proposalID) {
     if (createdVehicleData) {
       // If updatedData is available, resolve with it
       resolve(createdVehicleData);
-    } else {
-      // If updatedData is not available, handle it accordingly (resolve with default or an error)
-      resolve();
-    }
-  });
-};
-
-
-/**
- * Assign roles
- * The chief engineer must be able to edit the roles
- *
- * body AdminPanel_userID_body User model
- * userID Integer This is the unique identifier of the user
- * returns adminPanel_userID_body
- **/
-exports.userChiefEngineerUserIDAdminPanelUserIDPUT = function(body, userID, adminUserID) {
-  return new Promise(function(resolve, reject) {
-    viewAdminPanelData = {
-      'lastModified': body.lastModified || 0,
-      role : body.role || "Default",
-      joined : body.joined || "Default",
-      name : body.name || "Default",
-      department : body.department || "Default",
-      userID : body.userID || 0
-    };
-    resolve(viewAdminPanelData);
-  });
-}
-
-exports.viewAdminPanel = function(userID, adminUserID) {
-  return new Promise(function(resolve, reject) {
-    if (viewAdminPanelData) {
-      // If updatedData is available, resolve with it
-      resolve(viewAdminPanelData);
     } else {
       // If updatedData is not available, handle it accordingly (resolve with default or an error)
       resolve();
