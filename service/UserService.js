@@ -1,6 +1,7 @@
 'use strict';
 var chartData = null;
 
+var updatedProfileData = null;
 
 /**
  * Create a chatRoom
@@ -277,8 +278,12 @@ exports.viewChatWithSentChart = function(userID, chartID, chatRoomID) {
  **/
 exports.viewVehicleSetup = function(userID) {
   return new Promise(function(resolve, reject) {
-    var vehicleSetUpExample = {};
-    vehicleSetUpExample['application/json'] = {
+    if (updatedData) {
+      // If updatedData is available, resolve with it
+      resolve(updatedData);
+     } else {
+      var examples = {};
+    examples['application/json'] = {
   "year" : 0,
   "systems" : [ {
     "subSystems" : [ {
@@ -340,11 +345,73 @@ exports.viewVehicleSetup = function(userID) {
   "name" : "name",
   "description" : "description"
 };
-    if (Object.keys(vehicleSetUpExample).length > 0) {
-      resolve(vehicleSetUpExample[Object.keys(vehicleSetUpExample)[0]]);
-    } else {
-      resolve();                                                                                                                                                                                                                                                                     
+    resolve(examples[Object.keys(examples)[0]]);
     }
   });
 }
 
+
+/**
+ * View the profile page of a user
+ * Returns a profile page based on a single ID
+ *
+ * userID Integer This is the unique identifier of the user
+ * chartID Integer this is the unique identifier of the chart
+ * returns inline_response_200_2
+ **/
+exports.viewProfile = function(userID) {
+  return new Promise(function(resolve, reject) { 
+    if (updatedProfileData) {
+      // If updatedData is available, resolve with it
+      resolve(updatedProfileData);
+    } else {
+    var examples = {};
+    examples['application/json'] = {
+  "role" : "role",
+  "githubLink" : "http://example.com/aeiou",
+  "linkedinLink" : "http://example.com/aeiou",
+  "googleLink" : "http://example.com/aeiou",
+  "description" : "description",
+  "profileImage" : "http://example.com/aeiou",
+  "department" : "department",
+  "username" : "username"
+};
+    resolve(examples[Object.keys(examples)[0]]);
+    }
+  });
+}
+
+
+/**
+ * View the profile page of a user
+ * Returns a profile page based on a single ID
+ *
+ * userID Integer This is the unique identifier of the user
+ * chartID Integer this is the unique identifier of the chart
+ * returns inline_response_200_2
+ **/
+exports.viewProfile = function(userID) {
+  return new Promise(function(resolve, reject) { 
+    if (updatedProfileData) {
+      // If updatedData is available, resolve with it
+      resolve(updatedProfileData);
+    } else {
+    var examples = {};
+    examples['application/json'] = {
+  "role" : "role",
+  "githubLink" : "http://example.com/aeiou",
+  "linkedinLink" : "http://example.com/aeiou",
+  "googleLink" : "http://example.com/aeiou",
+  "description" : "description",
+  "profileImage" : "http://example.com/aeiou",
+  "department" : "department",
+  "username" : "username"
+};
+    if (Object.keys(examples).length > 0) {
+      resolve(examples[Object.keys(examples)[0]]);
+    } else {
+      resolve();
+    }
+  }
+  });
+}
