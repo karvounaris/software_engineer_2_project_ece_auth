@@ -1,4 +1,5 @@
 'use strict';
+var chartData = null;
 
 
 /**
@@ -46,7 +47,7 @@ exports.createChatRoom = function(body,userID) {
   "chatRoomIcon" : "http://example.com/aeiou"
 };
     if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
+      resolve(examples[Object.keys(examples)]);
     } else {
       resolve();
     }
@@ -80,58 +81,39 @@ exports.getWeather = function(userID) {
 }
 
 
-/**
- * Send data chart to chat
- * Send a data chart based on a user ID
- *
- * body Chat_chatRoomID_body User model
- * userID Integer This is the unique identifier of the user
- * chartID Integer This is the unique identifier of the chart
- * chatRoomID Integer This is the unique identifier of the chatroom
- * returns inline_response_200_3
- **/
-
-const readline = require('readline');
-
 exports.sendChartToChat = function(body,userID,chartID,chatRoomID){
   return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = {
-      "userList": body.userList.map(user => ({
-        "lastModified": user.lastModified,
-        "role": user.role,
-        "joined": user.joined,
-        "name": user.name,
-        "department": user.department,
-        "userID": user.userID
+    chartData = {
+      "userList": (body.userList || []).map(user => ({
+        "lastModified": user.lastModified || "Default",
+        "role": user.role || "Default",
+        "joined": user.joined || "Default",
+        "name": user.name || "Default",
+        "department": user.department || "Default",
+        "userID": user.userID || 0
       })),
-      "messageList": body.messageList.map(message => ({
-        "image": message.image,
-        "timeSent": message.timeSent,
-        "messageID": message.messageID,
-        "text": message.text,
-        "userID": message.userID
+      "messageList": (body.messageList || []).map(message => ({
+        "image": message.image || "Default",
+        "timeSent": message.timeSent || "Default",
+        "messageID": message.messageID || 0,
+        "text": message.text || "Default",
+        "userID": message.userID || 0
       })),
-      "chatRoomID": body.chatRoomID,
-      "chatRoomName": body.chatRoomName,
-      "chatRoomIcon": body.chatRoomIcon,
-      "chartList" : body.chartList.map(chart =>({
-        "id": chart.id,
-        "name": chart.name,
-        "dataCategory": chart.dataCategory,
-        "date": chart.date,
-        "track": chart.track,
-        "lap": chart.lap,
-        "data": chart.data
+      "chatRoomID": body.chatRoomID || 0,
+      "chatRoomName": body.chatRoomName  || "Default",
+      "chatRoomIcon": body.chatRoomIcon  || "Default",
+      "chartList" : (body.chartList || []).map(chart =>({
+        "id": chart.id || 0,
+        "name": chart.name  || "Default",
+        "dataCategory": chart.dataCategory  || "Default",
+        "date": chart.date || 0,
+        "track": chart.track  || "Default",
+        "lap": chart.lap || 0,
+        "data": chart.data || 0
     }))
     
     };
-
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
-    }
+      resolve(chartData);
   });
 }
 
@@ -272,45 +254,20 @@ exports.viewChart = function(userID,chartID) {
  **/
 exports.viewChatWithSentChart = function(userID, chartID, chatRoomID) {
   return new Promise(function(resolve, reject) {
-    var chatExample = {};
-    chatExample['application/json'] = {
-      "userList" : [ {
-        "lastModified" : "2000-01-23T04:56:07.000+00:00",
-        "role" : "role",
-        "joined" : "2000-01-23T04:56:07.000+00:00",
-        "name" : "name",
-        "department" : "department",
-        "userID" : 1
-      } ],
-      "messageList" : [ {
-        "image" : "http://example.com/aeiou",
-        "timeSent" : "2000-01-23T04:56:07.000+00:00",
-        "messageID" : 6,
-        "text" : "text",
-        "userID" : 1
-      } ],
-      "chatRoomID" : 5,
-      "chatRoomName" : "chatRoomName",
-      "chatRoomIcon" : "http://example.com/aeiou",
-      "chartList" : [{
-          "id": 1,
-          "name": "string",
-          "dataCategory": "string",
-          "date": 0,
-          "track": "string",
-          "lap": 0,
-          "data": 0
-      }]
-      };
-    
-    if (Object.keys(chatExample).length > 0) {
-      resolve(chatExample[Object.keys(chatExample)[0]]);
+    if (chartData) {
+      // If updatedData is available, resolve with it
+      resolve(chartData);
     } else {
+      // If updatedData is not available, handle it accordingly (resolve with default or an error)
       resolve();
     }
   });
-}
-
+};
+  
+  
+  
+  
+  
 /**
  * View vehicle setup
  * This endpoint displays vehicle setup details
