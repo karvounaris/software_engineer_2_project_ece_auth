@@ -20,6 +20,9 @@ jobs:
       - name: Give execution rights to Ava
         run: chmod +x ./node_modules/.bin/ava
 
+      - name: Give execution rights to c8
+        run: chmod +x ./node_modules/.bin/c8
+
       - name: Run tests
         run: npm run test
 
