@@ -696,6 +696,39 @@ paths:
           description: Invalid data details. Data don't exist.
       x-swagger-router-controller: User
   /user/{userID}/chat/{chatRoomID}:
+    get:
+      tags:
+      - user
+      summary: View a message in chat
+      description: Returns a data chart based on a single ID
+      operationId: getMessage
+      parameters:
+      - name: userID
+        in: path
+        description: This is the unique identifier of the user
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      - name: chatRoomID
+        in: path
+        description: this is the unique identifier of the chatRoom
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: Chart successfully fetched.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_2'
+        "500":
+          description: Server error.
+      x-swagger-router-controller: User
     post:
       tags:
       - user
@@ -739,6 +772,31 @@ paths:
           description: Server error
       x-swagger-router-controller: User
   /user/{userID}/chat:
+    get:
+      tags:
+      - user
+      summary: Gets chat
+      description: All assigned users must be able to view the chat
+      operationId: getChat
+      parameters:
+      - name: userID
+        in: path
+        description: This is the unique identifier of the user
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: Succesful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+        "500":
+          description: Server error
+      x-swagger-router-controller: User
     post:
       tags:
       - user
@@ -1000,6 +1058,31 @@ paths:
           description: File not found.  
       x-swagger-router-controller: Engineer
   /user/{userID}/profilePage:
+    get:
+      tags:
+      - user
+      summary: Gets user's profile page
+      description: All assigned users must be able to view their profile page
+      operationId: getProfilePage
+      parameters:
+      - name: userID
+        in: path
+        description: This is the unique identifier of the user
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+        "500":
+          description: Server error
+      x-swagger-router-controller: User 
     put:
       tags:
       - user

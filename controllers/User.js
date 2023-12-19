@@ -3,6 +3,26 @@
 var utils = require('../utils/writer.js');
 var User = require('../service/UserService');
 
+module.exports.getChat = function getChat (req, res, next, userID) {
+  User.getChat(userID)
+    .then(function (response) {
+      utils.writeJson(res, response);
+    })
+    .catch(function (response) {
+      utils.writeJson(res, response);
+    });
+};
+
+module.exports.getMessage = function getMessage (req, res, next, userID, chatRoomID) {
+  User.getMessage(userID, chatRoomID)
+    .then(function (response) {
+      utils.writeJson(res, response);
+    })
+    .catch(function (response) {
+      utils.writeJson(res, response);
+    });
+};
+
 module.exports.createChatRoom = function createChatRoom (req, res, next, body, userID) {
   User.createChatRoom(body, userID)
     .then(function (response) {
@@ -35,6 +55,16 @@ module.exports.sendChartToChat = function sendChartToChat (req, res, next, body,
 
 module.exports.sendMessageToChat = function sendMessageToChat (req, res, next, body, userID, chatRoomID) {
   User.sendMessageToChat(body, userID, chatRoomID)
+    .then(function (response) {
+      utils.writeJson(res, response);
+    })
+    .catch(function (response) {
+      utils.writeJson(res, response);
+    });
+};
+
+module.exports.getProfilePage = function getProfilePage (req, res, next, userID) {
+  User.getProfilePage(userID)
     .then(function (response) {
       utils.writeJson(res, response);
     })
