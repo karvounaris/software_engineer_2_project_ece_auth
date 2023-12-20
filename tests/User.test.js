@@ -12,6 +12,7 @@ const { userUserIDProfilePagePUT } = require('../service/UserService.js');
 const { userUserIDProfilePageDELETE } = require('../service/UserService.js');
 const { createChatRoom  } = require('../service/UserService.js');
 const { sendMessageToChat  } = require('../service/UserService.js');
+const { viewVehicleSetup } = require('../service/UserService.js');
 
 test.before(async (t) => {
     t.context.server = http.createServer(app);
@@ -41,7 +42,18 @@ test('GET /user/${userID}/chart/${chartID} endpoint returns correct data', async
   
   t.is(response.statusCode, 200);
   t.deepEqual(response.body, expectedResponse);
+});
 
+test('GET telemetry data by function', async t => {
+  const result = await viewChart();
+
+  t.is(result.date, 6);
+  t.is(result.data, 5.962133916683182);
+  t.deepEqual(result.dataCategory, "dataCategory");
+  t.deepEqual(result.name, "name");
+  t.is(result.lap, 1);
+  t.is(result.id, 0);
+  t.deepEqual(result.track, "track");
 });
   
 test('GET weather report by function', async t => {
@@ -62,7 +74,6 @@ test('GET user/{userID}/Weather view weather report', async (t) => {
     t.is(response.statusCode, 200);
 });
 
-
 test('PUT personal profile by function', async t => {
   const userID = 2;
   const new_user = {
@@ -78,7 +89,6 @@ test('PUT personal profile by function', async t => {
   
   const result = await userUserIDProfilePagePUT(new_user, userID);
   t.deepEqual(result.username, new_user.username);
-    
 });
  
 test('PUT user/{userID}/profilePage changes an item in personal profile', async (t) => {
@@ -149,7 +159,7 @@ test('PUT user/${userID}/chart/${chartID}/chat/${chatRoomID} send Chart to Chat'
   t.deepEqual(response.body.messageList[0].text, updateResource.body.messageList[0].text);
 });
 
-test('Send Chart to Chat by function', async t => {
+test('POST Send Chart to Chat by function', async t => {
   const newChartID = 5;
   
   const newChat = {
@@ -185,63 +195,48 @@ test('Send Chart to Chat by function', async t => {
   t.deepEqual(result, newChat);
 });
 
-
-test('GET telemetry data from function', async t => {
-  const result = await viewChart();
-
-  t.is(result.date, 6);
-  t.is(result.data, 5.962133916683182);
-  t.deepEqual(result.dataCategory, "dataCategory");
-  t.deepEqual(result.name, "name");
-  t.is(result.lap, 1);
-  t.is(result.id, 0);
-  t.deepEqual(result.track, "track");
-});
-
-
-  test('DELETE description from personal profile by function', async t => {
-    const userID = 2;
-    const del_description = {
-        "role" : "role",
-        "githubLink" : "http://example.com/aeiou",
-        "linkedinLink" : "http://example.com/aeiou",
-        "googleLink" : "http://example.com/aeiou",
-        "description" : "",
-        "profileImage" : "http://example.com/aeiou",
-        "department" : "department",
-        "username" : "anna"
-      };
-    
-    const result = await userUserIDProfilePageDELETE(del_description, userID);
-    t.deepEqual(result, del_description);
-    
+test('DELETE description from personal profile by function', async t => {
+  const userID = 2;
+  const del_description = {
+      "role" : "role",
+      "githubLink" : "http://example.com/aeiou",
+      "linkedinLink" : "http://example.com/aeiou",
+      "googleLink" : "http://example.com/aeiou",
+      "description" : "",
+      "profileImage" : "http://example.com/aeiou",
+      "department" : "department",
+      "username" : "anna"
+    };
+  
+  const result = await userUserIDProfilePageDELETE(del_description, userID);
+  t.deepEqual(result, del_description);
 });
  
-  test('DELETE user/{userID}/profilePage deletes description from personal profile', async (t) => {
-    const userID = 2;
-    
-    // var del_description = await t.context.got.get(`user/${userID}/profilePage`);
+test('DELETE user/{userID}/profilePage deletes description from personal profile', async (t) => {
+  const userID = 2;
+  
+  // var del_description = await t.context.got.get(`user/${userID}/profilePage`);
 
-    const response = await t.context.got.delete(`user/${userID}/profilePage`,
-    
-    {
-        json: {
-        "role" : "role",
-        "githubLink" : "http://example.com/aeiou",
-        "linkedinLink" : "http://example.com/aeiou",
-        "googleLink" : "http://example.com/aeiou",
-        "description" : "",
-        "profileImage" : "http://example.com/aeiou",
-        "department" : "department",
-        "username" : "annat"
-        }
-    });
-    
-    var del_description = await t.context.got.get(`user/${userID}/profilePage`);
-    
-    t.deepEqual(response.body, del_description.body);
-    t.is(response.statusCode, 200);
-    t.is(del_description.statusCode, 200);
+  const response = await t.context.got.delete(`user/${userID}/profilePage`,
+  
+  {
+      json: {
+      "role" : "role",
+      "githubLink" : "http://example.com/aeiou",
+      "linkedinLink" : "http://example.com/aeiou",
+      "googleLink" : "http://example.com/aeiou",
+      "description" : "",
+      "profileImage" : "http://example.com/aeiou",
+      "department" : "department",
+      "username" : "annat"
+      }
+  });
+  
+  var del_description = await t.context.got.get(`user/${userID}/profilePage`);
+  
+  t.deepEqual(response.body, del_description.body);
+  t.is(response.statusCode, 200);
+  t.is(del_description.statusCode, 200);
 });
 
 
@@ -279,13 +274,12 @@ test('POST chatRoom by function', async t => {
     "chatRoomID" : 5,
     "chatRoomName" : "chatRoomName",
     "chatRoomIcon" : "http://example.com/aeiou"
-};
+  };
   
   const result = await createChatRoom(new_chatRoom, userID);
   t.deepEqual(result, new_chatRoom);
   t.not(result.userList[0].name, null);
   t.not(result.userList[1].name, null);
-  
 });
 
 test('POST user/{userID}/chat creates a chatRoom', async (t) => {
@@ -401,10 +395,78 @@ test('PUT user/{userID}/chat/{chatRoomID} sends a message to chat', async (t) =>
   t.is(new_message.statusCode, 200);
 });
 
-test('GET /user/{userID}/vehicleSetUp', async t => {
+test('GET /user/{userID}/vehicleSetUp display vehicle setup', async t => {
   const userID = 3;
   const response = await t.context.got.get(`user/${userID}/vehicleSetUp`);
 
   t.is(response.statusCode, 200);
   t.is(response.body.year, 0);
+});
+
+test('GET display vehicle setup by function', async t => {
+  const userID = 3; 
+  const result = await viewVehicleSetup(userID);
+  const examples = {
+    "year" : 0,
+    "systems" : [ {
+      "subSystems" : [ {
+        "name" : "name",
+        "parts" : [ {
+          "name" : "name",
+          "initialValue" : 6,
+          "measurementUnit" : "measurementUnit"
+        }, {
+          "name" : "name",
+          "initialValue" : 6,
+          "measurementUnit" : "measurementUnit"
+        } ],
+        "description" : "description"
+      }, {
+        "name" : "name",
+        "parts" : [ {
+          "name" : "name",
+          "initialValue" : 6,
+          "measurementUnit" : "measurementUnit"
+        }, {
+          "name" : "name",
+          "initialValue" : 6,
+          "measurementUnit" : "measurementUnit"
+        } ],
+        "description" : "description"
+      } ],
+      "name" : "name",
+      "description" : "description"
+    }, {
+      "subSystems" : [ {
+        "name" : "name",
+        "parts" : [ {
+          "name" : "name",
+          "initialValue" : 6,
+          "measurementUnit" : "measurementUnit"
+        }, {
+          "name" : "name",
+          "initialValue" : 6,
+          "measurementUnit" : "measurementUnit"
+        } ],
+        "description" : "description"
+      }, {
+        "name" : "name",
+        "parts" : [ {
+          "name" : "name",
+          "initialValue" : 6,
+          "measurementUnit" : "measurementUnit"
+        }, {
+          "name" : "name",
+          "initialValue" : 6,
+          "measurementUnit" : "measurementUnit"
+        } ],
+        "description" : "description"
+      } ],
+      "name" : "name",
+      "description" : "description"
+    } ],
+    "name" : "name",
+    "description" : "description"
+  };
+  t.deepEqual(result, examples)
 });

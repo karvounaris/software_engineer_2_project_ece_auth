@@ -3,7 +3,6 @@ const {createVehicleSetup} = require('../service/ChiefEngineerService.js');
 const {acceptOrDeclineProposal} = require('../service/ChiefEngineerService.js');
 const {userChiefEngineerUserIDAdminPanelUserIDPUT} = require('../service/ChiefEngineerService.js');
 
-
 const http = require('http');
 const test = require('ava').default;
 const listen = require('test-listen');
@@ -123,7 +122,6 @@ test('PUT /user/chiefEngineer/{userID}/vehicleSetUp/{elementID} adds new element
     t.deepEqual(response.body.systems[0].subSystems[0].measurementUnit , updatedResource.body.systems[0].subSystems[0].measurementUnit);
 });
 
-
 test('PUT adds new element to the Vehicle by function', async t => {
     const userID = 2;
     const elementID = 3;
@@ -214,7 +212,6 @@ test('PUT adds new element to the Vehicle by function', async t => {
     const result = await updateVehicleSetup(new_user, userID, elementID);
     t.deepEqual(result, new_user);
 });
-
 
 test('POST /user/chiefEngineer/{userID}/vehicleSetUp/ Create Vehicle setup', async t => {
     const userID = 11;
@@ -480,7 +477,7 @@ test('PUT /user/chiefEngineer/{adminUserID}/adminPanel/{userID} changes the role
     t.deepEqual(response.body.role, result.body.role);
 });
 
-test('PUT changes the role of a user', async t => {
+test('PUT changes the role of a user by function', async t => {
     const adminUserID = 2;
     const userID = 6;
 

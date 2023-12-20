@@ -361,7 +361,7 @@ exports.viewChatWithSentChart = function(userID, chartID, chatRoomID) {
 exports.viewVehicleSetup = function(userID) {
   return new Promise(function(resolve, reject) {
     var examples = {};
-    examples['application/json'] = {
+    examples = {
       "year" : 0,
       "systems" : [ {
         "subSystems" : [ {
@@ -423,7 +423,7 @@ exports.viewVehicleSetup = function(userID) {
       "name" : "name",
       "description" : "description"
     };
-    resolve(examples[Object.keys(examples)[0]]);
+    resolve(examples);
   });
 }
 
