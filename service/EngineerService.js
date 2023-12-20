@@ -1,19 +1,7 @@
 'use strict';
 var EngineerProposalData =  null;
 
-/**
- * Uploads a file containing data from the sensors
- * Engineers must be able to upload a file containing data from the sensors
- *
- * body Object 
- * userID Integer This is the unique identifier of the user
- * no response value expected for this operation
- **/
-exports.postFile = function(body,userID) {
-  return new Promise(function(resolve, reject) {
-    resolve();
-  });
-}
+
 
 
 /**
@@ -55,16 +43,4 @@ exports.getEngineerProposal = function(userID, proposalID) {
 };
 
 
-/**
- * View the file containing data from the sensors
- * Returns a file containing data from the sensors based on a single ID
- *
- * body Object 
- * userID Integer This is the unique identifier of the user
- * no response value expected for this operation
- **/
-exports.viewFile = function(userID) {
-  return new Promise(function(resolve, reject) {
-    resolve();
-  });
-}
+

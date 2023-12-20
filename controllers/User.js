@@ -114,15 +114,7 @@ module.exports.viewVehicleSetup = function viewVehicleSetup (req, res, next, use
 };
 
 
-module.exports.viewProfile = function viewProfile (req, res, next, userID) {
-  User.viewProfile(userID)
-    .then(function (response) {
-      utils.writeJson(res, response);
-    })
-    .catch(function (response) {
-      utils.writeJson(res, response);
-    });
-};
+
 module.exports.viewChatWithSentChart = function viewChatwithSentChart (req, res, next, userID, chartID, chatRoomID) {
   User.viewChatWithSentChart(userID, chartID, chatRoomID)
     .then(function (response) {
