@@ -9,8 +9,6 @@ module.exports.changeStatus = function changeStatus(req, res, next, body, userID
       utils.writeJson(res, response);
     })
     .catch(function (response) {
-
-
       utils.writeJson(res, response);
     });
 };

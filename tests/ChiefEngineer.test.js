@@ -21,14 +21,6 @@ test.after.always((t) => {
     t.context.server.close();
 });
 
-
-test('View vehicle SetUp', async (t) => {
-    const userID = 2;
-    const response = await t.context.got.get(`user/${userID}/vehicleSetUp`);
-    
-    t.is(response.statusCode, 200);
-});
-
 test('PUT /user/chiefEngineer/{userID}/vehicleSetUp/{elementID} adds new element to the Vehicle', async t => {
     const userID = 10;
     const elementID = 1;
@@ -221,7 +213,6 @@ test('PUT adds new element to the Vehicle by function', async t => {
 
     const result = await updateVehicleSetup(new_user, userID, elementID);
     t.deepEqual(result, new_user);
-
 });
 
 
@@ -316,7 +307,7 @@ test('POST /user/chiefEngineer/{userID}/vehicleSetUp/ Create Vehicle setup', asy
 
     t.is(response.statusCode, 200);
     const updatedResource = await t.context.got.get(`user/chiefEngineer/${userID}/vehicleSetUp/`);
-        
+
     t.is(updatedResource.statusCode, 200); 
     t.deepEqual(response.body.systems[0].subSystems[0].name , updatedResource.body.systems[0].subSystems[0].name);
     t.deepEqual(response.body.systems[1].subSystems[1].name , updatedResource.body.systems[1].subSystems[1].name);

@@ -1,6 +1,5 @@
 'use strict';
 var chartData = null;
-var updatedProfileData = null;
 var chatroom = null;
 var updateChat = null;
 var updateProfileData = null;
@@ -352,10 +351,6 @@ exports.viewChatWithSentChart = function(userID, chartID, chatRoomID) {
   });
 };
   
-  
-  
-  
-  
 /**
  * View vehicle setup
  * This endpoint displays vehicle setup details
@@ -365,75 +360,70 @@ exports.viewChatWithSentChart = function(userID, chartID, chatRoomID) {
  **/
 exports.viewVehicleSetup = function(userID) {
   return new Promise(function(resolve, reject) {
-    if (updatedData) {
-      // If updatedData is available, resolve with it
-      resolve(updatedData);
-     } else {
-      var examples = {};
+    var examples = {};
     examples['application/json'] = {
-  "year" : 0,
-  "systems" : [ {
-    "subSystems" : [ {
-      "name" : "name",
-      "parts" : [ {
+      "year" : 0,
+      "systems" : [ {
+        "subSystems" : [ {
+          "name" : "name",
+          "parts" : [ {
+            "name" : "name",
+            "initialValue" : 6,
+            "measurementUnit" : "measurementUnit"
+          }, {
+            "name" : "name",
+            "initialValue" : 6,
+            "measurementUnit" : "measurementUnit"
+          } ],
+          "description" : "description"
+        }, {
+          "name" : "name",
+          "parts" : [ {
+            "name" : "name",
+            "initialValue" : 6,
+            "measurementUnit" : "measurementUnit"
+          }, {
+            "name" : "name",
+            "initialValue" : 6,
+            "measurementUnit" : "measurementUnit"
+          } ],
+          "description" : "description"
+        } ],
         "name" : "name",
-        "initialValue" : 6,
-        "measurementUnit" : "measurementUnit"
+        "description" : "description"
       }, {
+        "subSystems" : [ {
+          "name" : "name",
+          "parts" : [ {
+            "name" : "name",
+            "initialValue" : 6,
+            "measurementUnit" : "measurementUnit"
+          }, {
+            "name" : "name",
+            "initialValue" : 6,
+            "measurementUnit" : "measurementUnit"
+          } ],
+          "description" : "description"
+        }, {
+          "name" : "name",
+          "parts" : [ {
+            "name" : "name",
+            "initialValue" : 6,
+            "measurementUnit" : "measurementUnit"
+          }, {
+            "name" : "name",
+            "initialValue" : 6,
+            "measurementUnit" : "measurementUnit"
+          } ],
+          "description" : "description"
+        } ],
         "name" : "name",
-        "initialValue" : 6,
-        "measurementUnit" : "measurementUnit"
+        "description" : "description"
       } ],
-      "description" : "description"
-    }, {
       "name" : "name",
-      "parts" : [ {
-        "name" : "name",
-        "initialValue" : 6,
-        "measurementUnit" : "measurementUnit"
-      }, {
-        "name" : "name",
-        "initialValue" : 6,
-        "measurementUnit" : "measurementUnit"
-      } ],
       "description" : "description"
-    } ],
-    "name" : "name",
-    "description" : "description"
-  }, {
-    "subSystems" : [ {
-      "name" : "name",
-      "parts" : [ {
-        "name" : "name",
-        "initialValue" : 6,
-        "measurementUnit" : "measurementUnit"
-      }, {
-        "name" : "name",
-        "initialValue" : 6,
-        "measurementUnit" : "measurementUnit"
-      } ],
-      "description" : "description"
-    }, {
-      "name" : "name",
-      "parts" : [ {
-        "name" : "name",
-        "initialValue" : 6,
-        "measurementUnit" : "measurementUnit"
-      }, {
-        "name" : "name",
-        "initialValue" : 6,
-        "measurementUnit" : "measurementUnit"
-      } ],
-      "description" : "description"
-    } ],
-    "name" : "name",
-    "description" : "description"
-  } ],
-  "name" : "name",
-  "description" : "description"
-};
+    };
     resolve(examples[Object.keys(examples)[0]]);
-    }
   });
 }
 

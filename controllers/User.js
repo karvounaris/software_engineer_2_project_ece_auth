@@ -113,8 +113,6 @@ module.exports.viewVehicleSetup = function viewVehicleSetup (req, res, next, use
     });
 };
 
-
-
 module.exports.viewChatWithSentChart = function viewChatwithSentChart (req, res, next, userID, chartID, chatRoomID) {
   User.viewChatWithSentChart(userID, chartID, chatRoomID)
     .then(function (response) {
