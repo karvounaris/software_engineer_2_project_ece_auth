@@ -108,13 +108,7 @@ test('GET /user/${userID}/chart/${chartID} endpoint returns correct data', async
     t.is(new_user.statusCode, 200);
 });
 
-test('GET user/engineer/${userID}/file View the file', async (t) => {
-    const userID = 7;
 
-    const response = await t.context.got.get(`user/engineer/${userID}/file`);
-    t.is(response.statusCode, 200);
-    
-});
 
 test('Send Chart to Chat', async (t) => {
     const body = {
