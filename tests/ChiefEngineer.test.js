@@ -15,12 +15,17 @@ const got = require('got');
 
 const app = require('../index.js');
 
+// Before running tests, create a server instance and configure 'got' for HTTP/2 requests
 test.before(async (t) => {
+    // Create an HTTP server using the 'app' from '../index.js'
     t.context.server = http.createServer(app);
+    // Get the URL to the server
     t.context.prefixUrl = await listen(t.context.server);
+    // Configure 'got' for making HTTP/2 requests with the server's URL as a prefix and expecting JSON responses
     t.context.got = got.extend({ http2: true, prefixUrl: t.context.prefixUrl, responseType: 'json' });
 });
 
+// After all tests, close the server
 test.after.always((t) => {
     t.context.server.close();
 });
