@@ -26,6 +26,7 @@ test.after.always((t) => {
 });
 
 test('PUT /user/chiefEngineer/{userID}/vehicleSetUp/{elementID} adds new element to the Vehicle', async t => {
+    // define the user ID and element ID
     const userID = 10;
     const elementID = 1;
 
@@ -134,8 +135,10 @@ test('PUT /user/chiefEngineer/{userID}/vehicleSetUp/{elementID} adds new element
 });
 
 test('PUT adds new element to the Vehicle by function', async t => {
+    // define the user ID and element ID
     const userID = 2;
     const elementID = 3;
+    // Create a new user object
     const new_user = {
         "year": 0,
             "systems": [
@@ -227,6 +230,7 @@ test('PUT adds new element to the Vehicle by function', async t => {
 });
 
 test('POST /user/chiefEngineer/{userID}/vehicleSetUp/ Create Vehicle setup', async t => {
+    // define the user ID
     const userID = 11;
 
     // Send a POST request to create a new vehicle setup
@@ -333,8 +337,10 @@ test('POST /user/chiefEngineer/{userID}/vehicleSetUp/ Create Vehicle setup', asy
 });
 
 test('POST Create setup Vehicle by function', async t => {
+    // define the user ID and element ID
     const userID = 2;
     const elementID = 4;
+    // Create a new user object
     const new_user = {
         "year": 0,
             "systems": [
@@ -427,6 +433,7 @@ test('POST Create setup Vehicle by function', async t => {
 });
 
 test('PUT /user/chiefEngineer/{userID}/proposals/{proposalID} change the proposal status', async (t) => {
+    // define the user ID and proposal ID
     const userID = 2;
     const proposalID = 3;
 
@@ -462,8 +469,10 @@ test('PUT /user/chiefEngineer/{userID}/proposals/{proposalID} change the proposa
 
 
 test('PUT change the proposal status by function', async (t) => {
+    // define the user ID and proposal ID
     const userID = 7;
     const proposalID = 3;
+    // Create a new user object
     const new_user = {
         "newValue" : 2.3021358869347655,
         "prposalID" : 3,
@@ -486,6 +495,7 @@ test('PUT change the proposal status by function', async (t) => {
 
 
 test('PUT /user/chiefEngineer/{adminUserID}/adminPanel/{userID} changes the role of a user', async t => {
+    // define the admin user ID and user ID
     const adminUserID = 1;
     const userID = 5;
 
@@ -512,9 +522,11 @@ test('PUT /user/chiefEngineer/{adminUserID}/adminPanel/{userID} changes the role
 });
 
 test('PUT changes the role of a user by function', async t => {
+    // define the admin user ID and user ID
     const adminUserID = 2;
     const userID = 6;
 
+    // Create a new user object
     const newData = {
         'lastModified': 0,
         role : "Default",
