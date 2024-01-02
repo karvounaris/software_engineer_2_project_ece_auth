@@ -1,3 +1,6 @@
+/**
+ * @fileoverview This file contains the unit tests for the UserService module.
+ */
 const http = require('http');
 const test = require('ava').default;
 const listen = require('test-listen');

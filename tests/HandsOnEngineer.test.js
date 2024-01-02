@@ -1,3 +1,6 @@
+/**
+ * @fileoverview This file contains the unit tests for the HandsOnEngineerService module.
+ */
 const {changeStatus} = require('../service/HandsOnEngineerService.js');
 const http = require('http');
 const test = require('ava').default;

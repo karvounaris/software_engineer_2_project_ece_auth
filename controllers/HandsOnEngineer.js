@@ -1,4 +1,7 @@
 'use strict';
+/**
+ * @fileoverview This file contains the controller functions in the Hands-on-Engineer service.
+ */
 
 var utils = require('../utils/writer.js');
 var HandsOnEngineer = require('../service/HandsOnEngineerService');

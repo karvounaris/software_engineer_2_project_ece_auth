@@ -1,4 +1,7 @@
 'use strict';
+/**
+ * @fileoverview This file contains the controller functions for handling proposals in the Engineer service.
+ */
 
 var utils = require('../utils/writer.js');
 var Engineer = require('../service/EngineerService');

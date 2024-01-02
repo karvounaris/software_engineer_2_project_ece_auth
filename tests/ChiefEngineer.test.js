@@ -1,3 +1,6 @@
+/**
+ * @fileoverview This file contains tests for the ChiefEngineerService module.
+ */
 const {
     updateVehicleSetup,
     createVehicleSetup,
