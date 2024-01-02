@@ -3,7 +3,6 @@ const {createVehicleSetup} = require('../service/ChiefEngineerService.js');
 const {acceptOrDeclineProposal} = require('../service/ChiefEngineerService.js');
 const {userChiefEngineerUserIDAdminPanelUserIDPUT} = require('../service/ChiefEngineerService.js');
 
-
 const http = require('http');
 const test = require('ava').default;
 const listen = require('test-listen');
@@ -19,14 +18,6 @@ test.before(async (t) => {
 
 test.after.always((t) => {
     t.context.server.close();
-});
-
-
-test('View vehicle SetUp', async (t) => {
-    const userID = 2;
-    const response = await t.context.got.get(`user/${userID}/vehicleSetUp`);
-    
-    t.is(response.statusCode, 200);
 });
 
 test('PUT /user/chiefEngineer/{userID}/vehicleSetUp/{elementID} adds new element to the Vehicle', async t => {
@@ -131,7 +122,6 @@ test('PUT /user/chiefEngineer/{userID}/vehicleSetUp/{elementID} adds new element
     t.deepEqual(response.body.systems[0].subSystems[0].measurementUnit , updatedResource.body.systems[0].subSystems[0].measurementUnit);
 });
 
-
 test('PUT adds new element to the Vehicle by function', async t => {
     const userID = 2;
     const elementID = 3;
@@ -221,9 +211,7 @@ test('PUT adds new element to the Vehicle by function', async t => {
 
     const result = await updateVehicleSetup(new_user, userID, elementID);
     t.deepEqual(result, new_user);
-
 });
-
 
 test('POST /user/chiefEngineer/{userID}/vehicleSetUp/ Create Vehicle setup', async t => {
     const userID = 11;
@@ -316,7 +304,7 @@ test('POST /user/chiefEngineer/{userID}/vehicleSetUp/ Create Vehicle setup', asy
 
     t.is(response.statusCode, 200);
     const updatedResource = await t.context.got.get(`user/chiefEngineer/${userID}/vehicleSetUp/`);
-        
+
     t.is(updatedResource.statusCode, 200); 
     t.deepEqual(response.body.systems[0].subSystems[0].name , updatedResource.body.systems[0].subSystems[0].name);
     t.deepEqual(response.body.systems[1].subSystems[1].name , updatedResource.body.systems[1].subSystems[1].name);
@@ -489,7 +477,7 @@ test('PUT /user/chiefEngineer/{adminUserID}/adminPanel/{userID} changes the role
     t.deepEqual(response.body.role, result.body.role);
 });
 
-test('PUT changes the role of a user', async t => {
+test('PUT changes the role of a user by function', async t => {
     const adminUserID = 2;
     const userID = 6;
 

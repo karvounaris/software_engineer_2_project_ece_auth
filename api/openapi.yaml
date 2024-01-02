@@ -1002,61 +1002,6 @@ paths:
         '404':
           description: Proposal not found
       x-swagger-router-controller: ChiefEngineer
-  /user/engineer/{userID}/file:
-    post:
-      tags:
-      - engineer
-      summary: Uploads a file containing data from the sensors
-      description: Engineers must be able to upload a file containing data from the
-        sensors
-      operationId: postFile
-      parameters:
-      - name: userID
-        in: path
-        description: This is the unique identifier of the user
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: integer
-      requestBody:
-        content:
-          text/plain:
-            schema:
-              type: string
-              format: binary
-        required: true
-      responses:
-        "201":
-          description: New file added
-        "400":
-          description: Invalid action
-        "500":
-          description: Server error
-      x-swagger-router-controller: Engineer
-    get:
-      tags:
-        - engineer
-      summary: View the file containing data from the sensors
-      description: Returns a file containing data from the sensors based on a single ID
-      operationId: viewFile
-      parameters:
-        - name: userID
-          in: path
-          description: This is the unique identifier of the user
-          required: true
-          schema:
-            type: integer
-      responses:
-        '200':
-          description: File successfully fetched.
-          content:
-            application/json:
-              schema:
-                type: object
-        '404':
-          description: File not found.  
-      x-swagger-router-controller: Engineer
   /user/{userID}/profilePage:
     get:
       tags:

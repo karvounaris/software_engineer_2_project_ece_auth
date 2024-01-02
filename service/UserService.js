@@ -1,6 +1,5 @@
 'use strict';
 var chartData = null;
-var updatedProfileData = null;
 var chatroom = null;
 var updateChat = null;
 var updateProfileData = null;
@@ -344,7 +343,7 @@ exports.viewChatWithSentChart = function(userID, chartID, chatRoomID) {
     }
   });
 };
-   
+  
 /**
  * View vehicle setup
  * This endpoint displays vehicle setup details
@@ -354,138 +353,70 @@ exports.viewChatWithSentChart = function(userID, chartID, chatRoomID) {
  **/
 exports.viewVehicleSetup = function(userID) {
   return new Promise(function(resolve, reject) {
-    if (updatedData) {
-      // If updatedData is available, resolve with it
-      resolve(updatedData);
-     } else {
-      var examples = {};
-    examples['application/json'] = {
-  "year" : 0,
-  "systems" : [ {
-    "subSystems" : [ {
-      "name" : "name",
-      "parts" : [ {
+    var examples = {};
+    examples = {
+      "year" : 0,
+      "systems" : [ {
+        "subSystems" : [ {
+          "name" : "name",
+          "parts" : [ {
+            "name" : "name",
+            "initialValue" : 6,
+            "measurementUnit" : "measurementUnit"
+          }, {
+            "name" : "name",
+            "initialValue" : 6,
+            "measurementUnit" : "measurementUnit"
+          } ],
+          "description" : "description"
+        }, {
+          "name" : "name",
+          "parts" : [ {
+            "name" : "name",
+            "initialValue" : 6,
+            "measurementUnit" : "measurementUnit"
+          }, {
+            "name" : "name",
+            "initialValue" : 6,
+            "measurementUnit" : "measurementUnit"
+          } ],
+          "description" : "description"
+        } ],
         "name" : "name",
-        "initialValue" : 6,
-        "measurementUnit" : "measurementUnit"
+        "description" : "description"
       }, {
+        "subSystems" : [ {
+          "name" : "name",
+          "parts" : [ {
+            "name" : "name",
+            "initialValue" : 6,
+            "measurementUnit" : "measurementUnit"
+          }, {
+            "name" : "name",
+            "initialValue" : 6,
+            "measurementUnit" : "measurementUnit"
+          } ],
+          "description" : "description"
+        }, {
+          "name" : "name",
+          "parts" : [ {
+            "name" : "name",
+            "initialValue" : 6,
+            "measurementUnit" : "measurementUnit"
+          }, {
+            "name" : "name",
+            "initialValue" : 6,
+            "measurementUnit" : "measurementUnit"
+          } ],
+          "description" : "description"
+        } ],
         "name" : "name",
-        "initialValue" : 6,
-        "measurementUnit" : "measurementUnit"
+        "description" : "description"
       } ],
-      "description" : "description"
-    }, {
       "name" : "name",
-      "parts" : [ {
-        "name" : "name",
-        "initialValue" : 6,
-        "measurementUnit" : "measurementUnit"
-      }, {
-        "name" : "name",
-        "initialValue" : 6,
-        "measurementUnit" : "measurementUnit"
-      } ],
       "description" : "description"
-    } ],
-    "name" : "name",
-    "description" : "description"
-  }, {
-    "subSystems" : [ {
-      "name" : "name",
-      "parts" : [ {
-        "name" : "name",
-        "initialValue" : 6,
-        "measurementUnit" : "measurementUnit"
-      }, {
-        "name" : "name",
-        "initialValue" : 6,
-        "measurementUnit" : "measurementUnit"
-      } ],
-      "description" : "description"
-    }, {
-      "name" : "name",
-      "parts" : [ {
-        "name" : "name",
-        "initialValue" : 6,
-        "measurementUnit" : "measurementUnit"
-      }, {
-        "name" : "name",
-        "initialValue" : 6,
-        "measurementUnit" : "measurementUnit"
-      } ],
-      "description" : "description"
-    } ],
-    "name" : "name",
-    "description" : "description"
-  } ],
-  "name" : "name",
-  "description" : "description"
-};
-    resolve(examples[Object.keys(examples)[0]]);
-    }
+    };
+    resolve(examples);
   });
 }
 
-/**
- * View the profile page of a user
- * Returns a profile page based on a single ID
- *
- * userID Integer This is the unique identifier of the user
- * chartID Integer this is the unique identifier of the chart
- * returns inline_response_200_2
- **/
-exports.viewProfile = function(userID) {
-  return new Promise(function(resolve, reject) { 
-    if (updatedProfileData) {
-      // If updatedData is available, resolve with it
-      resolve(updatedProfileData);
-    } else {
-    var examples = {};
-    examples['application/json'] = {
-  "role" : "role",
-  "githubLink" : "http://example.com/aeiou",
-  "linkedinLink" : "http://example.com/aeiou",
-  "googleLink" : "http://example.com/aeiou",
-  "description" : "description",
-  "profileImage" : "http://example.com/aeiou",
-  "department" : "department",
-  "username" : "username"
-};
-    resolve(examples[Object.keys(examples)[0]]);
-    }
-  });
-}
-
-/**
- * View the profile page of a user
- * Returns a profile page based on a single ID
- *
- * userID Integer This is the unique identifier of the user
- * chartID Integer this is the unique identifier of the chart
- * returns inline_response_200_2
- **/
-exports.viewProfile = function(userID) {
-  return new Promise(function(resolve, reject) { 
-    if (updatedProfileData) {
-      // If updatedData is available, resolve with it
-      resolve(updatedProfileData);
-    } else {
-    var examples = {};
-    examples['application/json'] = {
-  "role" : "role",
-  "githubLink" : "http://example.com/aeiou",
-  "linkedinLink" : "http://example.com/aeiou",
-  "googleLink" : "http://example.com/aeiou",
-  "description" : "description",
-  "profileImage" : "http://example.com/aeiou",
-  "department" : "department",
-  "username" : "username"
-};
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
-    }
-  }
-  });
-}
