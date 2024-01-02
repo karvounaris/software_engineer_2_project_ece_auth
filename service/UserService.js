@@ -6,7 +6,6 @@ var updateChat = null;
 var updateProfileData = null;
 
 /*Get chat*/
-
 exports.getChat = function(userID) {
   return new Promise(function(resolve, reject) {
     var examples = {};
@@ -50,6 +49,7 @@ exports.getChat = function(userID) {
     }
   });
 }
+
 /**
  * Create a chatRoom
  * Creates a chatRoom for the users to communicate
@@ -88,7 +88,6 @@ exports.createChatRoom = function(body,userID) {
   });
 }
 
-
 /**
  * Gets the weather forecast
  * All assigned users must be able to view the weather report
@@ -113,7 +112,6 @@ exports.getWeather = function(userID) {
     }
   });
 }
-
 
 exports.sendChartToChat = function(body,userID,chartID,chatRoomID){
   return new Promise(function(resolve, reject) {
@@ -145,12 +143,10 @@ exports.sendChartToChat = function(body,userID,chartID,chatRoomID){
         "lap": chart.lap || 0,
         "data": chart.data || 0
     }))
-    
     };
       resolve(chartData);
   });
 }
-
 
 /*GET message*/
 exports.getMessage = function(userID, chatRoomID) {
@@ -223,7 +219,6 @@ exports.sendMessageToChat = function(body,userID,chatRoomID) {
     }
   });
 }
-
 
 /*GET profile page*/
 exports.getProfilePage = function(userID) {
@@ -303,8 +298,6 @@ exports.userUserIDProfilePagePUT = function(body,userID) {
   });
 }
 
-
-
 /**
  * View the data in data charts
  * Returns a data chart based on a single ID
@@ -351,11 +344,7 @@ exports.viewChatWithSentChart = function(userID, chartID, chatRoomID) {
     }
   });
 };
-  
-  
-  
-  
-  
+   
 /**
  * View vehicle setup
  * This endpoint displays vehicle setup details
@@ -437,7 +426,6 @@ exports.viewVehicleSetup = function(userID) {
   });
 }
 
-
 /**
  * View the profile page of a user
  * Returns a profile page based on a single ID
@@ -467,7 +455,6 @@ exports.viewProfile = function(userID) {
     }
   });
 }
-
 
 /**
  * View the profile page of a user
