@@ -3,8 +3,7 @@
 var utils = require('../utils/writer.js');
 var Engineer = require('../service/EngineerService');
 
-
-
+// Creates a list of proposals based on the provided paramaters.
 module.exports.postProposal = function postProposal (req, res, next, body, userID) {
   Engineer.postProposal(body, userID)
     .then(function (response) {
@@ -15,6 +14,7 @@ module.exports.postProposal = function postProposal (req, res, next, body, userI
     });
 };
 
+// Retrieves a list of proposals based on the provided user ID.
 module.exports.getEngineerProposal = function getEngineerProposal (req, res, next, userID, proposalID) {
   Engineer.getEngineerProposal(userID, proposalID)
     .then(function (response) {
