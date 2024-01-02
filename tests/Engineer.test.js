@@ -23,6 +23,7 @@ test.after.always((t) => {
 test('POST /user/engineer/{userID}/proposals change the proposal status', async (t) => {
     const userID = 4;
 
+    // Send a POST request to create a proposal
     const response = await t.context.got.post(`user/engineer/${userID}/proposals`, {
         json: {
             "newValue" : 2.3021358869347655,
@@ -39,9 +40,11 @@ test('POST /user/engineer/{userID}/proposals change the proposal status', async 
     });
 
     t.is(response.statusCode, 200);
+    // Retrieve the updated resource using a GET request
     const updatedResource = await t.context.got.get(`user/engineer/${userID}/proposals`);
         
     t.is(updatedResource.statusCode, 200); 
+    // Compare specific properties between the initial request and the updated resource
     t.deepEqual(response.body.newValue, updatedResource.body.newValue);
     t.deepEqual(response.body.status, updatedResource.body.status);
     t.deepEqual(response.body.confirmation, updatedResource.body.confirmation);
@@ -65,6 +68,8 @@ test('POST change the proposal status by function' , async (t) => {
         "confirmation": "Accepted"
         };
 
+        // Call the postProposal function with the new data, user ID, and proposal ID
         const result = await postProposal(new_user, userID, proposalID);
+        // Assert that the returned result matches the provided new_user data
         t.deepEqual(result, new_user);
 });

@@ -23,6 +23,7 @@ test('PUT /user/handsOnEngineer/{userID}/proposals/{proposalID} change the propo
     const userID = 5;
     const proposalID = 2;
 
+    // Send a PUT request to modify the proposal status
     const response = await t.context.got.put(`user/handsOnEngineer/${userID}/proposals/${proposalID}`, {
         json: {
             "newValue" : 2.3021358869347655,
@@ -39,9 +40,11 @@ test('PUT /user/handsOnEngineer/{userID}/proposals/{proposalID} change the propo
     });
 
     t.is(response.statusCode, 200);
+    // Retrieve the updated resource using a GET request
     const updatedResource = await t.context.got.get(`user/handsOnEngineer/${userID}/proposals/${proposalID}`);
         
-    t.is(updatedResource.statusCode, 200); 
+    t.is(updatedResource.statusCode, 200);
+    // Compare specific properties between the initial request and the updated resource 
     t.deepEqual(response.body.newValue, updatedResource.body.newValue);
     t.deepEqual(response.body.status, updatedResource.body.status);
     t.deepEqual(response.body.confirmation, updatedResource.body.confirmation);
@@ -65,6 +68,8 @@ test('PUT change the proposal status by function' , async (t) => {
         "confirmation": "Accepted"
         };
 
+        // Call the changeStatus function with the new data, user ID, and proposal ID
         const result = await changeStatus(new_user, userID, proposalID);
+        // Assert that the returned result matches the provided new_user data
         t.deepEqual(result, new_user);
 });

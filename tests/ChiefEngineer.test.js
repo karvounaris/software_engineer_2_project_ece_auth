@@ -29,6 +29,7 @@ test('PUT /user/chiefEngineer/{userID}/vehicleSetUp/{elementID} adds new element
     const userID = 10;
     const elementID = 1;
 
+    // Send a PUT request to modify an element of the vehicle setup
     const response = await t.context.got.put(`user/chiefEngineer/${userID}/vehicleSetUp/${elementID}`, {
         json: {
             "year": 0,
@@ -116,10 +117,13 @@ test('PUT /user/chiefEngineer/{userID}/vehicleSetUp/{elementID} adds new element
         });
 
     t.is(response.statusCode, 200);
-    
+
+    // Retrieve the updated resource using a GET request
     const updatedResource = await t.context.got.get(`user/chiefEngineer/${userID}/vehicleSetUp/${elementID}`);
         
     t.is(updatedResource.statusCode, 200); 
+
+    // Compare specific properties between the initial request and the updated resource
     t.deepEqual(response.body.systems[0].subSystems[0].name , updatedResource.body.systems[0].subSystems[0].name);
     t.deepEqual(response.body.systems[1].subSystems[1].name , updatedResource.body.systems[1].subSystems[1].name);
     t.deepEqual(response.body.systems[0].subSystems[0].parts[1].initialValue,
@@ -214,13 +218,16 @@ test('PUT adds new element to the Vehicle by function', async t => {
             "description": "description"
             };
 
+    // Call the updateVehicleSetup function with the new data, user ID, and element ID
     const result = await updateVehicleSetup(new_user, userID, elementID);
+    // Assert that the returned result matches the provided new_user data
     t.deepEqual(result, new_user);
 });
 
 test('POST /user/chiefEngineer/{userID}/vehicleSetUp/ Create Vehicle setup', async t => {
     const userID = 11;
 
+    // Send a POST request to create a new vehicle setup
     const response = await t.context.got.post(`user/chiefEngineer/${userID}/vehicleSetUp/`, {
         json: {
             "year": 0,
@@ -308,9 +315,13 @@ test('POST /user/chiefEngineer/{userID}/vehicleSetUp/ Create Vehicle setup', asy
         });
 
     t.is(response.statusCode, 200);
+        
+    // Retrieve the updated resource using a GET request
     const updatedResource = await t.context.got.get(`user/chiefEngineer/${userID}/vehicleSetUp/`);
 
     t.is(updatedResource.statusCode, 200); 
+    
+    // Compare specific properties between the initial request and the updated resource
     t.deepEqual(response.body.systems[0].subSystems[0].name , updatedResource.body.systems[0].subSystems[0].name);
     t.deepEqual(response.body.systems[1].subSystems[1].name , updatedResource.body.systems[1].subSystems[1].name);
     t.deepEqual(response.body.systems[0].subSystems[0].parts[1].initialValue,
@@ -405,7 +416,9 @@ test('POST Create setup Vehicle by function', async t => {
             "description": "description"
             };
 
+    // Call the updateVehicleSetup function with the new data, user ID, and element ID        
     const result = await createVehicleSetup(new_user, userID, elementID);
+    // Assert that the returned result matches the provided new_user data        
     t.deepEqual(result, new_user);
 
 });
@@ -414,6 +427,7 @@ test('PUT /user/chiefEngineer/{userID}/proposals/{proposalID} change the proposa
     const userID = 2;
     const proposalID = 3;
 
+    // Send a PUT request to modify the status of a proposal
     const response = await t.context.got.put(`user/chiefEngineer/${userID}/proposals/${proposalID}`, {
         json: {
             "newValue" : 2.3021358869347655,
@@ -430,9 +444,13 @@ test('PUT /user/chiefEngineer/{userID}/proposals/{proposalID} change the proposa
     });
 
     t.is(response.statusCode, 200);
+
+    // Retrieve the updated resource using a GET request
     const updatedResource = await t.context.got.get(`user/chiefEngineer/${userID}/proposals/${proposalID}`);
         
      t.is(updatedResource.statusCode, 200); 
+
+    // Compare specific properties between the initial request and the updated resource
      t.deepEqual(response.body.newValue, updatedResource.body.newValue);
      t.deepEqual(response.body.status, updatedResource.body.status);
      t.deepEqual(response.body.confirmation, updatedResource.body.confirmation);
@@ -456,7 +474,9 @@ test('PUT change the proposal status by function', async (t) => {
         "confirmation": "Accepted"
         };
 
+    // Call the acceptOrDeclineProposal function with the new data, user ID, and proposal ID    
     const result = await acceptOrDeclineProposal(new_user, userID, proposalID);
+    // Assert that the returned result matches the provided new_user data
     t.deepEqual(result, new_user);
 
 });
@@ -466,6 +486,7 @@ test('PUT /user/chiefEngineer/{adminUserID}/adminPanel/{userID} changes the role
     const adminUserID = 1;
     const userID = 5;
 
+    // Send a PUT request to modify the role of a user
     const response = await t.context.got.put(`user/chiefEngineer/${adminUserID}/adminPanel/${userID}`, {
         json: {
             "lastModified" : "2000-01-23T04:56:07.000+00:00",
@@ -477,8 +498,11 @@ test('PUT /user/chiefEngineer/{adminUserID}/adminPanel/{userID} changes the role
         }
     });
     t.is(response.statusCode, 200);
+
+    // Retrieve the updated resource using a GET request
     const result = await t.context.got.get(`user/chiefEngineer/${adminUserID}/adminPanel/${userID}`);
     t.is(result.statusCode, 200);
+    // Compare specific properties between the initial request and the updated resource
     t.deepEqual(response.body.role, result.body.role);
 });
 
@@ -495,6 +519,8 @@ test('PUT changes the role of a user by function', async t => {
         userID : 0
       };
 
+    //  Call the userChiefEngineerUserIDAdminPanelUserIDPUT function with the new data, admin user ID, and user ID 
     const result = await userChiefEngineerUserIDAdminPanelUserIDPUT(adminUserID, userID);
+    // Assert that the returned result matches the provided new_user data
     t.deepEqual(result.role, newData.role);
 });

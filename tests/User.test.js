@@ -34,6 +34,7 @@ test('GET /user/${userID}/chart/${chartID} endpoint returns correct data', async
   const userID = 35;
   const chartID = 3;
 
+  // Send a GET request to retrieve the resource
   const response = await t.context.got.get(`user/${userID}/chart/${chartID}`);
 
   const expectedResponse = {
@@ -46,11 +47,14 @@ test('GET /user/${userID}/chart/${chartID} endpoint returns correct data', async
     "track": "track"
   };
   
+  // Check that the response is correct (OK)
   t.is(response.statusCode, 200);
+  // Compare specific properties between the initial request and the updated resource
   t.deepEqual(response.body, expectedResponse);
 });
 
 test('GET telemetry data by function', async t => {
+  // call the function viewChart
   const result = await viewChart();
 
   t.is(result.date, 6);
@@ -63,6 +67,7 @@ test('GET telemetry data by function', async t => {
 });
   
 test('GET weather report by function', async t => {
+    // call the function getWeather
     const result = await getWeather();
     t.is(result.temperature, 0);
     t.is(result.humidity, 6.027456183070403);
@@ -73,7 +78,7 @@ test('GET weather report by function', async t => {
   
 test('GET user/{userID}/Weather view weather report', async (t) => {
     const userID = 2;
-    
+    // Send a GET request to retrieve the resource
     const response = await t.context.got.get(`user/${userID}/Weather`);
     
     t.is(response.body.temperature, 0);
@@ -92,14 +97,15 @@ test('PUT personal profile by function', async t => {
       "department" : "department",
       "username" : "anna"
     };
-  
+  // call the function userUserIDProfilePagePUT
   const result = await userUserIDProfilePagePUT(new_user, userID);
+  // Assert that the returned result matches the provided new_user data
   t.deepEqual(result.username, new_user.username);
 });
  
 test('PUT user/{userID}/profilePage changes an item in personal profile', async (t) => {
   const userID = 2;
-  
+  // Send a PUT request to modify the personal profile
   const response = await t.context.got.put(`user/${userID}/profilePage`,
   
   {
@@ -114,15 +120,16 @@ test('PUT user/{userID}/profilePage changes an item in personal profile', async 
     "username" : "annat"
     }
   });
-  
+
+  // Retrieve the updated resource using a GET request
   const new_user = await t.context.got.get(`user/${userID}/profilePage`);
-  
+  // Compare specific properties between the initial request and the updated resource
   t.deepEqual(response.body.username, new_user.body.username);
   t.is(response.statusCode, 200);
   t.is(new_user.statusCode, 200);
 });
 
-test('PUT user/${userID}/chart/${chartID}/chat/${chatRoomID} send Chart to Chat', async (t) => {
+test('POST user/${userID}/chart/${chartID}/chat/${chatRoomID} send Chart to Chat', async (t) => {
   const body = {
       "userList" : [ {
         "lastModified" : "2000-01-23T04:56:07.000+00:00",
@@ -156,9 +163,12 @@ test('PUT user/${userID}/chart/${chartID}/chat/${chatRoomID} send Chart to Chat'
   const chartID = 1;
   const chatRoomID = 5;             
   
+  // Send a POST request to send data chart to chat
   const response = await t.context.got.post(`user/${userID}/chart/${chartID}/chat/${chatRoomID}`, {json:body});
+  // Retrieve the updated resource using a GET request
   const updateResource = await t.context.got.get(`user/${userID}/chart/${chartID}/chat/${chatRoomID}`);
   t.is(updateResource.statusCode, 200);
+  // Compare specific properties between the initial request and the updated resource
   t.deepEqual(response.body.userList[0].userID, updateResource.body.userList[0].userID);
   t.deepEqual(response.body.userList[0].lastModified, updateResource.body.userList[0].lastModified);
   t.deepEqual(response.body.messageList[0].messageID, updateResource.body.messageList[0].messageID);
@@ -197,7 +207,9 @@ test('POST Send Chart to Chat by function', async t => {
           "data": 0
       }]
     }
+  // call the function sendChartToChat
   const result = await sendChartToChat(newChat, newChat.userList[0].userID, newChartID, newChat.chatRoomID);
+  // Assert that the returned result matches the provided new_user data
   t.deepEqual(result, newChat);
 });
 
@@ -213,16 +225,15 @@ test('DELETE description from personal profile by function', async t => {
       "department" : "department",
       "username" : "anna"
     };
-  
+  // call the function userUserIDProfilePageDELETE
   const result = await userUserIDProfilePageDELETE(del_description, userID);
+  // Assert that the returned result matches the provided new_user data 
   t.deepEqual(result, del_description);
 });
  
 test('DELETE user/{userID}/profilePage deletes description from personal profile', async (t) => {
   const userID = 2;
-  
-  // var del_description = await t.context.got.get(`user/${userID}/profilePage`);
-
+  // Send a DELETE request to delete the description from personal profile
   const response = await t.context.got.delete(`user/${userID}/profilePage`,
   
   {
@@ -237,9 +248,9 @@ test('DELETE user/{userID}/profilePage deletes description from personal profile
       "username" : "annat"
       }
   });
-  
+  // Retrieve the updated resource using a GET request
   var del_description = await t.context.got.get(`user/${userID}/profilePage`);
-  
+  // Compare specific properties between the initial request and the updated resource
   t.deepEqual(response.body, del_description.body);
   t.is(response.statusCode, 200);
   t.is(del_description.statusCode, 200);
@@ -282,8 +293,11 @@ test('POST chatRoom by function', async t => {
     "chatRoomIcon" : "http://example.com/aeiou"
   };
   
+  // call the function createChatRoom
   const result = await createChatRoom(new_chatRoom, userID);
+  // Assert that the returned result matches the provided new_user data
   t.deepEqual(result, new_chatRoom);
+  // Assert that the returned result is not null
   t.not(result.userList[0].name, null);
   t.not(result.userList[1].name, null);
 });
@@ -291,6 +305,7 @@ test('POST chatRoom by function', async t => {
 test('POST user/{userID}/chat creates a chatRoom', async (t) => {
   const userID = 2;
   
+  // Send a POST request to create a chatRoom
   const response = await t.context.got.post(`user/${userID}/chat`,
   
   {
@@ -329,8 +344,10 @@ test('POST user/{userID}/chat creates a chatRoom', async (t) => {
     }
   });
   
+  // Retrieve the updated resource using a GET request
   const new_chatRoom = await t.context.got.get(`user/${userID}/chat`);
   
+  // Compare specific properties between the initial request and the updated resource
   t.deepEqual(response.body, new_chatRoom.body);
   t.is(response.statusCode, 200);
   t.is(new_chatRoom.statusCode, 200);
@@ -360,7 +377,9 @@ test('PUT message to chat by function', async t => {
     "chatRoomIcon" : "http://example.com/aeiou"
 };
   
+  // call the function sendMessageToChat
   const result = await sendMessageToChat (new_message, userID);
+  // Assert that the returned result matches the provided new_user data
   t.deepEqual(result, new_message);
   
 });
@@ -369,6 +388,7 @@ test('PUT user/{userID}/chat/{chatRoomID} sends a message to chat', async (t) =>
   const userID = 2;
   const chatRoomID = 5;
   
+  // Send a PUT request to send a message to chat
   const response = await t.context.got.post(`user/${userID}/chat/${chatRoomID}`,
   
   {
@@ -394,8 +414,9 @@ test('PUT user/{userID}/chat/{chatRoomID} sends a message to chat', async (t) =>
     }
   });
   
+  // Retrieve the updated resource using a GET request
   const new_message = await t.context.got.get(`user/${userID}/chat/${chatRoomID}`);
-  
+  // Compare specific properties between the initial request and the updated resource
   t.deepEqual(response.body, new_message.body);
   t.is(response.statusCode, 200);
   t.is(new_message.statusCode, 200);
@@ -403,6 +424,7 @@ test('PUT user/{userID}/chat/{chatRoomID} sends a message to chat', async (t) =>
 
 test('GET /user/{userID}/vehicleSetUp display vehicle setup', async t => {
   const userID = 3;
+  // Send a GET request to retrieve the resource
   const response = await t.context.got.get(`user/${userID}/vehicleSetUp`);
 
   t.is(response.statusCode, 200);
@@ -411,6 +433,7 @@ test('GET /user/{userID}/vehicleSetUp display vehicle setup', async t => {
 
 test('GET display vehicle setup by function', async t => {
   const userID = 3; 
+  // call the function viewVehicleSetup
   const result = await viewVehicleSetup(userID);
   const examples = {
     "year" : 0,
@@ -474,5 +497,6 @@ test('GET display vehicle setup by function', async t => {
     "name" : "name",
     "description" : "description"
   };
+  // Assert that the returned result matches the provided new_user data
   t.deepEqual(result, examples)
 });
