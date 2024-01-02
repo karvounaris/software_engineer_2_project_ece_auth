@@ -116,11 +116,13 @@ test('PUT /user/chiefEngineer/{userID}/vehicleSetUp/{elementID} adds new element
             }
         });
 
+    // Assert that the response status code is 200 (OK)
     t.is(response.statusCode, 200);
 
     // Retrieve the updated resource using a GET request
     const updatedResource = await t.context.got.get(`user/chiefEngineer/${userID}/vehicleSetUp/${elementID}`);
-        
+    
+    // Assert that the response status code is 200 (OK)
     t.is(updatedResource.statusCode, 200); 
 
     // Compare specific properties between the initial request and the updated resource
@@ -314,11 +316,12 @@ test('POST /user/chiefEngineer/{userID}/vehicleSetUp/ Create Vehicle setup', asy
             }
         });
 
+    // Assert that the response status code is 200 (OK)    
     t.is(response.statusCode, 200);
         
     // Retrieve the updated resource using a GET request
     const updatedResource = await t.context.got.get(`user/chiefEngineer/${userID}/vehicleSetUp/`);
-
+    // Assert that the response status code is 200 (OK)
     t.is(updatedResource.statusCode, 200); 
     
     // Compare specific properties between the initial request and the updated resource
@@ -442,12 +445,12 @@ test('PUT /user/chiefEngineer/{userID}/proposals/{proposalID} change the proposa
             "confirmation": "Accepted"
             }
     });
-
+    // Assert that the response status code is 200 (OK)
     t.is(response.statusCode, 200);
 
     // Retrieve the updated resource using a GET request
     const updatedResource = await t.context.got.get(`user/chiefEngineer/${userID}/proposals/${proposalID}`);
-        
+    // Assert that the response status code is 200 (OK)
      t.is(updatedResource.statusCode, 200); 
 
     // Compare specific properties between the initial request and the updated resource
@@ -497,10 +500,12 @@ test('PUT /user/chiefEngineer/{adminUserID}/adminPanel/{userID} changes the role
             "userID" : 0
         }
     });
+    // Assert that the response status code is 200 (OK)
     t.is(response.statusCode, 200);
 
     // Retrieve the updated resource using a GET request
     const result = await t.context.got.get(`user/chiefEngineer/${adminUserID}/adminPanel/${userID}`);
+    // Assert that the response status code is 200 (OK)
     t.is(result.statusCode, 200);
     // Compare specific properties between the initial request and the updated resource
     t.deepEqual(response.body.role, result.body.role);

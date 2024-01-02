@@ -82,6 +82,7 @@ test('GET user/{userID}/Weather view weather report', async (t) => {
     const response = await t.context.got.get(`user/${userID}/Weather`);
     
     t.is(response.body.temperature, 0);
+    // Check that the response is correct (OK)
     t.is(response.statusCode, 200);
 });
 
@@ -125,6 +126,7 @@ test('PUT user/{userID}/profilePage changes an item in personal profile', async 
   const new_user = await t.context.got.get(`user/${userID}/profilePage`);
   // Compare specific properties between the initial request and the updated resource
   t.deepEqual(response.body.username, new_user.body.username);
+  // Check that the response is correct (OK)
   t.is(response.statusCode, 200);
   t.is(new_user.statusCode, 200);
 });
@@ -167,6 +169,7 @@ test('POST user/${userID}/chart/${chartID}/chat/${chatRoomID} send Chart to Chat
   const response = await t.context.got.post(`user/${userID}/chart/${chartID}/chat/${chatRoomID}`, {json:body});
   // Retrieve the updated resource using a GET request
   const updateResource = await t.context.got.get(`user/${userID}/chart/${chartID}/chat/${chatRoomID}`);
+  // Check that the response is correct (OK)
   t.is(updateResource.statusCode, 200);
   // Compare specific properties between the initial request and the updated resource
   t.deepEqual(response.body.userList[0].userID, updateResource.body.userList[0].userID);
@@ -252,6 +255,7 @@ test('DELETE user/{userID}/profilePage deletes description from personal profile
   var del_description = await t.context.got.get(`user/${userID}/profilePage`);
   // Compare specific properties between the initial request and the updated resource
   t.deepEqual(response.body, del_description.body);
+  // Check that the response is correct (OK)
   t.is(response.statusCode, 200);
   t.is(del_description.statusCode, 200);
 });
@@ -349,6 +353,7 @@ test('POST user/{userID}/chat creates a chatRoom', async (t) => {
   
   // Compare specific properties between the initial request and the updated resource
   t.deepEqual(response.body, new_chatRoom.body);
+  // Check that the response is correct (OK)
   t.is(response.statusCode, 200);
   t.is(new_chatRoom.statusCode, 200);
 });
@@ -418,6 +423,7 @@ test('PUT user/{userID}/chat/{chatRoomID} sends a message to chat', async (t) =>
   const new_message = await t.context.got.get(`user/${userID}/chat/${chatRoomID}`);
   // Compare specific properties between the initial request and the updated resource
   t.deepEqual(response.body, new_message.body);
+  // Check that the response is correct (OK)
   t.is(response.statusCode, 200);
   t.is(new_message.statusCode, 200);
 });
@@ -426,8 +432,9 @@ test('GET /user/{userID}/vehicleSetUp display vehicle setup', async t => {
   const userID = 3;
   // Send a GET request to retrieve the resource
   const response = await t.context.got.get(`user/${userID}/vehicleSetUp`);
-
+ //  Check that the response is correct (OK)
   t.is(response.statusCode, 200);
+
   t.is(response.body.year, 0);
 });
 
