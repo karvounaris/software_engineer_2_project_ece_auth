@@ -1,7 +1,9 @@
-const {updateVehicleSetup} = require('../service/ChiefEngineerService.js');
-const {createVehicleSetup} = require('../service/ChiefEngineerService.js');
-const {acceptOrDeclineProposal} = require('../service/ChiefEngineerService.js');
-const {userChiefEngineerUserIDAdminPanelUserIDPUT} = require('../service/ChiefEngineerService.js');
+const {
+    updateVehicleSetup,
+    createVehicleSetup,
+    acceptOrDeclineProposal, 
+    userChiefEngineerUserIDAdminPanelUserIDPUT } = require('../service/ChiefEngineerService.js');
+
 
 const http = require('http');
 const test = require('ava').default;

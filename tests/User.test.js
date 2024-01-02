@@ -5,14 +5,17 @@ const got = require('got');
 
 const app = require('../index.js');
 
-const { sendChartToChat } = require('../service/UserService.js');
-const { viewChart } = require('../service/UserService.js');
-const { getWeather } = require('../service/UserService.js');
-const { userUserIDProfilePagePUT } = require('../service/UserService.js');
-const { userUserIDProfilePageDELETE } = require('../service/UserService.js');
-const { createChatRoom  } = require('../service/UserService.js');
-const { sendMessageToChat  } = require('../service/UserService.js');
-const { viewVehicleSetup } = require('../service/UserService.js');
+  const { 
+    sendChartToChat,
+    viewChart,
+    getWeather,
+    userUserIDProfilePagePUT,
+    userUserIDProfilePageDELETE,
+    createChatRoom,
+    sendMessageToChat,
+    viewVehicleSetup
+  } = require('../service/UserService.js');
+  
 
 test.before(async (t) => {
     t.context.server = http.createServer(app);
