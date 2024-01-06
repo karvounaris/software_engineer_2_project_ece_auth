@@ -11,7 +11,6 @@ const http = require('http');
 const test = require('ava').default;
 const listen = require('test-listen');
 const got = require('got');
-
 const app = require('../index.js');
 
 // Before running tests, create a server instance and configure 'got' for HTTP/2 requests

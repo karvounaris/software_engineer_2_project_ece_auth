@@ -6,7 +6,6 @@ const http = require('http');
 const test = require('ava').default;
 const listen = require('test-listen');
 const got = require('got');
-
 const app = require('../index.js');
 
 test.before(async (t) => {
