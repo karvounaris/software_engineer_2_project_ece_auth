@@ -15,8 +15,8 @@ var viewAdminPanelData = null;
  * proposalID Integer This is a unique identifier of the proposal
  * returns proposals_proposalID_body_1
  **/
-exports.acceptOrDeclineProposal = function(body,userID,proposalID) {
-  return new Promise(function(resolve, reject) {
+exports.acceptOrDeclineProposal = function(body) {
+  return new Promise(function(resolve) {
     updatedProposalData = {
       id : body.id || 0,
       prposalID : body.prposalID || 0,
@@ -34,8 +34,8 @@ exports.acceptOrDeclineProposal = function(body,userID,proposalID) {
 }
 
 
-exports.getProposal = function(userID, proposalID) {
-  return new Promise(function(resolve, reject) {
+exports.getProposal = function() {
+  return new Promise(function(resolve) {
     if (updatedProposalData) {
       resolve(updatedProposalData);
     } else {
@@ -53,8 +53,8 @@ exports.getProposal = function(userID, proposalID) {
  * userID Integer This is the unique identifier of the user
  * returns inline_response_200_1
  **/
-exports.createVehicleSetup = function(body,userID) {
-  return new Promise(function(resolve, reject) {
+exports.createVehicleSetup = function(body) {
+  return new Promise(function(resolve) {
     createdVehicleData = {
       year: body.year || 0,
       systems: (body.systems || []).map(system => ({
@@ -87,8 +87,8 @@ exports.createVehicleSetup = function(body,userID) {
  * elementID Integer This is the unique identifier of the element
  * returns inline_response_200_1
  **/
-exports.updateVehicleSetup = function(body, userID, elementID) {
-  return new Promise(function(resolve, reject) {
+exports.updateVehicleSetup = function(body) {
+  return new Promise(function(resolve) {
     updatedVehicleData = {
       year: body.year || 0,
       systems: (body.systems || []).map(system => ({
@@ -111,8 +111,8 @@ exports.updateVehicleSetup = function(body, userID, elementID) {
   });
 };
 
-exports.viewUpdatedVehicleSetup = function(userID, proposalID) {
-  return new Promise(function(resolve, reject) {
+exports.viewUpdatedVehicleSetup = function() {
+  return new Promise(function(resolve) {
     if (updatedVehicleData) {
       resolve(updatedVehicleData);
     } else {
@@ -122,8 +122,8 @@ exports.viewUpdatedVehicleSetup = function(userID, proposalID) {
 };
 
 
-exports.getCreatedVehicleSetup = function(userID, proposalID) {
-  return new Promise(function(resolve, reject) {
+exports.getCreatedVehicleSetup = function() {
+  return new Promise(function(resolve) {
     if (createdVehicleData) {
       resolve(createdVehicleData);
     } else {
@@ -133,8 +133,8 @@ exports.getCreatedVehicleSetup = function(userID, proposalID) {
 };
 
 
-exports.userChiefEngineerUserIDAdminPanelUserIDPUT = function(body, userID, adminUserID) {
-  return new Promise(function(resolve, reject) {
+exports.userChiefEngineerUserIDAdminPanelUserIDPUT = function(body) {
+  return new Promise(function(resolve) {
     viewAdminPanelData = {
       "lastModified": body.lastModified || 0,
       role: body.role || "Default",
@@ -148,8 +148,8 @@ exports.userChiefEngineerUserIDAdminPanelUserIDPUT = function(body, userID, admi
 }
 
 
-exports.viewAdminPanel = function(body, userID, adminUserID) {
-  return new Promise(function(resolve, reject) {
+exports.viewAdminPanel = function() {
+  return new Promise(function(resolve,) {
     if (viewAdminPanelData) {
       resolve(viewAdminPanelData);
     } else {
