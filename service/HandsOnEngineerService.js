@@ -11,8 +11,8 @@ var handsOnEngineerProposalData = null;
  * proposalID Integer this is the unique identifier of the proposal
  * returns proposals_proposalID_body
  **/
-exports.changeStatus = function(body,userID,proposalID) {
-  return new Promise(function(resolve, reject) {
+exports.changeStatus = function(body) {
+  return new Promise(function(resolve) {
     handsOnEngineerProposalData = {
       newValue : body.newValue || 0.0,
       prposalID : body.prposalID || 0,
@@ -30,8 +30,8 @@ exports.changeStatus = function(body,userID,proposalID) {
 }
 
 
-exports.getHandsOnEngineerProposal = function(userID, proposalID) {
-  return new Promise(function(resolve, reject) {
+exports.getHandsOnEngineerProposal = function() {
+  return new Promise(function(resolve) {
     if (handsOnEngineerProposalData) {
       resolve(handsOnEngineerProposalData);
     } else {
