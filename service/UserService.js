@@ -6,8 +6,8 @@ var updateProfileData = null;
 
 
 /*Get chat*/
-exports.getChat = function(userID) {
-  return new Promise(function(resolve, reject) {
+exports.getChat = function() {
+  return new Promise(function(resolve) {
     var examples = {};
     examples['application/json'] = {
       "userList" : [ {
@@ -59,8 +59,8 @@ exports.getChat = function(userID) {
  * userID Integer This is the unique identifier of the user
  * returns inline_response_200_3
  **/
-exports.createChatRoom = function(body,userID) {
-  return new Promise(function(resolve, reject) {
+exports.createChatRoom = function(body) {
+  return new Promise(function(resolve) {
     chatroom = {
       "userList": body.userList.map(user => ({
         "lastModified": user.lastModified,
@@ -97,8 +97,8 @@ exports.createChatRoom = function(body,userID) {
  * userID Integer This is the unique identifier of the user
  * returns inline_response_200
  **/
-exports.getWeather = function(userID) {
-  return new Promise(function(resolve, reject) {
+exports.getWeather = function() {
+  return new Promise(function(resolve) {
     var examples = {};
     examples['application/json'] = {
       "temperature" : 0,
@@ -116,8 +116,8 @@ exports.getWeather = function(userID) {
 }
 
 
-exports.sendChartToChat = function(body,userID,chartID,chatRoomID){
-  return new Promise(function(resolve, reject) {
+exports.sendChartToChat = function(body){
+  return new Promise(function(resolve) {
     chartData = {
       "userList": (body.userList || []).map(user => ({
         "lastModified": user.lastModified || "Default",
@@ -153,8 +153,8 @@ exports.sendChartToChat = function(body,userID,chartID,chatRoomID){
 
 
 /*GET message*/
-exports.getMessage = function(userID, chatRoomID) {
-  return new Promise(function(resolve, reject) {
+exports.getMessage = function() {
+  return new Promise(function(resolve) {
     var examples = {};
     examples['application/json'] = {
       "userList" :  {
@@ -194,8 +194,8 @@ exports.getMessage = function(userID, chatRoomID) {
  * chatRoomID Integer This is the unique identifier of the chatroom
  * returns inline_response_200_3
  **/
-exports.sendMessageToChat = function(body,userID,chatRoomID) {
-  return new Promise(function(resolve, reject) {
+exports.sendMessageToChat = function(body) {
+  return new Promise(function(resolve) {
     updateChat = {
       "user":
       {
@@ -227,8 +227,8 @@ exports.sendMessageToChat = function(body,userID,chatRoomID) {
 
 
 /*GET profile page*/
-exports.getProfilePage = function(body, userID) {
-  return new Promise(function(resolve, reject) {
+exports.getProfilePage = function() {
+  return new Promise(function(resolve) {
     if(updateProfileData){
       resolve(updateProfileData);
     } else{
@@ -245,8 +245,8 @@ exports.getProfilePage = function(body, userID) {
  * userID Integer This is the unique identifier of the user
  * no response value expected for this operation
  **/
-exports.userUserIDProfilePageDELETE = function(body,userID) {
-  return new Promise(function(resolve, reject) {
+exports.userUserIDProfilePageDELETE = function(body) {
+  return new Promise(function(resolve) {
     updateProfileData = {
       "role" : body.role,
       "githubLink" : body.githubLink,
@@ -274,8 +274,8 @@ exports.userUserIDProfilePageDELETE = function(body,userID) {
  * userID Integer This is the unique identifier of the user
  * returns userID_profilePage_body
  **/
-exports.userUserIDProfilePagePUT = function(body,userID) {
-  return new Promise(function(resolve, reject) {
+exports.userUserIDProfilePagePUT = function(body) {
+  return new Promise(function(resolve) {
     updateProfileData = {
       "role" : body.role || "Default",
       "githubLink" : body.githubLink || "Default",
@@ -299,8 +299,8 @@ exports.userUserIDProfilePagePUT = function(body,userID) {
  * chartID Integer this is the unique identifier of the chart
  * returns inline_response_200_2
  **/
-exports.viewChart = function(userID,chartID) {
-  return new Promise(function(resolve, reject) {
+exports.viewChart = function() {
+  return new Promise(function(resolve) {
     var examples = {};
     examples['application/json'] = {
       "date" : 6,
@@ -327,8 +327,8 @@ exports.viewChart = function(userID,chartID) {
  * userID Integer This is the unique identifier of the user
  * returns inline_response_200
  **/
-exports.viewChatWithSentChart = function(userID, chartID, chatRoomID) {
-  return new Promise(function(resolve, reject) {
+exports.viewChatWithSentChart = function() {
+  return new Promise(function(resolve) {
     if (chartData) {
       resolve(chartData);
     } else {
@@ -344,8 +344,8 @@ exports.viewChatWithSentChart = function(userID, chartID, chatRoomID) {
  * userID Integer This is the unique identifier of the user
  * returns inline_response_200_1
  **/
-exports.viewVehicleSetup = function(userID) {
-  return new Promise(function(resolve, reject) {
+exports.viewVehicleSetup = function() {
+  return new Promise(function(resolve) {
     var examples = {};
     examples = {
       "year" : 0,

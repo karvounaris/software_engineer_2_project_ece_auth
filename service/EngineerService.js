@@ -10,8 +10,8 @@ var engineerProposalData =  null;
  * userID Integer This is the unique identifier of the user
  * returns userID_proposals_body
  **/
-exports.postProposal = function(body,userID) {
-  return new Promise(function(resolve, reject) {
+exports.postProposal = function(body) {
+  return new Promise(function(resolve) {
     engineerProposalData = {
       newValue : body.newValue || 0.0,
       prposalID : body.prposalID || 0,
@@ -29,8 +29,8 @@ exports.postProposal = function(body,userID) {
 }
 
 
-exports.getEngineerProposal = function(userID, proposalID) {
-  return new Promise(function(resolve, reject) {
+exports.getEngineerProposal = function() {
+  return new Promise(function(resolve) {
     if (engineerProposalData) {
       resolve(engineerProposalData);
     } else {
