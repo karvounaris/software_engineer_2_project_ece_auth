@@ -20,5 +20,10 @@
     "get-port": "^5.1.1",
     "got": "^11.8.1",
     "test-listen": "^1.1.0"
+  },
+  "ava": {
+    "files": [
+      "tests/**/*.test.js"
+    ]
   }
 }

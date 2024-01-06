@@ -1,7 +1,5 @@
 'use strict';
-var EngineerProposalData =  null;
-
-
+var engineerProposalData =  null;
 
 
 /**
@@ -12,9 +10,9 @@ var EngineerProposalData =  null;
  * userID Integer This is the unique identifier of the user
  * returns userID_proposals_body
  **/
-exports.postProposal = function(body,userID) {
-  return new Promise(function(resolve, reject) {
-    EngineerProposalData = {
+exports.postProposal = function(body) {
+  return new Promise(function(resolve) {
+    engineerProposalData = {
       newValue : body.newValue || 0.0,
       prposalID : body.prposalID || 0,
       partID : body.partID || 0,
@@ -26,17 +24,16 @@ exports.postProposal = function(body,userID) {
       status : body.status || "Default Status",
       confirmation : body.confirmation || "Default Confirmation"
     };
-      resolve(EngineerProposalData); // Resolve with the constructed dynamic response
+    resolve(engineerProposalData);
   });
 }
 
-exports.getEngineerProposal = function(userID, proposalID) {
-  return new Promise(function(resolve, reject) {
-    if (EngineerProposalData) {
-      // If updatedData is available, resolve with it
-      resolve(EngineerProposalData);
+
+exports.getEngineerProposal = function() {
+  return new Promise(function(resolve) {
+    if (engineerProposalData) {
+      resolve(engineerProposalData);
     } else {
-      // If updatedData is not available, handle it accordingly (resolve with default or an error)
       resolve();
     }
   });

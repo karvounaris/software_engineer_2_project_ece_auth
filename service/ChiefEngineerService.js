@@ -4,6 +4,8 @@ var updatedVehicleData = null;
 var updatedProposalData = null;
 var createdVehicleData = null;
 var viewAdminPanelData = null;
+
+
 /**
  * Accepts or Declines a proposal
  * Chief engineer must be able to accept or decline proposals
@@ -13,8 +15,8 @@ var viewAdminPanelData = null;
  * proposalID Integer This is a unique identifier of the proposal
  * returns proposals_proposalID_body_1
  **/
-exports.acceptOrDeclineProposal = function(body,userID,proposalID) {
-  return new Promise(function(resolve, reject) {
+exports.acceptOrDeclineProposal = function(body) {
+  return new Promise(function(resolve) {
     updatedProposalData = {
       id : body.id || 0,
       prposalID : body.prposalID || 0,
@@ -27,17 +29,16 @@ exports.acceptOrDeclineProposal = function(body,userID,proposalID) {
       currentValue : body.currentValue || 0,
       newValue : body.newValue || 0
     };
-    resolve(updatedProposalData); // Resolve with the constructed dynamic response
+    resolve(updatedProposalData);
   });
 }
 
-exports.getProposal = function(userID, proposalID) {
-  return new Promise(function(resolve, reject) {
+
+exports.getProposal = function() {
+  return new Promise(function(resolve) {
     if (updatedProposalData) {
-      // If updatedData is available, resolve with it
       resolve(updatedProposalData);
     } else {
-      // If updatedData is not available, handle it accordingly (resolve with default or an error)
       resolve();
     }
   });
@@ -52,8 +53,8 @@ exports.getProposal = function(userID, proposalID) {
  * userID Integer This is the unique identifier of the user
  * returns inline_response_200_1
  **/
-exports.createVehicleSetup = function(body,userID) {
-  return new Promise(function(resolve, reject) {
+exports.createVehicleSetup = function(body) {
+  return new Promise(function(resolve) {
     createdVehicleData = {
       year: body.year || 0,
       systems: (body.systems || []).map(system => ({
@@ -72,9 +73,10 @@ exports.createVehicleSetup = function(body,userID) {
       name: body.name || 'Default Vehicle Name',
       description: body.description || 'Default Vehicle Description'
     };
-    resolve(createdVehicleData); // Resolve with the constructed dynamic response
+    resolve(createdVehicleData);
   });
 }
+
 
 /**
  * Update vehicle setup
@@ -85,8 +87,8 @@ exports.createVehicleSetup = function(body,userID) {
  * elementID Integer This is the unique identifier of the element
  * returns inline_response_200_1
  **/
-exports.updateVehicleSetup = function(body, userID, elementID) {
-  return new Promise(function(resolve, reject) {
+exports.updateVehicleSetup = function(body) {
+  return new Promise(function(resolve) {
     updatedVehicleData = {
       year: body.year || 0,
       systems: (body.systems || []).map(system => ({
@@ -105,38 +107,36 @@ exports.updateVehicleSetup = function(body, userID, elementID) {
       name: body.name || 'Default Vehicle Name',
       description: body.description || 'Default Vehicle Description'
     };
-    resolve(updatedVehicleData); // Resolve with the constructed dynamic response
+    resolve(updatedVehicleData);
   });
 };
 
-exports.viewUpdatedVehicleSetup = function(userID, proposalID) {
-  return new Promise(function(resolve, reject) {
+exports.viewUpdatedVehicleSetup = function() {
+  return new Promise(function(resolve) {
     if (updatedVehicleData) {
-      // If updatedData is available, resolve with it
       resolve(updatedVehicleData);
     } else {
-      // If updatedData is not available, handle it accordingly (resolve with default or an error)
       resolve();
     }
   });
 };
 
-exports.getCreatedVehicleSetup = function(userID, proposalID) {
-  return new Promise(function(resolve, reject) {
+
+exports.getCreatedVehicleSetup = function() {
+  return new Promise(function(resolve) {
     if (createdVehicleData) {
-      // If updatedData is available, resolve with it
       resolve(createdVehicleData);
     } else {
-      // If updatedData is not available, handle it accordingly (resolve with default or an error)
       resolve();
     }
   });
 };
 
-exports.userChiefEngineerUserIDAdminPanelUserIDPUT = function(body, userID, adminUserID) {
-  return new Promise(function(resolve, reject) {
+
+exports.userChiefEngineerUserIDAdminPanelUserIDPUT = function(body) {
+  return new Promise(function(resolve) {
     viewAdminPanelData = {
-      'lastModified': body.lastModified || 0,
+      "lastModified": body.lastModified || 0,
       role: body.role || "Default",
       joined: body.joined || "Default",
       name: body.name || "Default",
@@ -147,13 +147,12 @@ exports.userChiefEngineerUserIDAdminPanelUserIDPUT = function(body, userID, admi
   });
 }
 
-exports.viewAdminPanel = function(body, userID, adminUserID) {
-  return new Promise(function(resolve, reject) {
+
+exports.viewAdminPanel = function() {
+  return new Promise(function(resolve,) {
     if (viewAdminPanelData) {
-      // If updatedData is available, resolve with it
       resolve(viewAdminPanelData);
     } else {
-      // If updatedData is not available, handle it accordingly (resolve with default or an error)
       resolve();
     }
   });

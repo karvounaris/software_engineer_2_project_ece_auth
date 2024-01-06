@@ -1,6 +1,7 @@
 'use strict';
 var handsOnEngineerProposalData = null;
 
+
 /**
  * the hands-on engineer changes the proposal status
  * Hands-on engineers must be able to change the proposal status to DONE
@@ -10,8 +11,8 @@ var handsOnEngineerProposalData = null;
  * proposalID Integer this is the unique identifier of the proposal
  * returns proposals_proposalID_body
  **/
-exports.changeStatus = function(body,userID,proposalID) {
-  return new Promise(function(resolve, reject) {
+exports.changeStatus = function(body) {
+  return new Promise(function(resolve) {
     handsOnEngineerProposalData = {
       newValue : body.newValue || 0.0,
       prposalID : body.prposalID || 0,
@@ -24,17 +25,16 @@ exports.changeStatus = function(body,userID,proposalID) {
       status : body.status || "Default Status",
       confirmation : body.confirmation || "Default Confirmation"
     };
-      resolve(handsOnEngineerProposalData); // Resolve with the constructed dynamic response
+    resolve(handsOnEngineerProposalData);
   });
 }
 
-exports.getHandsOnEngineerProposal = function(userID, proposalID) {
-  return new Promise(function(resolve, reject) {
+
+exports.getHandsOnEngineerProposal = function() {
+  return new Promise(function(resolve) {
     if (handsOnEngineerProposalData) {
-      // If updatedData is available, resolve with it
       resolve(handsOnEngineerProposalData);
     } else {
-      // If updatedData is not available, handle it accordingly (resolve with default or an error)
       resolve();
     }
   });
