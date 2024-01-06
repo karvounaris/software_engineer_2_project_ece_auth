@@ -19,57 +19,35 @@ test.after.always((t) => {
     t.context.server.close();
 });
 
+const { putChangeProposalStatus_examples } = require('./global_variables_examples.js');
 test('PUT /user/handsOnEngineer/{userID}/proposals/{proposalID} change the proposal status', async (t) => {
     const userID = 5;
     const proposalID = 2;
 
     // Send a PUT request to modify the proposal status
     const response = await t.context.got.put(`user/handsOnEngineer/${userID}/proposals/${proposalID}`, {
-        json: {
-            "newValue" : 2.3021358869347655,
-            "prposalID" : 3,
-            "partID" : 1,
-            "description" : "Critical change for tires",
-            "id" : 0,
-            "title" : "title",
-            "userID" : 2,
-            "currentValue" : 5.637376656633329,
-            "status" : "Done",
-            "confirmation": "Accepted"
-            }
+        json: putChangeProposalStatus_examples,
+        responseType: 'json'
     });
 
     t.is(response.statusCode, 200);
     // Retrieve the updated resource using a GET request
-    const updatedResource = await t.context.got.get(`user/handsOnEngineer/${userID}/proposals/${proposalID}`);
+    const result = await t.context.got.get(`user/handsOnEngineer/${userID}/proposals/${proposalID}`);
         
-    t.is(updatedResource.statusCode, 200);
+    t.is(result.statusCode, 200);
     // Compare specific properties between the initial request and the updated resource 
-    t.deepEqual(response.body.newValue, updatedResource.body.newValue);
-    t.deepEqual(response.body.status, updatedResource.body.status);
-    t.deepEqual(response.body.confirmation, updatedResource.body.confirmation);
-    t.deepEqual(response.body.description, updatedResource.body.description);
+    t.deepEqual(response.body.newValue, result.body.newValue);
+    t.deepEqual(response.body.status, result.body.status);
+    t.deepEqual(response.body.confirmation, result.body.confirmation);
+    t.deepEqual(response.body.description, result.body.description);
 });
 
 test('PUT change the proposal status by function' , async (t) => {
     const userID = 24;
     const proposalID = 6;
 
-    const new_user = {
-        "newValue" : 2.3021358869347655,
-        "prposalID" : 3,
-        "partID" : 1,
-        "description" : "Critical change for tires",
-        "id" : 0,
-        "title" : "title",
-        "userID" : 2,
-        "currentValue" : 5.637376656633329,
-        "status" : "Done",
-        "confirmation": "Accepted"
-        };
-
-        // Call the changeStatus function with the new data, user ID, and proposal ID
-        const result = await changeStatus(new_user, userID, proposalID);
-        // Assert that the returned result matches the provided new_user data
-        t.deepEqual(result, new_user);
+    // Call the changeStatus function with the new data, user ID, and proposal ID
+    const result = await changeStatus(putChangeProposalStatus_examples, userID, proposalID);
+    // Assert that the returned result matches the provided new_user data
+    t.deepEqual(result, putChangeProposalStatus_examples);
 });
