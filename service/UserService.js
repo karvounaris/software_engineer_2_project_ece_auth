@@ -4,43 +4,44 @@ var chatroom = null;
 var updateChat = null;
 var updateProfileData = null;
 
+
 /*Get chat*/
 exports.getChat = function(userID) {
   return new Promise(function(resolve, reject) {
     var examples = {};
     examples['application/json'] = {
-  "userList" : [ {
-    "last-modified" : "2000-01-23T04:56:07.000+00:00",
-    "role" : "role",
-    "joined" : "2000-01-23T04:56:07.000+00:00",
-    "name" : "name",
-    "department" : "department",
-    "userID" : 0
-  }, {
-    "last-modified" : "2000-01-23T04:56:07.000+00:00",
-    "role" : "role",
-    "joined" : "2000-01-23T04:56:07.000+00:00",
-    "name" : "name",
-    "department" : "department",
-    "userID" : 0
-  } ],
-  "messageList" : [ {
-    "image" : "http://example.com/aeiou",
-    "timeSent" : "2000-01-23T04:56:07.000+00:00",
-    "messageID" : 6,
-    "text" : "text",
-    "userID" : 1
-  }, {
-    "image" : "http://example.com/aeiou",
-    "timeSent" : "2000-01-23T04:56:07.000+00:00",
-    "messageID" : 6,
-    "text" : "text",
-    "userID" : 1
-  } ],
-  "chatRoomID" : 5,
-  "chatRoomName" : "chatRoomName",
-  "chatRoomIcon" : "http://example.com/aeiou"
-};
+      "userList" : [ {
+        "last-modified" : "2000-01-23T04:56:07.000+00:00",
+        "role" : "role",
+        "joined" : "2000-01-23T04:56:07.000+00:00",
+        "name" : "name",
+        "department" : "department",
+        "userID" : 0
+      }, {
+        "last-modified" : "2000-01-23T04:56:07.000+00:00",
+        "role" : "role",
+        "joined" : "2000-01-23T04:56:07.000+00:00",
+        "name" : "name",
+        "department" : "department",
+        "userID" : 0
+      } ],
+      "messageList" : [ {
+        "image" : "http://example.com/aeiou",
+        "timeSent" : "2000-01-23T04:56:07.000+00:00",
+        "messageID" : 6,
+        "text" : "text",
+        "userID" : 1
+      }, {
+        "image" : "http://example.com/aeiou",
+        "timeSent" : "2000-01-23T04:56:07.000+00:00",
+        "messageID" : 6,
+        "text" : "text",
+        "userID" : 1
+      } ],
+      "chatRoomID" : 5,
+      "chatRoomName" : "chatRoomName",
+      "chatRoomIcon" : "http://example.com/aeiou"
+    };
     if (chatroom) {
       resolve(chatroom);
     } else {
@@ -48,6 +49,7 @@ exports.getChat = function(userID) {
     }
   });
 }
+
 
 /**
  * Create a chatRoom
@@ -87,6 +89,7 @@ exports.createChatRoom = function(body,userID) {
   });
 }
 
+
 /**
  * Gets the weather forecast
  * All assigned users must be able to view the weather report
@@ -98,12 +101,12 @@ exports.getWeather = function(userID) {
   return new Promise(function(resolve, reject) {
     var examples = {};
     examples['application/json'] = {
-  "temperature" : 0,
-  "humidity" : 6.027456183070403,
-  "windDirection" : 5,
-  "windSpeed" : 1.4658129805029452,
-  "chanceOfRain" : 5
-};
+      "temperature" : 0,
+      "humidity" : 6.027456183070403,
+      "windDirection" : 5,
+      "windSpeed" : 1.4658129805029452,
+      "chanceOfRain" : 5
+    };
     if (Object.keys(examples).length > 0) {
       resolve(examples[Object.keys(examples)[0]]);
     } else {
@@ -111,6 +114,7 @@ exports.getWeather = function(userID) {
     }
   });
 }
+
 
 exports.sendChartToChat = function(body,userID,chartID,chatRoomID){
   return new Promise(function(resolve, reject) {
@@ -141,36 +145,37 @@ exports.sendChartToChat = function(body,userID,chartID,chatRoomID){
         "track": chart.track  || "Default",
         "lap": chart.lap || 0,
         "data": chart.data || 0
-    }))
+      }))
     };
-      resolve(chartData);
+    resolve(chartData);
   });
 }
+
 
 /*GET message*/
 exports.getMessage = function(userID, chatRoomID) {
   return new Promise(function(resolve, reject) {
     var examples = {};
     examples['application/json'] = {
-  "userList" :  {
-    "last-modified" : "2000-01-23T04:56:07.000+00:00",
-    "role" : "role",
-    "joined" : "2000-01-23T04:56:07.000+00:00",
-    "name" : "name",
-    "department" : "department",
-    "userID" : 0
-  }, 
-  "messageList" :  {
-    "image" : "http://example.com/aeiou",
-    "timeSent" : "2000-01-23T04:56:07.000+00:00",
-    "messageID" : 6,
-    "text" : "text",
-    "userID" : 1
-  },
-  "chatRoomID" : 5,
-  "chatRoomName" : "chatRoomName",
-  "chatRoomIcon" : "http://example.com/aeiou"
-};
+      "userList" :  {
+        "last-modified" : "2000-01-23T04:56:07.000+00:00",
+        "role" : "role",
+        "joined" : "2000-01-23T04:56:07.000+00:00",
+        "name" : "name",
+        "department" : "department",
+        "userID" : 0
+      }, 
+      "messageList" :  {
+        "image" : "http://example.com/aeiou",
+        "timeSent" : "2000-01-23T04:56:07.000+00:00",
+        "messageID" : 6,
+        "text" : "text",
+        "userID" : 1
+      },
+      "chatRoomID" : 5,
+      "chatRoomName" : "chatRoomName",
+      "chatRoomIcon" : "http://example.com/aeiou"
+    };
     if (updateChat) {
       resolve(updateChat);
     } else {
@@ -178,6 +183,7 @@ exports.getMessage = function(userID, chatRoomID) {
     }
   });
 }
+
 
 /**
  * send message to chat
@@ -219,27 +225,18 @@ exports.sendMessageToChat = function(body,userID,chatRoomID) {
   });
 }
 
+
 /*GET profile page*/
-exports.getProfilePage = function(userID) {
+exports.getProfilePage = function(body, userID) {
   return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = {
-    "role" : "role",
-    "githubLink" : "http://example.com/aeiou",
-    "linkedinLink" : "http://example.com/aeiou",
-    "googleLink" : "http://example.com/aeiou",
-    "description" : "description",
-    "profileImage" : "http://example.com/aeiou",
-    "department" : "department",
-    "username" : "username"
-    }
-    if (updateProfileData) {
+    if(updateProfileData){
       resolve(updateProfileData);
-    } else {
-      resolve(examples);
+    } else{
+      resolve();
     }
   });
 } 
+
 
 /**
  * Delete profile description
@@ -250,7 +247,6 @@ exports.getProfilePage = function(userID) {
  **/
 exports.userUserIDProfilePageDELETE = function(body,userID) {
   return new Promise(function(resolve, reject) {
-    
     updateProfileData = {
       "role" : body.role,
       "githubLink" : body.githubLink,
@@ -269,6 +265,7 @@ exports.userUserIDProfilePageDELETE = function(body,userID) {
   });
 }
 
+
 /**
  * Edit Profile Page
  * All assigned users must be able to edit their Personal Profile page
@@ -280,22 +277,19 @@ exports.userUserIDProfilePageDELETE = function(body,userID) {
 exports.userUserIDProfilePagePUT = function(body,userID) {
   return new Promise(function(resolve, reject) {
     updateProfileData = {
-  "role" : body.role,
-  "githubLink" : body.githubLink,
-  "linkedinLink" : body.linkedinLink,
-  "googleLink" : body.googleLink,
-  "description" : body.description,
-  "profileImage" : body.profileImage,
-  "department" : body.department,
-  "username" : body.username
-};
-    if (updateProfileData) {
-      resolve(updateProfileData);
-    } else {
-      resolve();
-    }
+      "role" : body.role || "Default",
+      "githubLink" : body.githubLink || "Default",
+      "linkedinLink" : body.linkedinLink || "Default",
+      "googleLink" : body.googleLink || "Default",
+      "description" : body.description || "Default",
+      "profileImage" : body.profileImage || "Default",
+      "department" : body.department || "Default",
+      "username" : body.username|| "Default"
+    };
+    resolve(updateProfileData);
   });
 }
+
 
 /**
  * View the data in data charts
@@ -309,14 +303,14 @@ exports.viewChart = function(userID,chartID) {
   return new Promise(function(resolve, reject) {
     var examples = {};
     examples['application/json'] = {
-  "date" : 6,
-  "data" : 5.962133916683182,
-  "dataCategory" : "dataCategory",
-  "name" : "name",
-  "lap" : 1,
-  "id" : 0,
-  "track" : "track"
-};
+      "date" : 6,
+      "data" : 5.962133916683182,
+      "dataCategory" : "dataCategory",
+      "name" : "name",
+      "lap" : 1,
+      "id" : 0,
+      "track" : "track"
+    };
     if (Object.keys(examples).length > 0) {
       resolve(examples[Object.keys(examples)[0]]);
     } else {
@@ -324,6 +318,7 @@ exports.viewChart = function(userID,chartID) {
     }
   });
 }
+
 
 /**
  * Get Chat with User's sent Chat
@@ -335,10 +330,8 @@ exports.viewChart = function(userID,chartID) {
 exports.viewChatWithSentChart = function(userID, chartID, chatRoomID) {
   return new Promise(function(resolve, reject) {
     if (chartData) {
-      // If updatedData is available, resolve with it
       resolve(chartData);
     } else {
-      // If updatedData is not available, handle it accordingly (resolve with default or an error)
       resolve();
     }
   });
@@ -369,50 +362,10 @@ exports.viewVehicleSetup = function(userID) {
             "measurementUnit" : "measurementUnit"
           } ],
           "description" : "description"
-        }, {
-          "name" : "name",
-          "parts" : [ {
-            "name" : "name",
-            "initialValue" : 6,
-            "measurementUnit" : "measurementUnit"
-          }, {
-            "name" : "name",
-            "initialValue" : 6,
-            "measurementUnit" : "measurementUnit"
-          } ],
-          "description" : "description"
-        } ],
+        }],
         "name" : "name",
         "description" : "description"
-      }, {
-        "subSystems" : [ {
-          "name" : "name",
-          "parts" : [ {
-            "name" : "name",
-            "initialValue" : 6,
-            "measurementUnit" : "measurementUnit"
-          }, {
-            "name" : "name",
-            "initialValue" : 6,
-            "measurementUnit" : "measurementUnit"
-          } ],
-          "description" : "description"
-        }, {
-          "name" : "name",
-          "parts" : [ {
-            "name" : "name",
-            "initialValue" : 6,
-            "measurementUnit" : "measurementUnit"
-          }, {
-            "name" : "name",
-            "initialValue" : 6,
-            "measurementUnit" : "measurementUnit"
-          } ],
-          "description" : "description"
-        } ],
-        "name" : "name",
-        "description" : "description"
-      } ],
+      }],
       "name" : "name",
       "description" : "description"
     };

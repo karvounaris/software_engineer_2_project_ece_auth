@@ -4,6 +4,8 @@ var updatedVehicleData = null;
 var updatedProposalData = null;
 var createdVehicleData = null;
 var viewAdminPanelData = null;
+
+
 /**
  * Accepts or Declines a proposal
  * Chief engineer must be able to accept or decline proposals
@@ -27,17 +29,16 @@ exports.acceptOrDeclineProposal = function(body,userID,proposalID) {
       currentValue : body.currentValue || 0,
       newValue : body.newValue || 0
     };
-    resolve(updatedProposalData); // Resolve with the constructed dynamic response
+    resolve(updatedProposalData);
   });
 }
+
 
 exports.getProposal = function(userID, proposalID) {
   return new Promise(function(resolve, reject) {
     if (updatedProposalData) {
-      // If updatedData is available, resolve with it
       resolve(updatedProposalData);
     } else {
-      // If updatedData is not available, handle it accordingly (resolve with default or an error)
       resolve();
     }
   });
@@ -72,9 +73,10 @@ exports.createVehicleSetup = function(body,userID) {
       name: body.name || 'Default Vehicle Name',
       description: body.description || 'Default Vehicle Description'
     };
-    resolve(createdVehicleData); // Resolve with the constructed dynamic response
+    resolve(createdVehicleData);
   });
 }
+
 
 /**
  * Update vehicle setup
@@ -105,38 +107,36 @@ exports.updateVehicleSetup = function(body, userID, elementID) {
       name: body.name || 'Default Vehicle Name',
       description: body.description || 'Default Vehicle Description'
     };
-    resolve(updatedVehicleData); // Resolve with the constructed dynamic response
+    resolve(updatedVehicleData);
   });
 };
 
 exports.viewUpdatedVehicleSetup = function(userID, proposalID) {
   return new Promise(function(resolve, reject) {
     if (updatedVehicleData) {
-      // If updatedData is available, resolve with it
       resolve(updatedVehicleData);
     } else {
-      // If updatedData is not available, handle it accordingly (resolve with default or an error)
       resolve();
     }
   });
 };
+
 
 exports.getCreatedVehicleSetup = function(userID, proposalID) {
   return new Promise(function(resolve, reject) {
     if (createdVehicleData) {
-      // If updatedData is available, resolve with it
       resolve(createdVehicleData);
     } else {
-      // If updatedData is not available, handle it accordingly (resolve with default or an error)
       resolve();
     }
   });
 };
 
+
 exports.userChiefEngineerUserIDAdminPanelUserIDPUT = function(body, userID, adminUserID) {
   return new Promise(function(resolve, reject) {
     viewAdminPanelData = {
-      'lastModified': body.lastModified || 0,
+      "lastModified": body.lastModified || 0,
       role: body.role || "Default",
       joined: body.joined || "Default",
       name: body.name || "Default",
@@ -147,13 +147,12 @@ exports.userChiefEngineerUserIDAdminPanelUserIDPUT = function(body, userID, admi
   });
 }
 
+
 exports.viewAdminPanel = function(body, userID, adminUserID) {
   return new Promise(function(resolve, reject) {
     if (viewAdminPanelData) {
-      // If updatedData is available, resolve with it
       resolve(viewAdminPanelData);
     } else {
-      // If updatedData is not available, handle it accordingly (resolve with default or an error)
       resolve();
     }
   });
