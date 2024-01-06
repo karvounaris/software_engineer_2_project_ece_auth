@@ -70,8 +70,8 @@ module.exports.sendMessageToChat = function sendMessageToChat (req, res, next, b
 };
 
 // User retrieves the profile page based on the provided user ID.
-module.exports.getProfilePage = function getProfilePage (req, res, next, userID) {
-  User.getProfilePage(userID)
+module.exports.getProfilePage = function getProfilePage (req, res, body, next, userID) {
+  User.getProfilePage(body, userID)
     .then(function (response) {
       utils.writeJson(res, response);
     })
