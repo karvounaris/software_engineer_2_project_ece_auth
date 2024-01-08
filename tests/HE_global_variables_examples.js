@@ -14,4 +14,5 @@ const putChangeProposalStatus_examples = {
     "confirmation": "Accepted"
     };
 
-    module.exports = putChangeProposalStatus_examples;
+    //exports the variables to be used in the tests
+module.exports = {putChangeProposalStatus_examples};

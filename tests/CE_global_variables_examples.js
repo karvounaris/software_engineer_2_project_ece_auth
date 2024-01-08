@@ -1,6 +1,8 @@
 //Global variable examples in json for chief engineer functions
 
 //Example of new vehicle setup element
+//it can be a system, a subsystem or a part
+//also contains the year, its name and its description
 const putpostVehicleSetup_examples = {
     "year" : 0,
     "systems" : [ {
@@ -25,6 +27,7 @@ const putpostVehicleSetup_examples = {
 };
 
 //Example of change in proposal confirmation
+//accepted or declined
 const putProposalID_examples = {
     "newValue" : 2.3021358869347655,
     "prposalID" : 3,
@@ -48,4 +51,5 @@ const putChangeRole_examples = {
     "userID": 0
   };
 
+  ////exports the variables to be used in the tests
   module.exports = {putpostVehicleSetup_examples, putProposalID_examples, putChangeRole_examples};

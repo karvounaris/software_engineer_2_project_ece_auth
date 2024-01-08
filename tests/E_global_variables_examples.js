@@ -14,4 +14,5 @@ const postNewProposal_examples = {
     "confirmation": "Accepted"
   };
 
-  module.exports = postNewProposal_examples;
+  //exports the variables to be used in the tests
+  module.exports = {postNewProposal_examples};

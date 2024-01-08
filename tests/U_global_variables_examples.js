@@ -1,6 +1,8 @@
 //Global variable examples in json for user functions
 
 //Example of a vehice setup
+//contains examples for systems, subsystems and parts
+//also the year, the name and a description
 const viewVehicleSetup_examples = {
     "year" : 0,
     "systems" : [ {
@@ -44,7 +46,7 @@ const getWeather_examples = {
   "chanceOfRain" : 5
 };
 
-//Example of a profile page with no description
+//Example of a profile page 
 const putdeleteProfilePage_examples = {
   "role" : "role",
   "githubLink" : "http://example.com/aeiou",
@@ -57,6 +59,7 @@ const putdeleteProfilePage_examples = {
 };
 
 //Example of a new chat
+//Sends a chart to the chatroom
 const postNewChat_examples = {
   "userList" : [ {
     "lastModified" : "2000-01-23T04:56:07.000+00:00",
@@ -88,6 +91,7 @@ const postNewChat_examples = {
 };
 
 //Example of a new chatroom
+//contains users, messages, id, name and icon
 const postNewChatRoom_examples = {
   "userList" : [ {
     "lastModified" : "2000-01-23T04:56:07.000+00:00",
@@ -123,6 +127,8 @@ const postNewChatRoom_examples = {
 };
 
 //Example of a new message
+//includes the user that send it
+//uses the id to specify the chat
 const putMessageToChat_examples = {
   "user" :  {
     "lastModified" : "2000-01-23T04:56:07.000+00:00",
@@ -144,6 +150,7 @@ const putMessageToChat_examples = {
   "chatRoomIcon" : "http://example.com/aeiou"
 }
 
+//exports the variables to be used in the tests
 module.exports = { viewVehicleSetup_examples, getChartID_examples, getWeather_examples,
                   putdeleteProfilePage_examples, postNewChat_examples, postNewChatRoom_examples,
                   putMessageToChat_examples};
