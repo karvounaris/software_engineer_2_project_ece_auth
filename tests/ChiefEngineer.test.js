@@ -28,7 +28,7 @@ test.after.always((t) => {
     t.context.server.close();
 });
 
-const { putpostVehicleSetup_examples } = require('./global_variables_examples.js');
+const { putpostVehicleSetup_examples } = require('./CE_global_variables_examples.js');
 test('PUT /user/chiefEngineer/{userID}/vehicleSetUp/{elementID} adds new element to the Vehicle', async t => {
 
     // define the user ID and element ID
@@ -104,7 +104,7 @@ test('POST Create setup Vehicle by function', async t => {
     t.deepEqual(result, putpostVehicleSetup_examples);
 });
 
-const { putProposalID_examples } = require('./global_variables_examples.js');
+const { putProposalID_examples } = require('./CE_global_variables_examples.js');
 test('PUT /user/chiefEngineer/{userID}/proposals/{proposalID} change the proposal status', async (t) => {
     // define the user ID and proposal ID
     const userID = 2;
@@ -142,7 +142,7 @@ test('PUT change the proposal status by function', async (t) => {
 
 });
 
-const { putChangeRole_examples } = require('./global_variables_examples.js');
+const { putChangeRole_examples } = require('./CE_global_variables_examples.js');
 test('PUT /user/chiefEngineer/{adminUserID}/adminPanel/{userID} changes the role of a user', async t => {
     // define the admin user ID and user ID
     const adminUserID = 1;

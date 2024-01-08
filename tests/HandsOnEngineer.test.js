@@ -18,7 +18,7 @@ test.after.always((t) => {
     t.context.server.close();
 });
 
-const { putChangeProposalStatus_examples } = require('./global_variables_examples.js');
+const { putChangeProposalStatus_examples } = require('./HE_global_variables_examples.js');
 test('PUT /user/handsOnEngineer/{userID}/proposals/{proposalID} change the proposal status', async (t) => {
     const userID = 5;
     const proposalID = 2;

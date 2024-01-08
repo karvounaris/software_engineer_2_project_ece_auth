@@ -1,3 +1,6 @@
+//Global variable examples in json for user functions
+
+//Example of a vehice setup
 const viewVehicleSetup_examples = {
     "year" : 0,
     "systems" : [ {
@@ -21,51 +24,7 @@ const viewVehicleSetup_examples = {
     "description" : "description"
 };
 
-const putpostVehicleSetup_examples = {
-    "year" : 0,
-    "systems" : [ {
-      "subSystems" : [ {
-        "name" : "Engine",
-        "parts" : [ {
-          "name" : "name",
-          "initialValue" : 6,
-          "measurementUnit" : "measurementUnit"
-        }, {
-          "name" : "name",
-          "initialValue" : 6,
-          "measurementUnit" : "measurementUnit"
-        } ],
-        "description" : "description"
-      }],
-      "name" : "name",
-      "description" : "description"
-    }],
-    "name" : "name",
-    "description" : "description"
-};
-
-const putProposalID_examples = {
-    "newValue" : 2.3021358869347655,
-    "prposalID" : 3,
-    "partID" : 1,
-    "description" : "Critical change for tires",
-    "id" : 0,
-    "title" : "title",
-    "userID" : 2,
-    "currentValue" : 5.637376656633329,
-    "status" : "Done",
-    "confirmation": "Accepted"
-    };
-
-const putChangeRole_examples = {
-  "lastModified": "2000-01-23T04:56:07.000+00:00",
-  "role": "waterBoy",
-  "joined": "2000-01-23T04:56:07.000+00:00",
-  "name": "name",
-  "department": "department",
-  "userID": 0
-};
-
+//Example of a chart
 const getChartID_examples = {
   "date": 6,
   "data": 5.962133916683182,
@@ -76,6 +35,7 @@ const getChartID_examples = {
   "track": "track"
 };
 
+//Example of a weather forecast
 const getWeather_examples = {
   "temperature" : 0,
   "humidity" : 6.027456183070403,
@@ -84,6 +44,7 @@ const getWeather_examples = {
   "chanceOfRain" : 5
 };
 
+//Example of a profile page with no description
 const putdeleteProfilePage_examples = {
   "role" : "role",
   "githubLink" : "http://example.com/aeiou",
@@ -95,6 +56,7 @@ const putdeleteProfilePage_examples = {
   "username" : "annat"
 };
 
+//Example of a new chat
 const postNewChat_examples = {
   "userList" : [ {
     "lastModified" : "2000-01-23T04:56:07.000+00:00",
@@ -125,6 +87,7 @@ const postNewChat_examples = {
   }]
 };
 
+//Example of a new chatroom
 const postNewChatRoom_examples = {
   "userList" : [ {
     "lastModified" : "2000-01-23T04:56:07.000+00:00",
@@ -159,6 +122,7 @@ const postNewChatRoom_examples = {
   "chatRoomIcon" : "http://example.com/aeiou"
 };
 
+//Example of a new message
 const putMessageToChat_examples = {
   "user" :  {
     "lastModified" : "2000-01-23T04:56:07.000+00:00",
@@ -180,32 +144,6 @@ const putMessageToChat_examples = {
   "chatRoomIcon" : "http://example.com/aeiou"
 }
 
-const postNewProposal_examples = {
-  "newValue" : 2.3021358869347655,
-  "prposalID" : 3,
-  "partID" : 1,
-  "description" : "Critical change for tires",
-  "id" : 0,
-  "title" : "title",
-  "userID" : 2,
-  "currentValue" : 5.637376656633329,
-  "status" : "Done",
-  "confirmation": "Accepted"
-};
-
-const putChangeProposalStatus_examples = {
-  "newValue" : 2.3021358869347655,
-  "prposalID" : 3,
-  "partID" : 1,
-  "description" : "Critical change for tires",
-  "id" : 0,
-  "title" : "title",
-  "userID" : 2,
-  "currentValue" : 5.637376656633329,
-  "status" : "Done",
-  "confirmation": "Accepted"
-  };
-
-module.exports = { viewVehicleSetup_examples, putpostVehicleSetup_examples, putProposalID_examples, putChangeRole_examples,
-                  getChartID_examples, getWeather_examples, putdeleteProfilePage_examples, postNewChat_examples, postNewChatRoom_examples,
-                  putMessageToChat_examples, postNewProposal_examples, putChangeProposalStatus_examples };
+module.exports = { viewVehicleSetup_examples, getChartID_examples, getWeather_examples,
+                  putdeleteProfilePage_examples, postNewChat_examples, postNewChatRoom_examples,
+                  putMessageToChat_examples};

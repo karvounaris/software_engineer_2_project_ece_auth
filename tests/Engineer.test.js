@@ -19,7 +19,7 @@ test.after.always((t) => {
     t.context.server.close();
 });
 
-const { postNewProposal_examples } = require('./global_variables_examples.js');
+const { postNewProposal_examples } = require('./E_global_variables_examples.js');
 test('POST /user/engineer/{userID}/proposals create new proposal', async (t) => {
     const userID = 4;
 

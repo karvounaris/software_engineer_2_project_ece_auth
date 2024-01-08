@@ -27,7 +27,7 @@ test.after.always((t) => {
     t.context.server.close();
 });
 
-const { getChartID_examples } = require('./global_variables_examples.js');
+const { getChartID_examples } = require('./U_global_variables_examples.js');
 test('GET /user/${userID}/chart/${chartID} endpoint returns correct data', async t => {
   const userID = 35;
   const chartID = 3;
@@ -54,7 +54,7 @@ test('GET telemetry data by function', async t => {
   t.deepEqual(result.track, getChartID_examples.track);
 });
   
-const { getWeather_examples } = require('./global_variables_examples.js');
+const { getWeather_examples } = require('./U_global_variables_examples.js');
 test('GET user/{userID}/Weather view weather report', async (t) => {
   const userID = 2;
   // Send a GET request to retrieve the resource
@@ -75,7 +75,7 @@ test('GET weather report by function', async t => {
     t.is(result.chanceOfRain, getWeather_examples.chanceOfRain);
 });
 
-const { putdeleteProfilePage_examples } = require('./global_variables_examples.js');
+const { putdeleteProfilePage_examples } = require('./U_global_variables_examples.js');
 test('PUT user/{userID}/profilePage changes an item in personal profile', async (t) => {
   const userID = 2;
   // Send a PUT request to modify the personal profile
@@ -101,7 +101,7 @@ test('PUT personal profile by function', async t => {
   t.deepEqual(result.username, putdeleteProfilePage_examples.username);
 });
 
-const { postNewChat_examples } = require('./global_variables_examples.js');
+const { postNewChat_examples } = require('./U_global_variables_examples.js');
 test('POST user/${userID}/chart/${chartID}/chat/${chatRoomID} send Chart to Chat', async (t) => {
   const userID = 1;
   const chartID = 1;
@@ -158,7 +158,7 @@ test('DELETE description from personal profile by function', async t => {
   t.deepEqual(result, putdeleteProfilePage_examples);
 });
 
-const { postNewChatRoom_examples } = require('./global_variables_examples.js');
+const { postNewChatRoom_examples } = require('./U_global_variables_examples.js');
 test('POST user/{userID}/chat creates a chatRoom', async (t) => {
   const userID = 2;
   
@@ -190,7 +190,7 @@ test('POST chatRoom by function', async t => {
   t.not(result.userList[1].name, null);
 });
 
-const { putMessageToChat_examples } = require('./global_variables_examples.js');
+const { putMessageToChat_examples } = require('./U_global_variables_examples.js');
 test('PUT user/{userID}/chat/{chatRoomID} sends a message to chat', async (t) => {
   const userID = 2;
   const chatRoomID = 5;
@@ -229,7 +229,7 @@ test('GET /user/{userID}/vehicleSetUp display vehicle setup', async t => {
   t.is(response.body.year, 0);
 });
 
-const { viewVehicleSetup_examples } = require('./global_variables_examples.js');
+const { viewVehicleSetup_examples } = require('./U_global_variables_examples.js');
 test('GET display vehicle setup by function', async t => {
   const userID = 3; 
   // call the function viewVehicleSetup
