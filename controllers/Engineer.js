@@ -7,7 +7,7 @@ var utils = require('../utils/writer.js');
 var Engineer = require('../service/EngineerService');
 
 // Creates a list of proposals based on the provided paramaters.
-module.exports.postProposal = function postProposal (req, res, next, body, userID) {
+module.exports.postProposal = function postProposal ( res, body, userID) {
   Engineer.postProposal(body, userID)
     .then(function (response) {
       utils.writeJson(res, response);
@@ -18,7 +18,7 @@ module.exports.postProposal = function postProposal (req, res, next, body, userI
 };
 
 // Retrieves a list of proposals based on the provided user ID.
-module.exports.getEngineerProposal = function getEngineerProposal (req, res, next, userID, proposalID) {
+module.exports.getEngineerProposal = function getEngineerProposal (res, userID, proposalID) {
   Engineer.getEngineerProposal(userID, proposalID)
     .then(function (response) {
       utils.writeJson(res, response);
