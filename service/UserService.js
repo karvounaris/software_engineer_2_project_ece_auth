@@ -8,44 +8,10 @@ var updateProfileData = null;
 /*Get chat*/
 exports.getChat = function() {
   return new Promise(function(resolve) {
-    var examples = {};
-    examples['application/json'] = {
-      "userList" : [ {
-        "last-modified" : "2000-01-23T04:56:07.000+00:00",
-        "role" : "role",
-        "joined" : "2000-01-23T04:56:07.000+00:00",
-        "name" : "name",
-        "department" : "department",
-        "userID" : 0
-      }, {
-        "last-modified" : "2000-01-23T04:56:07.000+00:00",
-        "role" : "role",
-        "joined" : "2000-01-23T04:56:07.000+00:00",
-        "name" : "name",
-        "department" : "department",
-        "userID" : 0
-      } ],
-      "messageList" : [ {
-        "image" : "http://example.com/aeiou",
-        "timeSent" : "2000-01-23T04:56:07.000+00:00",
-        "messageID" : 6,
-        "text" : "text",
-        "userID" : 1
-      }, {
-        "image" : "http://example.com/aeiou",
-        "timeSent" : "2000-01-23T04:56:07.000+00:00",
-        "messageID" : 6,
-        "text" : "text",
-        "userID" : 1
-      } ],
-      "chatRoomID" : 5,
-      "chatRoomName" : "chatRoomName",
-      "chatRoomIcon" : "http://example.com/aeiou"
-    };
     if (chatroom) {
       resolve(chatroom);
     } else {
-      resolve(examples);
+      resolve();
     }
   });
 }
@@ -155,31 +121,10 @@ exports.sendChartToChat = function(body){
 /*GET message*/
 exports.getMessage = function() {
   return new Promise(function(resolve) {
-    var examples = {};
-    examples['application/json'] = {
-      "userList" :  {
-        "last-modified" : "2000-01-23T04:56:07.000+00:00",
-        "role" : "role",
-        "joined" : "2000-01-23T04:56:07.000+00:00",
-        "name" : "name",
-        "department" : "department",
-        "userID" : 0
-      }, 
-      "messageList" :  {
-        "image" : "http://example.com/aeiou",
-        "timeSent" : "2000-01-23T04:56:07.000+00:00",
-        "messageID" : 6,
-        "text" : "text",
-        "userID" : 1
-      },
-      "chatRoomID" : 5,
-      "chatRoomName" : "chatRoomName",
-      "chatRoomIcon" : "http://example.com/aeiou"
-    };
     if (updateChat) {
       resolve(updateChat);
     } else {
-      resolve(examples);
+      resolve();
     }
   });
 }
