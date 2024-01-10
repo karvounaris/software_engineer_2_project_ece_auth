@@ -2,11 +2,12 @@
 
 var utils = require('../utils/writer.js');
 var User = require('../service/UserService');
-var UserGET = require('../service/UserGETService');
+var UserChat = require('../service/UserChatService');
+var UserProf = require('../service/UserProfService');
 
 // User retrieves a Chat.
 module.exports.getChat = function getChat (req, res, next, userID) {
-  UserGET.getChat(userID)
+  UserChat.getChat(userID)
     .then(function (response) {
       utils.writeJson(res, response);
     })
@@ -17,7 +18,7 @@ module.exports.getChat = function getChat (req, res, next, userID) {
 
 // User retrieves a Message.
 module.exports.getMessage = function getMessage (req, res, next, userID, chatRoomID) {
-  UserGET.getMessage(userID, chatRoomID)
+  UserChat.getMessage(userID, chatRoomID)
     .then(function (response) {
       utils.writeJson(res, response);
     })
@@ -28,7 +29,7 @@ module.exports.getMessage = function getMessage (req, res, next, userID, chatRoo
 
 // User creates a Chat Room.
 module.exports.createChatRoom = function createChatRoom (req, res, next, body, userID) {
-  User.createChatRoom(body, userID)
+  UserChat.createChatRoom(body, userID)
     .then(function (response) {
       utils.writeJson(res, response);
     })
@@ -39,7 +40,7 @@ module.exports.createChatRoom = function createChatRoom (req, res, next, body, u
 
 // User retrieves the Weather report.
 module.exports.getWeather = function getWeather (req, res, next, userID) {
-  UserGET.getWeather(userID)
+  User.getWeather(userID)
     .then(function (response) {
       utils.writeJson(res, response);
     })
@@ -61,7 +62,7 @@ module.exports.sendChartToChat = function sendChartToChat (req, res, next, body,
 
 // User sends a message to a chat room based on a chatroom ID.
 module.exports.sendMessageToChat = function sendMessageToChat (req, res, next, body, userID, chatRoomID) {
-  User.sendMessageToChat(body, userID, chatRoomID)
+  UserChat.sendMessageToChat(body, userID, chatRoomID)
     .then(function (response) {
       utils.writeJson(res, response);
     })
@@ -72,7 +73,7 @@ module.exports.sendMessageToChat = function sendMessageToChat (req, res, next, b
 
 // User retrieves the profile page based on the provided user ID.
 module.exports.getProfilePage = function getProfilePage (req, res, body, next, userID) {
-  UserGET.getProfilePage(body, userID)
+  UserProf.getProfilePage(body, userID)
     .then(function (response) {
       utils.writeJson(res, response);
     })
@@ -83,7 +84,7 @@ module.exports.getProfilePage = function getProfilePage (req, res, body, next, u
 
 // User deletes the profile description based on the provided user ID.
 module.exports.userUserIDProfilePageDELETE = function userUserIDProfilePageDELETE (req, res, next, userID) {
-  User.userUserIDProfilePageDELETE(userID)
+  UserProf.userUserIDProfilePageDELETE(userID)
     .then(function (response) {
       utils.writeJson(res, response);
     })
@@ -94,7 +95,7 @@ module.exports.userUserIDProfilePageDELETE = function userUserIDProfilePageDELET
 
 // User edits the profile based on the provided user ID.
 module.exports.userUserIDProfilePagePUT = function userUserIDProfilePagePUT (req, res, next, body, userID) {
-  User.userUserIDProfilePagePUT(body, userID)
+  UserProf.userUserIDProfilePagePUT(body, userID)
     .then(function (response) {
       utils.writeJson(res, response);
     })
@@ -105,7 +106,7 @@ module.exports.userUserIDProfilePagePUT = function userUserIDProfilePagePUT (req
 
 // User retrieves the chart based on the provided user ID.
 module.exports.viewChart = function viewChart (req, res, next, userID, chartID) {
-  UserGET.viewChart(userID, chartID)
+  User.viewChart(userID, chartID)
     .then(function (response) {
       utils.writeJson(res, response);
     })
@@ -116,7 +117,7 @@ module.exports.viewChart = function viewChart (req, res, next, userID, chartID) 
 
 // User retrieves the vehicle Setup based on the provided user ID.
 module.exports.viewVehicleSetup = function viewVehicleSetup (req, res, next, userID) {
-  UserGET.viewVehicleSetup(userID)
+  User.viewVehicleSetup(userID)
     .then(function (response) {
       utils.writeJson(res, response);
     })
@@ -127,7 +128,7 @@ module.exports.viewVehicleSetup = function viewVehicleSetup (req, res, next, use
 
 // User retrieves the Chat details on the provided user ID, chartID and chatRoomID.
 module.exports.viewChatWithSentChart = function viewChatwithSentChart (req, res, next, userID, chartID, chatRoomID) {
-  UserGET.viewChatWithSentChart(userID, chartID, chatRoomID)
+  User.viewChatWithSentChart(userID, chartID, chatRoomID)
     .then(function (response) {
       utils.writeJson(res, response);
     })

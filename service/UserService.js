@@ -1,39 +1,25 @@
 'use strict';
+var chartData = null;
 
-var updateProfileData = null;
-
-/**
- * Create a chatRoom
- * Creates a chatRoom for the users to communicate
+ /**
+ * Gets the weather forecast
+ * All assigned users must be able to view the weather report
  *
- * body UserID_chat_body User model
  * userID Integer This is the unique identifier of the user
- * returns inline_response_200_3
+ * returns inline_response_200
  **/
-exports.createChatRoom = function(body) {
+ exports.getWeather = function() {
   return new Promise(function(resolve) {
-    chatroom = {
-      "userList": body.userList.map(user => ({
-        "lastModified": user.lastModified,
-        "role": user.role,
-        "joined": user.joined,
-        "name": user.name,
-        "department": user.department,
-        "userID": user.userID
-      })),
-      "messageList": body.messageList.map(message => ({
-        "image": message.image,
-        "timeSent": message.timeSent,
-        "messageID": message.messageID,
-        "text": message.text,
-        "userID": message.userID
-      })),
-      "chatRoomID": body.chatRoomID,
-      "chatRoomName": body.chatRoomName,
-      "chatRoomIcon": body.chatRoomIcon
+    var examples = {};
+    examples['application/json'] = {
+      "temperature" : 0,
+      "humidity" : 6.027456183070403,
+      "windDirection" : 5,
+      "windSpeed" : 1.4658129805029452,
+      "chanceOfRain" : 5
     };
-    if (chatroom) {
-      resolve(chatroom);
+    if (Object.keys(examples).length > 0) {
+      resolve(examples[Object.keys(examples)[0]]);
     } else {
       resolve();
     }
@@ -41,95 +27,85 @@ exports.createChatRoom = function(body) {
 }
 
 /**
-   * send message to chat
-   * Send message based on a chatroom ID
-   *
-   * body Chat_chatRoomID_body_1 User model
-   * userID Integer This is the unique identifier of the user
-   * chatRoomID Integer This is the unique identifier of the chatroom
-   * returns inline_response_200_3
-   **/
-exports.sendMessageToChat = function(body) {
-  return new Promise(function(resolve) {
-    updateChat = {
-      "user":
-      {
-        "lastModified": body.user.lastModified,
-        "role": body.user.role,
-        "joined": body.user.joined,
-        "name": body.user.name,
-        "department": body.user.department,
-        "userID": body.user.userID
-      },
-      "message": {
-        "image": body.message.image,
-        "timeSent": body.message.timeSent,
-        "messageID": body.message.messageID,
-        "text": body.message.text,
-        "userID": body.message.userID
-      },
-      "chatRoomID": body.chatRoomID,
-      "chatRoomName": body.chatRoomName,
-      "chatRoomIcon": body.chatRoomIcon
-    };
-    if (updateChat) {
-      resolve(updateChat);
-    } else {
-      resolve();
-    }
-  });
-} 
-
-/**
- * Delete profile description
- * All users must be able to delete their profile description
+ * View the data in data charts
+ * Returns a data chart based on a single ID
  *
  * userID Integer This is the unique identifier of the user
- * no response value expected for this operation
+ * chartID Integer this is the unique identifier of the chart
+ * returns inline_response_200_2
  **/
-exports.userUserIDProfilePageDELETE = function(body) {
+exports.viewChart = function() {
   return new Promise(function(resolve) {
-    updateProfileData = {
-      "role" : body.role,
-      "githubLink" : body.githubLink,
-      "linkedinLink" : body.linkedinLink,
-      "googleLink" : body.googleLink,
-      "description" : body.description,
-      "profileImage" : body.profileImage,
-      "department" : body.department,
-      "username" : body.username
+    var examples = {};
+    examples['application/json'] = {
+      "date" : 6,
+      "data" : 5.962133916683182,
+      "dataCategory" : "dataCategory",
+      "name" : "name",
+      "lap" : 1,
+      "id" : 0,
+      "track" : "track"
     };
-    if (updateProfileData) {
-      resolve(updateProfileData);
+    if (Object.keys(examples).length > 0) {
+      resolve(examples[Object.keys(examples)[0]]);
     } else {
       resolve();
     }
   });
 }
+/**
+ * Get Chat with User's sent Chat
+ * This endpoint displays vehicle setup details
+ *
+ * userID Integer This is the unique identifier of the user
+ * returns inline_response_200
+ **/
+exports.viewChatWithSentChart = function() {
+  return new Promise(function(resolve) {
+    if (chartData) {
+      resolve(chartData);
+    } else {
+      resolve();
+    }
+  });
+};
 
 /**
- * Edit Profile Page
- * All assigned users must be able to edit their Personal Profile page
+ * View vehicle setup
+ * This endpoint displays vehicle setup details
  *
- * body UserID_profilePage_body User Profile
  * userID Integer This is the unique identifier of the user
- * returns userID_profilePage_body
+ * returns inline_response_200_1
  **/
-exports.userUserIDProfilePagePUT = function(body) {
+exports.viewVehicleSetup = function() {
   return new Promise(function(resolve) {
-    updateProfileData = {
-      "role" : body.role || "Default",
-      "githubLink" : body.githubLink || "Default",
-      "linkedinLink" : body.linkedinLink || "Default",
-      "googleLink" : body.googleLink || "Default",
-      "description" : body.description || "Default",
-      "profileImage" : body.profileImage || "Default",
-      "department" : body.department || "Default",
-      "username" : body.username|| "Default"
+    var examples = {};
+    examples = {
+      "year" : 0,
+      "systems" : [ {
+        "subSystems" : [ {
+          "name" : "name",
+          "parts" : [ {
+            "name" : "name",
+            "initialValue" : 6,
+            "measurementUnit" : "measurementUnit"
+          }, {
+            "name" : "name",
+            "initialValue" : 6,
+            "measurementUnit" : "measurementUnit"
+          } ],
+          "description" : "description"
+        }],
+        "name" : "name",
+        "description" : "description"
+      }],
+      "name" : "name",
+      "description" : "description"
     };
-    resolve(updateProfileData);
+    resolve(examples);
   });
 }
+
 
 exports.sendChartToChat = function(body){
   return new Promise(function(resolve) {
