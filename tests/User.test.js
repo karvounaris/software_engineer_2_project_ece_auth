@@ -17,8 +17,7 @@ const {
   const { 
     sendChartToChat,
     createChatRoom,
-    sendMessageToChat,
-    viewVehicleSetup } = require('../service/UserChatService.js');
+    sendMessageToChat,} = require('../service/UserChatService.js');
   
 test.before(async (t) => {
     t.context.server = http.createServer(app);
