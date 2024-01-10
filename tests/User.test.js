@@ -19,7 +19,7 @@ const {
 
   const { 
     userUserIDProfilePagePUT,
-    userUserIDProfilePageDELETE,} = require('../service/UserChatService.js');
+    userUserIDProfilePageDELETE,} = require('../service/UserProfileService.js');
   
 test.before(async (t) => {
     t.context.server = http.createServer(app);

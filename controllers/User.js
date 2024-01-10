@@ -3,7 +3,7 @@
 var utils = require('../utils/writer.js');
 var User = require('../service/UserService');
 var UserChat = require('../service/UserChatService');
-var UserProf = require('../service/UserProfService');
+var UserProf = require('../service/UserProfileService');
 
 // User retrieves a Chat.
 module.exports.getChat = function getChat (req, res, next, userID) {
