@@ -8,14 +8,17 @@ const got = require('got');
 const app = require('../index.js');
 
 const { 
-  sendChartToChat,
   viewChart,
   getWeather,
   userUserIDProfilePagePUT,
   userUserIDProfilePageDELETE,
-  createChatRoom,
-  sendMessageToChat,
   viewVehicleSetup } = require('../service/UserService.js');
+
+  const { 
+    sendChartToChat,
+    createChatRoom,
+    sendMessageToChat,
+    viewVehicleSetup } = require('../service/UserChatService.js');
   
 test.before(async (t) => {
     t.context.server = http.createServer(app);
