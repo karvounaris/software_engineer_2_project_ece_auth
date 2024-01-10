@@ -3,41 +3,82 @@
 var updateProfileData = null;
 
 /**
- * Gets the weather forecast
- * All assigned users must be able to view the weather report
+ * Create a chatRoom
+ * Creates a chatRoom for the users to communicate
  *
+ * body UserID_chat_body User model
  * userID Integer This is the unique identifier of the user
- * returns inline_response_200
+ * returns inline_response_200_3
  **/
-exports.getWeather = function() {
+exports.createChatRoom = function(body) {
   return new Promise(function(resolve) {
-    var examples = {};
-    examples['application/json'] = {
-      "temperature" : 0,
-      "humidity" : 6.027456183070403,
-      "windDirection" : 5,
-      "windSpeed" : 1.4658129805029452,
-      "chanceOfRain" : 5
+    chatroom = {
+      "userList": body.userList.map(user => ({
+        "lastModified": user.lastModified,
+        "role": user.role,
+        "joined": user.joined,
+        "name": user.name,
+        "department": user.department,
+        "userID": user.userID
+      })),
+      "messageList": body.messageList.map(message => ({
+        "image": message.image,
+        "timeSent": message.timeSent,
+        "messageID": message.messageID,
+        "text": message.text,
+        "userID": message.userID
+      })),
+      "chatRoomID": body.chatRoomID,
+      "chatRoomName": body.chatRoomName,
+      "chatRoomIcon": body.chatRoomIcon
     };
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
+    if (chatroom) {
+      resolve(chatroom);
     } else {
       resolve();
     }
   });
 }
 
-/*GET profile page*/
-exports.getProfilePage = function() {
+/**
+   * send message to chat
+   * Send message based on a chatroom ID
+   *
+   * body Chat_chatRoomID_body_1 User model
+   * userID Integer This is the unique identifier of the user
+   * chatRoomID Integer This is the unique identifier of the chatroom
+   * returns inline_response_200_3
+   **/
+exports.sendMessageToChat = function(body) {
   return new Promise(function(resolve) {
-    if(updateProfileData){
-      resolve(updateProfileData);
-    } else{
+    updateChat = {
+      "user":
+      {
+        "lastModified": body.user.lastModified,
+        "role": body.user.role,
+        "joined": body.user.joined,
+        "name": body.user.name,
+        "department": body.user.department,
+        "userID": body.user.userID
+      },
+      "message": {
+        "image": body.message.image,
+        "timeSent": body.message.timeSent,
+        "messageID": body.message.messageID,
+        "text": body.message.text,
+        "userID": body.message.userID
+      },
+      "chatRoomID": body.chatRoomID,
+      "chatRoomName": body.chatRoomName,
+      "chatRoomIcon": body.chatRoomIcon
+    };
+    if (updateChat) {
+      resolve(updateChat);
+    } else {
       resolve();
     }
   });
 } 
-
 
 /**
  * Delete profile description
@@ -66,7 +107,6 @@ exports.userUserIDProfilePageDELETE = function(body) {
   });
 }
 
-
 /**
  * Edit Profile Page
  * All assigned users must be able to edit their Personal Profile page
@@ -91,86 +131,37 @@ exports.userUserIDProfilePagePUT = function(body) {
   });
 }
 
-
-/**
- * View the data in data charts
- * Returns a data chart based on a single ID
- *
- * userID Integer This is the unique identifier of the user
- * chartID Integer this is the unique identifier of the chart
- * returns inline_response_200_2
- **/
-exports.viewChart = function() {
+exports.sendChartToChat = function(body){
   return new Promise(function(resolve) {
-    var examples = {};
-    examples['application/json'] = {
-      "date" : 6,
-      "data" : 5.962133916683182,
-      "dataCategory" : "dataCategory",
-      "name" : "name",
-      "lap" : 1,
-      "id" : 0,
-      "track" : "track"
+    chartData = {
+      "userList": (body.userList || []).map(user => ({
+        "lastModified": user.lastModified || "Default",
+        "role": user.role || "Default",
+        "joined": user.joined || "Default",
+        "name": user.name || "Default",
+        "department": user.department || "Default",
+        "userID": user.userID || 0
+      })),
+      "messageList": (body.messageList || []).map(message => ({
+        "image": message.image || "Default",
+        "timeSent": message.timeSent || "Default",
+        "messageID": message.messageID || 0,
+        "text": message.text || "Default",
+        "userID": message.userID || 0
+      })),
+      "chatRoomID": body.chatRoomID || 0,
+      "chatRoomName": body.chatRoomName  || "Default",
+      "chatRoomIcon": body.chatRoomIcon  || "Default",
+      "chartList" : (body.chartList || []).map(chart =>({
+        "id": chart.id || 0,
+        "name": chart.name  || "Default",
+        "dataCategory": chart.dataCategory  || "Default",
+        "date": chart.date || 0,
+        "track": chart.track  || "Default",
+        "lap": chart.lap || 0,
+        "data": chart.data || 0
+      }))
     };
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
-    }
+    resolve(chartData);
   });
 }
-
-
-/**
- * Get Chat with User's sent Chat
- * This endpoint displays vehicle setup details
- *
- * userID Integer This is the unique identifier of the user
- * returns inline_response_200
- **/
-exports.viewChatWithSentChart = function() {
-  return new Promise(function(resolve) {
-    if (chartData) {
-      resolve(chartData);
-    } else {
-      resolve();
-    }
-  });
-};
-  
-/**
- * View vehicle setup
- * This endpoint displays vehicle setup details
- *
- * userID Integer This is the unique identifier of the user
- * returns inline_response_200_1
- **/
-exports.viewVehicleSetup = function() {
-  return new Promise(function(resolve) {
-    var examples = {};
-    examples = {
-      "year" : 0,
-      "systems" : [ {
-        "subSystems" : [ {
-          "name" : "name",
-          "parts" : [ {
-            "name" : "name",
-            "initialValue" : 6,
-            "measurementUnit" : "measurementUnit"
-          }, {
-            "name" : "name",
-            "initialValue" : 6,
-            "measurementUnit" : "measurementUnit"
-          } ],
-          "description" : "description"
-        }],
-        "name" : "name",
-        "description" : "description"
-      }],
-      "name" : "name",
-      "description" : "description"
-    };
-    resolve(examples);
-  });
-}
-

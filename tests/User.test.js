@@ -10,14 +10,14 @@ const app = require('../index.js');
 const { 
   viewChart,
   getWeather,
-  userUserIDProfilePagePUT,
-  userUserIDProfilePageDELETE,
-  viewVehicleSetup } = require('../service/UserService.js');
+  viewVehicleSetup } = require('../service/UserGETService.js');
 
   const { 
     sendChartToChat,
     createChatRoom,
-    sendMessageToChat,} = require('../service/UserChatService.js');
+    userUserIDProfilePagePUT,
+    userUserIDProfilePageDELETE,
+    sendMessageToChat,} = require('../service/UserService.js');
   
 test.before(async (t) => {
     t.context.server = http.createServer(app);
