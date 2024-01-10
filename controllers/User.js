@@ -2,10 +2,11 @@
 
 var utils = require('../utils/writer.js');
 var User = require('../service/UserService');
+var UserChat = require('../service/UserChatService');
 
 // User retrieves a Chat.
 module.exports.getChat = function getChat (req, res, next, userID) {
-  User.getChat(userID)
+  UserChat.getChat(userID)
     .then(function (response) {
       utils.writeJson(res, response);
     })
@@ -16,7 +17,7 @@ module.exports.getChat = function getChat (req, res, next, userID) {
 
 // User retrieves a Message.
 module.exports.getMessage = function getMessage (req, res, next, userID, chatRoomID) {
-  User.getMessage(userID, chatRoomID)
+  UserChat.getMessage(userID, chatRoomID)
     .then(function (response) {
       utils.writeJson(res, response);
     })
@@ -27,7 +28,7 @@ module.exports.getMessage = function getMessage (req, res, next, userID, chatRoo
 
 // User creates a Chat Room.
 module.exports.createChatRoom = function createChatRoom (req, res, next, body, userID) {
-  User.createChatRoom(body, userID)
+  UserChat.createChatRoom(body, userID)
     .then(function (response) {
       utils.writeJson(res, response);
     })
@@ -49,7 +50,7 @@ module.exports.getWeather = function getWeather (req, res, next, userID) {
 
 // Send a data chart based on a user ID.
 module.exports.sendChartToChat = function sendChartToChat (req, res, next, body, userID, chartID, chatRoomID) {
-  User.sendChartToChat(body, userID, chartID, chatRoomID)
+  UserChat.sendChartToChat(body, userID, chartID, chatRoomID)
     .then(function (response) {
       utils.writeJson(res, response);
     })
@@ -60,7 +61,7 @@ module.exports.sendChartToChat = function sendChartToChat (req, res, next, body,
 
 // User sends a message to a chat room based on a chatroom ID.
 module.exports.sendMessageToChat = function sendMessageToChat (req, res, next, body, userID, chatRoomID) {
-  User.sendMessageToChat(body, userID, chatRoomID)
+  UserChat.sendMessageToChat(body, userID, chatRoomID)
     .then(function (response) {
       utils.writeJson(res, response);
     })
@@ -126,7 +127,7 @@ module.exports.viewVehicleSetup = function viewVehicleSetup (req, res, next, use
 
 // User retrieves the Chat details on the provided user ID, chartID and chatRoomID.
 module.exports.viewChatWithSentChart = function viewChatwithSentChart (req, res, next, userID, chartID, chatRoomID) {
-  User.viewChatWithSentChart(userID, chartID, chatRoomID)
+  UserChat.viewChatWithSentChart(userID, chartID, chatRoomID)
     .then(function (response) {
       utils.writeJson(res, response);
     })
