@@ -5,7 +5,6 @@ var updatedProposalData = null;
 var createdVehicleData = null;
 var viewAdminPanelData = null;
 
-
 /**
  * Accepts or Declines a proposal
  * Chief engineer must be able to accept or decline proposals
@@ -33,7 +32,6 @@ exports.acceptOrDeclineProposal = function(body) {
   });
 }
 
-
 exports.getProposal = function() {
   return new Promise(function(resolve) {
     if (updatedProposalData) {
@@ -43,7 +41,6 @@ exports.getProposal = function() {
     }
   });
 };
-
 
 /**
  * Create vehicle setup
@@ -76,7 +73,6 @@ exports.createVehicleSetup = function(body) {
     resolve(createdVehicleData);
   });
 }
-
 
 /**
  * Update vehicle setup
@@ -121,7 +117,6 @@ exports.viewUpdatedVehicleSetup = function() {
   });
 };
 
-
 exports.getCreatedVehicleSetup = function() {
   return new Promise(function(resolve) {
     if (createdVehicleData) {
@@ -131,7 +126,6 @@ exports.getCreatedVehicleSetup = function() {
     }
   });
 };
-
 
 exports.userChiefEngineerUserIDAdminPanelUserIDPUT = function(body) {
   return new Promise(function(resolve) {
@@ -146,7 +140,6 @@ exports.userChiefEngineerUserIDAdminPanelUserIDPUT = function(body) {
     resolve(viewAdminPanelData);
   });
 }
-
 
 exports.viewAdminPanel = function() {
   return new Promise(function(resolve,) {
